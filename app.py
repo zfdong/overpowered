@@ -1,5 +1,7 @@
 import streamlit as st
 from streamlit.components.v1 import html
+import folium
+from streamlit_folium import folium_static
 
 def main():
     st.set_page_config(page_title="Overpowered", page_icon="", layout = "centered")
@@ -52,17 +54,22 @@ def main2() :
     """
     )
     
+##def main3():
+##    st.title('ArcGIS Online Map in Streamlit')
+##
+##    # Example ArcGIS Online map URL
+##    map_url = "https://www.arcgis.com/apps/mapviewer/index.html?webmap=3572b0bcfb724855af36a5cb54cef1d8"
+##
+##    # Define the iframe HTML code with your map URL
+##    iframe = f'<iframe src="{map_url}" width="100%" height="600"></iframe>'
+##
+##    # Use the HTML method to display the iframe in your app
+##    html(iframe, height=600)
+
 def main3():
-    st.title('ArcGIS Online Map in Streamlit')
-
-    # Example ArcGIS Online map URL
-    map_url = "https://www.arcgis.com/apps/mapviewer/index.html?webmap=3572b0bcfb724855af36a5cb54cef1d8"
-
-    # Define the iframe HTML code with your map URL
-    iframe = f'<iframe src="{map_url}" width="100%" height="600"></iframe>'
-
-    # Use the HTML method to display the iframe in your app
-    html(iframe, height=600)
+    # Create a map object centered at a specific location
+    m = folium.Map(location=[45.372, -121.6972], zoom_start=12)
+    folium_static(m)
 
 if __name__ == "__main__":
     main()
