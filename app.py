@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit.components.v1 import html
 import folium
 from streamlit_folium import folium_static
+import geopandas as gpd
 
 def main():
     st.set_page_config(page_title="Overpowered", page_icon="", layout = "centered")
@@ -67,8 +68,18 @@ def main2() :
 ##    html(iframe, height=600)
 
 def main3():
+    # Load your shapefile
+    gdf = gpd.read_file('data/TransmissionLine_CEC.shp')
+
+    # Convert to GeoJSON
+    gdf.to_file('data/TransmissionLine_CEC.geojson', driver='GeoJSON')
+
     # Create a map object centered at a specific location
     m = folium.Map(location=[45.372, -121.6972], zoom_start=12)
+
+    # Add the GeoJSON to the map
+    folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
+
     folium_static(m)
 
 if __name__ == "__main__":
