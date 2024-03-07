@@ -5,13 +5,15 @@ def main():
     st.set_page_config(page_title="Overpowered", page_icon="", layout = "centered")
     st.title('Overpowered - Connecting Renewable Energy to the Grid Faster')
     app_choice_2 = st.selectbox('Choose Page to Navigate To:', ['Home', 'Clustering', 'Power Grid Map'])
-    if app_choice_2 == 'HOME':
+    if app_choice_2 == 'Home':
         main1()
     elif app_choice_2 == 'Clustering':
         main2()
     elif app_choice_2 == 'Power Grid Map':
         main3()
 
+
+    
 def main1():
     st.write("## Introduction")
 
@@ -41,6 +43,14 @@ def main1():
     3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
     4. **Zhifei Dong** *(zfdong@berkeley.edu)*
     """)
+def main2() :
+    st.write("## Clustering Model")
+
+    st.write(
+    """
+    Link the model here.
+    """
+    )
     
 def main3():
     st.title('ArcGIS Online Map in Streamlit')
