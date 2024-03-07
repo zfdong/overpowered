@@ -75,7 +75,7 @@ def main3():
     #gdf.to_file('data/TransmissionLine_CEC.geojson', driver='GeoJSON')
 
     # Create a map object centered at a specific location
-    m = folium.Map(location=[36.7783, -119.4179], zoom_start=8)
+    m = folium.Map(location=[36.7783, -119.4179], zoom_start=6)
 
     # Add the GeoJSON to the map
     #folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
