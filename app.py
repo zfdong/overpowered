@@ -11,6 +11,36 @@ def main():
         main2()
     elif app_choice_2 == 'Power Grid Map':
         main3()
+
+def main1():
+    st.write("## Introduction")
+
+    st.write(
+    """
+    Adding a new power generation facility to the grid is inefficient: takes on average 4 years and has a high rate of applicant dropout. New regulations have changed the approval process. We plan to use data techniques to create a more efficient power grid interconnection queue process by using batch processing
+    """
+    )
+
+    st.write("## Intended Audience")
+
+    st.write(
+        """
+        CAISO Reviewers and Developers
+        """
+    )
+    
+    st.write("## Data Sources")
+    
+    st.markdown(""" """)
+
+    st.write("## Meet The Team")
+
+    st.markdown("""
+    1. **Adam Kreitzman** *(adam_kreitzman@berkeley.edu)*
+    2. **Hailee Schuele** *(hschuele@berkeley.edu)*
+    3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
+    4. **Zhifei Dong** *(zfdong@berkeley.edu)*
+    """)
     
 def main3():
     st.title('ArcGIS Online Map in Streamlit')
