@@ -69,16 +69,16 @@ def main2() :
 
 def main3():
     # Load your shapefile
-    gdf = gpd.read_file('data/TransmissionLine_CEC.shp')
+    #gdf = gpd.read_file('data/TransmissionLine_CEC.shp')
 
     # Convert to GeoJSON
-    gdf.to_file('data/TransmissionLine_CEC.geojson', driver='GeoJSON')
+    #gdf.to_file('data/TransmissionLine_CEC.geojson', driver='GeoJSON')
 
     # Create a map object centered at a specific location
-    m = folium.Map(location=[45.372, -121.6972], zoom_start=12)
+    m = folium.Map(location=[36.7783, -119.4179], zoom_start=12)
 
     # Add the GeoJSON to the map
-    folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
+    #folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
 
     folium_static(m)
 
