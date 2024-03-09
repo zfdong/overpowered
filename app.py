@@ -86,7 +86,7 @@ def main3():
     # Add the GeoJSON to the map
     #folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
 
-    st_folium(m,width=900, height=500)
+    st_folium(m,width=1500, height=1000)
     
     #folium_static(m)
 
