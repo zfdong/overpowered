@@ -5,7 +5,9 @@ from streamlit_folium import folium_static
 import geopandas as gpd
 
 def main():
-    st.set_page_config(page_title="Overpowered", page_icon="", layout = "centered")
+    # make page wide 
+    st.set_page_config(page_title="Overpowered", page_icon="", layout = "wide")
+    
     st.title('Overpowered - Connecting Renewable Energy to the Grid Faster')
     app_choice_2 = st.selectbox('Choose Page to Navigate To:', ['Home', 'Clustering', 'Power Grid Map'])
     if app_choice_2 == 'Home':
@@ -16,7 +18,7 @@ def main():
         main3()
 
 
-    
+# home page     
 def main1():
     st.write("## Introduction")
 
@@ -46,6 +48,7 @@ def main1():
     3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
     4. **Zhifei Dong** *(zfdong@berkeley.edu)*
     """)
+# cluster model 
 def main2() :
     st.write("## Clustering Model")
 
@@ -67,7 +70,10 @@ def main2() :
 ##    # Use the HTML method to display the iframe in your app
 ##    html(iframe, height=600)
 
+# Interactive Map
 def main3():
+    st.write("## CAISO Power Grid Map")
+    
     # Load your shapefile
     #gdf = gpd.read_file('data/TransmissionLine_CEC.shp')
 
