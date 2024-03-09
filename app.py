@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit.components.v1 import html
 import folium
-from streamlit_folium import folium_static
+from streamlit_folium import folium_static, st_folium
 import geopandas as gpd
 
 def main():
@@ -86,7 +86,9 @@ def main3():
     # Add the GeoJSON to the map
     #folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
 
-    folium_static(m)
+    st_folium(m,width=900, height=500)
+    
+    #folium_static(m)
 
 if __name__ == "__main__":
     main()
