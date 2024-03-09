@@ -73,20 +73,14 @@ def main2() :
 # Interactive Map
 def main3():
     st.write("## CAISO Power Grid Map")
-    
-    # Load your shapefile
-    #gdf = gpd.read_file('data/TransmissionLine_CEC.shp')
-
-    # Convert to GeoJSON
-    #gdf.to_file('data/TransmissionLine_CEC.geojson', driver='GeoJSON')
 
     # Create a map object centered at a specific location
     m = folium.Map(location=[36.7783, -119.4179], zoom_start=6)
 
     # Add the GeoJSON to the map
-    #folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
+    folium.GeoJson('data/TransmissionLine_CEC.geojson', name='CAISO Transmission Line').add_to(m)
 
-    st_folium(m,width=1500, height=1000)
+    st_folium(m,width=1500, height=800)
     
     #folium_static(m)
 
