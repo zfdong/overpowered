@@ -6,7 +6,8 @@ import folium
 from folium.plugins import BeautifyIcon
 
 import json
-
+import pandas as pd
+from st_aggrid import AgGrid, GridOptionsBuilder
 
 #from streamlit_folium import folium_static, st_folium
 
@@ -58,13 +59,27 @@ def main1():
     """)
 # cluster model 
 def main2() :
-    st.write("## Clustering Model")
+    full_queue_df = load_data('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
+    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
+    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
+    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
+    
+    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
+    # options_builder.configure_column(‘col1’, editable=True)
+    options_builder.configure_selection('single')
+    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
+    grid_options = options_builder.build()
 
-    st.write(
-    """
-    Link the model here.
-    """
-    )
+    st.write("## Clustering Model")
+    # st.caption('Select an application from the queue to suggest a cluster')
+    grid_return = AgGrid(visible_df, grid_options)
+    selected_rows = grid_return["selected_rows"]
+    try:
+        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
+        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
+        cluster_grid_return = AgGrid(cluster_df)
+    except:
+        st.write("Select a row to continue")   
     
 ##def main3():
 ##    st.title('ArcGIS Online Map in Streamlit')
@@ -116,62 +131,62 @@ def main3():
                               "weight" : 3,
                                })   
 
-        # add CA power plants 
-        json_file = 'data/California_Power_Plants.geojson'
-
-##        with open(json_file, 'r') as f:
-##            geojson_data = json.load(f)
+##        # add CA power plants 
+##        json_file = 'data/California_Power_Plants.geojson'
 ##
-##        # get coordinates from geojson
-##        lats = []
-##        lons = []
-##        for feature in geojson_data["features"]:
-##            coordinates = feature["geometry"]["coordinates"]
-##            lats.append(coordinates[0])
-##            lons.append(coordinates[1])
+####        with open(json_file, 'r') as f:
+####            geojson_data = json.load(f)
+####
+####        # get coordinates from geojson
+####        lats = []
+####        lons = []
+####        for feature in geojson_data["features"]:
+####            coordinates = feature["geometry"]["coordinates"]
+####            lats.append(coordinates[0])
+####            lons.append(coordinates[1])
+####        
+####        # Create star-shaped markers
+####        for lat, lon in zip(lats, lons):
+####            star_icon = BeautifyIcon(icon='star',
+####                                     inner_icon_style='color:red;font-size:10px;',  # Customize star color and size
+####                                     background_color='transparent',
+####                                     border_color='transparent')
+####            folium.Marker([lat, lon], icon=star_icon).add_to(m)
+##
+##        style_dict ={
+##                    # "stroke": True,
+##                    "color": "#3388ff",
+##                    "weight": 2,
+##                    "opacity": 1,
+##                    # "fill": True,
+##                    # "fillColor": "#ffffff",
+##                    "fillOpacity": 0,
+##                    # "dashArray": "9"
+##                    # "clickable": True,
+##                }
+##        m.add_geojson(json_file, style = style_dict, layer_name='CA Power Plants')
+##
+##        # add CA substations 
+####        shp_file = 'data/CA_Substations_Final.shp'
+####        # convert to geojson
+####        gdf = gpd.read_file(shp_file)
+####        gdf.to_crs('EPSG:4326', inplace=True)
+####        json_file = shp_file.replace('.shp','.geojson')
+####        gdf.to_file(json_file, driver='GeoJSON')
 ##        
-##        # Create star-shaped markers
-##        for lat, lon in zip(lats, lons):
-##            star_icon = BeautifyIcon(icon='star',
-##                                     inner_icon_style='color:red;font-size:10px;',  # Customize star color and size
-##                                     background_color='transparent',
-##                                     border_color='transparent')
-##            folium.Marker([lat, lon], icon=star_icon).add_to(m)
-
-        style_dict ={
-                    # "stroke": True,
-                    "color": "#3388ff",
-                    "weight": 2,
-                    "opacity": 1,
-                    # "fill": True,
-                    # "fillColor": "#ffffff",
-                    "fillOpacity": 0,
-                    # "dashArray": "9"
-                    # "clickable": True,
-                }
-        m.add_geojson(json_file, style = style_dict, layer_name='CA Power Plants')
-
-        # add CA substations 
-##        shp_file = 'data/CA_Substations_Final.shp'
-##        # convert to geojson
-##        gdf = gpd.read_file(shp_file)
-##        gdf.to_crs('EPSG:4326', inplace=True)
-##        json_file = shp_file.replace('.shp','.geojson')
-##        gdf.to_file(json_file, driver='GeoJSON')
-        
-        json_file = 'data/CA_Substations_Final.geojson'
-        m.add_geojson(json_file, layer_name='CA Substations')
-
-        # add EIA retired generators
-##        shp_file = 'data/EIA_Retired_Generators_Y2022.shp'
-##        # convert to geojson
-##        gdf = gpd.read_file(shp_file)
-##        gdf.to_crs('EPSG:4326', inplace=True)
-##        json_file = shp_file.replace('.shp','.geojson')
-##        gdf.to_file(json_file, driver='GeoJSON')
-        
-        json_file = 'data/EIA_Retired_Generators_Y2022.geojson'
-        m.add_geojson(json_file, layer_name='EIA Retired Generators')        
+##        json_file = 'data/CA_Substations_Final.geojson'
+##        m.add_geojson(json_file, layer_name='CA Substations')
+##
+##        # add EIA retired generators
+####        shp_file = 'data/EIA_Retired_Generators_Y2022.shp'
+####        # convert to geojson
+####        gdf = gpd.read_file(shp_file)
+####        gdf.to_crs('EPSG:4326', inplace=True)
+####        json_file = shp_file.replace('.shp','.geojson')
+####        gdf.to_file(json_file, driver='GeoJSON')
+##        
+##        json_file = 'data/EIA_Retired_Generators_Y2022.geojson'
+##        m.add_geojson(json_file, layer_name='EIA Retired Generators')        
         
         m.to_streamlit(height=700)
 
