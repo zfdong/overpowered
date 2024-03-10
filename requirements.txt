@@ -1,3 +1,4 @@
 streamlit
 geopandas
 leafmap
+st_aggrid
