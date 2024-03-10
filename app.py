@@ -163,14 +163,14 @@ def main3():
         m.add_geojson(json_file, layer_name='CA Substations')
 
         # add EIA retired generators
-        shp_file = 'data/EIA_Retired_Generators_Y2022.shp'
-        # convert to geojson
-        gdf = gpd.read_file(shp_file)
-        gdf.to_crs('EPSG:4326', inplace=True)
-        json_file = shp_file.replace('.shp','.geojson')
-        gdf.to_file(json_file, driver='GeoJSON')
+##        shp_file = 'data/EIA_Retired_Generators_Y2022.shp'
+##        # convert to geojson
+##        gdf = gpd.read_file(shp_file)
+##        gdf.to_crs('EPSG:4326', inplace=True)
+##        json_file = shp_file.replace('.shp','.geojson')
+##        gdf.to_file(json_file, driver='GeoJSON')
         
-        #json_file = 'data/CA_Substations_Final.geoj
+        json_file = 'data/EIA_Retired_Generators_Y2022.geojson'
         m.add_geojson(json_file, layer_name='EIA Retired Generators')        
         
         m.to_streamlit(height=700)
