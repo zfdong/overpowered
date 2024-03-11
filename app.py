@@ -13,6 +13,12 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 
 import geopandas as gpd
 
+@st.cache_data  # This function will be cached
+def load_data(path):
+    data = pd.read_csv(path)
+    return data
+
+
 def main():
     # make page wide 
     st.set_page_config(page_title="Overpowered", page_icon="", layout = "wide")
