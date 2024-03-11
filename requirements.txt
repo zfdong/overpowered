@@ -2,3 +2,5 @@ streamlit
 geopandas
 leafmap
 streamlit-aggrid
+openpyxl
+xlrd
