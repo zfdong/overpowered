@@ -4,3 +4,4 @@ leafmap
 streamlit-aggrid
 openpyxl
 xlrd
+vega_datasets
