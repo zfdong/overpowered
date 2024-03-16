@@ -8,7 +8,10 @@ from folium.plugins import BeautifyIcon
 import json
 import pandas as pd
 # the command below causes segmentation fault on local computer
-from st_aggrid import AgGrid, GridOptionsBuilder
+#from st_aggrid import AgGrid, GridOptionsBuilder
+
+import altair as alt
+from vega_datasets import data
 
 #from streamlit_folium import folium_static, st_folium
 
@@ -19,6 +22,61 @@ def load_excel(path, sheetname):
     data = pd.read_excel(path, sheetname)
     return data
 
+def create_altair_charts() :
+    # define map center and zoom scale 
+    center = [-119, 37]
+    scale = 2000
+
+    sphere = alt.sphere()
+    graticule = alt.graticule(step=[5, 5])
+    # lats = alt.sequence(start=-30, stop=71, step=10, as_='lats')
+    # lons = alt.sequence(start=-90, stop=91, step=10, as_='lons')
+
+    width = 800
+    height = 600
+
+    # Source of land data
+    source = alt.topo_feature(data.us_10m.url, 'states')
+
+    # CA counties map
+    with open('data/California_County_Boundaries.geojson', 'r') as file:
+        california_counties_geojson = json.load(file)
+
+    ca_counties = alt.Data(values=california_counties_geojson)
+
+    # Layering and configuring the components
+    base = alt.layer(
+        alt.Chart(sphere).mark_geoshape(fill='none'),
+        alt.Chart(graticule).mark_geoshape(stroke='gray', strokeWidth=0.5),
+        alt.Chart(source).mark_geoshape(fill='lightgray', stroke='gray'),
+        alt.Chart(ca_counties).mark_geoshape(fill='lightgray', stroke='gray')
+    ).properties(width=width, height=height)
+
+    projections = {
+        "Mercator": {
+            "type": "mercator",
+            "center": center,
+            "rotate": [0,0,0],
+            "translate": [width/2, height/2],
+            "scale": scale,
+            "precision": 0.1
+        },
+    }
+    geo_chart = base.properties(projection=projections['Mercator'])
+
+    multi = alt.selection_multi(on='click', nearest=False, empty = 'none', bind='legend', toggle="true")
+##    geo_points = alt.Chart(subset_metrics_df).mark_circle().encode(
+##        longitude='longitude:Q',
+##        latitude='latitude:Q',
+##        opacity=alt.condition(multi, alt.OpacityValue(1), alt.OpacityValue(0.8)),
+##        size=alt.condition(multi, alt.value(selected_size),alt.value(unselected_size)),
+##        shape=alt.condition(multi, alt.ShapeValue("diamond"), alt.ShapeValue("circle")),
+##        tooltip='name',
+##        color= alt.condition(multi, "name:N",alt.ColorValue('black'))
+##    ).add_selection(
+##        multi
+##    )
+    return alt.vconcat(geo_chart, center=True)
 
 def main():
     # make page wide 
@@ -66,27 +124,40 @@ def main1():
     """)
 # cluster model 
 def main2() :
-    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
-    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
-    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
-    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
-    
-    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
-    # options_builder.configure_column(‘col1’, editable=True)
-    options_builder.configure_selection('single')
-    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
-    grid_options = options_builder.build()
 
-    st.write("## Clustering Model")
-    # st.caption('Select an application from the queue to suggest a cluster')
-    grid_return = AgGrid(visible_df, grid_options)
-    selected_rows = grid_return["selected_rows"]
-    try:
-        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
-        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
-        cluster_grid_return = AgGrid(cluster_df)
-    except:
-        st.write("Select a row to continue")   
+    # CA counties map
+    with open('data/California_County_Boundaries.geojson', 'r') as file:
+        california_counties_geojson = json.load(file)
+        
+    county_list = [feature['properties']['CountyName'] for feature in california_counties_geojson['features']]
+    
+    selectedLeague = st.selectbox("Choose CA County", county_list)
+
+    # altair chart
+    st.altair_chart(create_altair_charts(), use_container_width=True)
+    
+    
+##    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
+##    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
+##    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
+##    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
+##    
+##    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
+##    # options_builder.configure_column(‘col1’, editable=True)
+##    options_builder.configure_selection('single')
+##    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
+##    grid_options = options_builder.build()
+##
+##    st.write("## Clustering Model")
+##    # st.caption('Select an application from the queue to suggest a cluster')
+##    grid_return = AgGrid(visible_df, grid_options)
+##    selected_rows = grid_return["selected_rows"]
+##    try:
+##        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
+##        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
+##        cluster_grid_return = AgGrid(cluster_df)
+##    except:
+##        st.write("Select a row to continue")   
     
     #return
 # Interactive Map
