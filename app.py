@@ -1,4 +1,11 @@
 import streamlit as st
+
+# Initialize the list in st.session_state if it doesn't exist
+if 'selected_county_list' not in st.session_state:
+    st.session_state.selected_county_list = []
+if 'selected_data_list' not in st.session_state:
+    st.session_state.selected_data_list = []
+
 from streamlit.components.v1 import html
 import leafmap.foliumap as leafmap
 
@@ -8,7 +15,7 @@ from folium.plugins import BeautifyIcon
 import json
 import pandas as pd
 # the command below causes segmentation fault on local computer
-from st_aggrid import AgGrid, GridOptionsBuilder
+#from st_aggrid import AgGrid, GridOptionsBuilder
 
 import altair as alt
 from vega_datasets import data
@@ -20,6 +27,10 @@ import geopandas as gpd
 from shapely.geometry import shape, MultiPolygon, MultiLineString
 
 
+@st.cache_data
+def load_basemap() :
+    basemap = alt.topo_feature(data.us_10m.url, 'states')
+    return basemap 
 
 @st.cache_data
 def load_excel(path, sheetname):
@@ -27,19 +38,19 @@ def load_excel(path, sheetname):
     return data
 
 @st.cache_data
-def load_county_map(file_path):
-    # CA counties map
+def load_geojson(file_path):
     with open(file_path, 'r') as file:
-        ca_counties = json.load(file)
-    return ca_counties
+        geojson_data = json.load(file)
+    return geojson_data
+
+##@st.cache_data
+##def load_transmission_lines(file_path):
+##    # transmission lines geojson
+##    with open(file_path, 'r') as file:
+##        trans_lines = json.load(file)
+##    return trans_lines    
 
 @st.cache_data
-def load_transmission_lines(file_path):
-    # transmission lines geojson
-    with open(file_path, 'r') as file:
-        trans_lines = json.load(file)
-    return trans_lines    
-
 def extract_geojson_by_county(county, in_geojson) :
     # create a new GeoJSON structure for the extracted county
     extracted_geojson = {
@@ -55,6 +66,7 @@ def extract_geojson_by_county(county, in_geojson) :
         
     return extracted_geojson
 
+@st.cache_data
 def get_county_centroid(in_county):
     # Using Shapely to create a geometry from the GeoJSON geometry
     geom = shape(in_county['features'][0]['geometry'])
@@ -71,7 +83,8 @@ def get_county_centroid(in_county):
     else:
         centroid = geom.centroid
     return centroid.x, centroid.y
-    
+
+@st.cache_data    
 def extract_lines_within_county(lines_geojson, county_geojson):
     # get county shape
     county_shape = shape(county_geojson['features'][0]['geometry'])
@@ -91,42 +104,28 @@ def extract_lines_within_county(lines_geojson, county_geojson):
     }    
     return within_lines_geojson
 
-def create_altair_charts(county, in_geojson, lines_geojson) :
-    # extract county data from all data 
-    county_data = extract_geojson_by_county(county, in_geojson) 
-    ca_counties = alt.Data(values=county_data)
+def is_valid_coordinate(lat, lon):
+    """Check if the provided latitude and longitude values are valid."""
+    return -90 <= lat <= 90 and -180 <= lon <= 180
 
-    # get transmission lines within the selected county
-    lines_data = extract_lines_within_county(lines_geojson, county_data)
-    ca_lines = alt.Data(values=lines_data)
+#@st.cache_data
+def create_altair_charts(basemap, county, county_geojson, lines_geojson, in_center, in_scale, coord_df) :
+    # prepare for altair display 
+    ca_counties = alt.Data(values=county_geojson)
+    ca_lines = alt.Data(values=lines_geojson, format=alt.DataFormat(property='features', type='json'))
     
     # define map center and zoom scale 
-    center = get_county_centroid(county_data)
-    scale = 17000
-
-    # insert centroid to the geojson
-    county_data['features'][0]['properties']['centroid_lon'] = center[0]
-    county_data['features'][0]['properties']['centroid_lat'] = center[1]
-
-    sphere = alt.sphere()
-    graticule = alt.graticule(step=[5, 5])
+    center = in_center
+    scale = in_scale
 
     width = 800
     height = 600
 
-    # Source of land data
-    source = alt.topo_feature(data.us_10m.url, 'states')
-
     # Layering and configuring the components
     base = alt.layer(
-        alt.Chart(sphere).mark_geoshape(fill='none'),
-        alt.Chart(graticule).mark_geoshape(stroke='gray', strokeWidth=0.5),
-        alt.Chart(source).mark_geoshape(fill='lightgray', stroke='gray'),
+        alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray'),
         alt.Chart(ca_counties).mark_geoshape(fill='yellow', stroke='gray'),
-##        alt.Chart(ca_counties).mark_text(align='center',baseline='middle',fontSize=10,dy=-5
-##                                         ).encode(longitude='centroid_lon:Q',latitude='centroid_lat:Q',text='CountyName:N' 
-##                                                  )
-        alt.Chart(ca_lines).mark_geoshape(filled=False, stroke='blue')
+        alt.Chart(ca_lines).mark_geoshape(filled=False, stroke='blue').encode(tooltip=alt.Tooltip('properties.Name:N',title=''))
     ).properties(width=width, height=height)
 
     projections = {
@@ -141,7 +140,24 @@ def create_altair_charts(county, in_geojson, lines_geojson) :
     }
     geo_chart = base.properties(projection=projections['Mercator'])
 
-    multi = alt.selection_multi(on='click', nearest=False, empty = 'none', bind='legend', toggle="true")
+    alt_chart = geo_chart
+    
+    # add user input point
+    if is_valid_coordinate(coord_df['lat'][0], coord_df['lon'][0]):
+        # Create points for the input coordinates
+        points = alt.Chart(coord_df).mark_point(
+            shape = 'diamond',
+            filled = True,
+            color='red',
+            size=100
+        ).encode(
+            longitude='lon:Q',
+            latitude='lat:Q'
+        )
+        
+        alt_chart = geo_chart + points
+    
+##    multi = alt.selection_multi(on='click', nearest=False, empty = 'none', bind='legend', toggle="true")
 ##    geo_points = alt.Chart(subset_metrics_df).mark_circle().encode(
 ##        longitude='longitude:Q',
 ##        latitude='latitude:Q',
@@ -153,7 +169,8 @@ def create_altair_charts(county, in_geojson, lines_geojson) :
 ##    ).add_selection(
 ##        multi
 ##    )
-    return alt.vconcat(geo_chart, center=True)
+    #return alt.vconcat(geo_chart, center=True)
+    return alt_chart
 
 def main():
     # make page wide 
@@ -233,45 +250,92 @@ In short, our solution speeds up the Queue, provides flexibility, and reduces de
     """)
 # cluster model 
 def main2() :
-    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
-    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
-    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
-    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
-    
-    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
-    # options_builder.configure_column(‘col1’, editable=True)
-    options_builder.configure_selection('single')
-    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
-    grid_options = options_builder.build()
-
-    st.write("## Clustering Model")
-    # st.caption('Select an application from the queue to suggest a cluster')
-    grid_return = AgGrid(visible_df, grid_options)
-    selected_rows = grid_return["selected_rows"]
-    try:
-        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
-        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
-        cluster_grid_return = AgGrid(cluster_df)
-    except:
-        st.write("Select a row to continue")   
+##    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
+##    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
+##    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
+##    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
+##    
+##    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
+##    # options_builder.configure_column(‘col1’, editable=True)
+##    options_builder.configure_selection('single')
+##    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
+##    grid_options = options_builder.build()
+##
+##    st.write("## Clustering Model")
+##    # st.caption('Select an application from the queue to suggest a cluster')
+##    grid_return = AgGrid(visible_df, grid_options)
+##    selected_rows = grid_return["selected_rows"]
+##    try:
+##        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
+##        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
+##        cluster_grid_return = AgGrid(cluster_df)
+##    except:
+##        st.write("Select a row to continue")   
     
     return
     
 def main3():
-    # load and cache CA counties map 
-    california_counties_geojson = load_county_map('data/California_County_Boundaries.geojson')
+    ## Load Data
+    # US states map
+    basemap = load_basemap()
+    # CA counties map 
+    california_counties_geojson = load_geojson('data/California_County_Boundaries.geojson')
+    # transmission lines
+    transmission_lines_geojson = load_geojson('data/TransmissionLine_CEC.geojson')
+    # substations
+    substations_geojson = load_geojson('data/CA_Substations_Final.geojson')
+    # power plants
+    plants_geojson = load_geojson('data/California_Power_Plants.geojson')
+    # retired generators
+    retired_gen_geojson = load_geojson('data/EIA_Retired_Generators_Y2022.geojson')
+    
+    # split display
+    col1, col2 = st.columns([1, 4])
     # get a list of counties
     county_list = [feature['properties']['CountyName'] for feature in california_counties_geojson['features']]
-    # create select box of counties 
-    selectedCounty = st.selectbox("Choose a County to View", county_list)
+    index_county = 0
+    # create a list of scales to display
+    scale_list = list(range(5000,40000,2500))
+    index_scale = scale_list.index(17500)
+    # create list of extra dataset to add
+    extra_data_list = ['None','Substations','Power Plants','Retired Generators']
+    index_extra = 0
 
-    # load and cache transmission lines
-    transmission_lines_geojson = load_transmission_lines('data/TransmissionLine_CEC.geojson')
+    with col1:
+        # create select box of counties 
+        selectedCounty = st.selectbox("Choose a County to View: ", county_list, index_county)
+        selectedScale = st.selectbox("Choose a Zoom-In Scale to Display: ", scale_list, index_scale)
+        selectedExtra = st.selectbox("Add Additional Data to Display: ", extra_data_list, index_extra)
 
+        # Input widgets for longitude and latitude
+        st.write("**Enter a location:**")
+        latitude = st.number_input("**Latitude:**", value=999.00, format="%.2f")
+        longitude = st.number_input("**Longitude:**", value=999.00, format="%.2f")
+        # Create a DataFrame with the input coordinates
+        coord_df = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
+
+    with col2:
+        if selectedCounty not in st.session_state.selected_county_list :
+            st.session_state.selected_county_list.append(selectedCounty)
+            
+            # extract county data from all counties 
+            county_data = extract_geojson_by_county(selectedCounty, california_counties_geojson)
+            # get centroid coordinates
+            centroid = get_county_centroid(county_data)
+        
+            # get transmission lines within the selected county
+            lines_data = extract_lines_within_county(transmission_lines_geojson, county_data)
+
+            st.session_state.selected_data_list.append([county_data, centroid, lines_data])
+            
+        else :
+            index = st.session_state.selected_county_list.index(selectedCounty)
+            county_data = st.session_state.selected_data_list[index][0]
+            centroid = st.session_state.selected_data_list[index][1]
+            lines_data = st.session_state.selected_data_list[index][2]
     
-    
-    # altair chart
-    st.altair_chart(create_altair_charts(selectedCounty, california_counties_geojson, transmission_lines_geojson), use_container_width=True)
+        # altair chart
+        st.altair_chart(create_altair_charts(basemap,selectedCounty,county_data,lines_data,centroid,selectedScale,coord_df), use_container_width=True)
     
 # Interactive Map
 ##def main3():
