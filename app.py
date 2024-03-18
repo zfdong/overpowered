@@ -15,7 +15,7 @@ from folium.plugins import BeautifyIcon
 import json
 import pandas as pd
 # the command below causes segmentation fault on local computer
-#from st_aggrid import AgGrid, GridOptionsBuilder
+from st_aggrid import AgGrid, GridOptionsBuilder
 
 import altair as alt
 from vega_datasets import data
@@ -104,12 +104,32 @@ def extract_lines_within_county(lines_geojson, county_geojson):
     }    
     return within_lines_geojson
 
+@st.cache_data    
+def extract_points_within_county(points_geojson, county_geojson):
+    # get county shape
+    county_shape = shape(county_geojson['features'][0]['geometry'])
+
+    within_points = []
+    for feature in points_geojson['features'] :
+        point_shape = shape(feature['geometry'])
+        if point_shape.within(county_shape) :
+            within_points.append(feature)
+
+    # create a new GeoJSON structure for within points
+    within_points_geojson = {
+        "type": "FeatureCollection",
+        "crs": points_geojson["crs"],
+        "features": within_points
+    }
+    
+    return within_points_geojson
+
 def is_valid_coordinate(lat, lon):
     """Check if the provided latitude and longitude values are valid."""
     return -90 <= lat <= 90 and -180 <= lon <= 180
 
 #@st.cache_data
-def create_altair_charts(basemap, county, county_geojson, lines_geojson, in_center, in_scale, coord_df) :
+def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_geojson, property_name, in_center, in_scale, coord_df) :
     # prepare for altair display 
     ca_counties = alt.Data(values=county_geojson)
     ca_lines = alt.Data(values=lines_geojson, format=alt.DataFormat(property='features', type='json'))
@@ -138,9 +158,33 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, in_cent
             "precision": 0.1
         },
     }
+    
     geo_chart = base.properties(projection=projections['Mercator'])
 
     alt_chart = geo_chart
+
+    # add extra points data only when data is selected and there are points within county boundary
+    data_tmp = None
+    if points_geojson is not None and points_geojson['features']:
+
+        #st.write(points_geojson)
+        
+        # convert geojson to pd df
+        data_tmp = pd.json_normalize(points_geojson['features'], sep="_")
+        data_tmp['longitude'] = data_tmp['geometry_coordinates'].apply(lambda x: x[0])
+        data_tmp['latitude'] = data_tmp['geometry_coordinates'].apply(lambda x: x[1])
+
+        extra_points = alt.Chart(data_tmp).mark_point(
+            filled = True,
+            color='black',
+            size=100
+        ).encode(
+            longitude='longitude:Q',
+            latitude='latitude:Q',
+            tooltip=property_name
+        )
+
+        alt_chart = geo_chart + extra_points
     
     # add user input point
     if is_valid_coordinate(coord_df['lat'][0], coord_df['lon'][0]):
@@ -155,7 +199,7 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, in_cent
             latitude='lat:Q'
         )
         
-        alt_chart = geo_chart + points
+        alt_chart = alt_chart + points
     
 ##    multi = alt.selection_multi(on='click', nearest=False, empty = 'none', bind='legend', toggle="true")
 ##    geo_points = alt.Chart(subset_metrics_df).mark_circle().encode(
@@ -170,7 +214,7 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, in_cent
 ##        multi
 ##    )
     #return alt.vconcat(geo_chart, center=True)
-    return alt_chart
+    return alt_chart, data_tmp
 
 def main():
     # make page wide 
@@ -250,31 +294,47 @@ In short, our solution speeds up the Queue, provides flexibility, and reduces de
     """)
 # cluster model 
 def main2() :
-##    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
-##    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
-##    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
-##    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
-##    
-##    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
-##    # options_builder.configure_column(‘col1’, editable=True)
-##    options_builder.configure_selection('single')
-##    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
-##    grid_options = options_builder.build()
-##
-##    st.write("## Clustering Model")
-##    # st.caption('Select an application from the queue to suggest a cluster')
-##    grid_return = AgGrid(visible_df, grid_options)
-##    selected_rows = grid_return["selected_rows"]
-##    try:
-##        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
-##        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
-##        cluster_grid_return = AgGrid(cluster_df)
-##    except:
-##        st.write("Select a row to continue")   
+    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
+    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
+    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
+    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
+    
+    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
+    # options_builder.configure_column(‘col1’, editable=True)
+    options_builder.configure_selection('single')
+    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
+    grid_options = options_builder.build()
+
+    st.write("## Clustering Model")
+    # st.caption('Select an application from the queue to suggest a cluster')
+    grid_return = AgGrid(visible_df, grid_options)
+    selected_rows = grid_return["selected_rows"]
+    try:
+        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
+        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
+        cluster_grid_return = AgGrid(cluster_df)
+    except:
+        st.write("Select a row to continue")   
     
     return
     
 def main3():
+
+    st.write("## How to Use the Querying Map")
+
+    st.markdown("""Currently, the querying map only supports CAISO database. 
+    """)
+
+    st.markdown("""
+    1. To start with, choose a California county to zoom into. The county boundary is filled with "yellow" color.
+
+    2. Select a zoom-in scale to display the transmission lines in "blue" color.
+
+    3. Choose an extra data layer to display as "black dot". The available data layers are substations, power plants and retired generators.
+
+    4. This is optional. User can enter a location coordinate by latitude and longitude. The location will be added to plots as "red diamond"
+    """)
+    
     ## Load Data
     # US states map
     basemap = load_basemap()
@@ -307,6 +367,8 @@ def main3():
         selectedScale = st.selectbox("Choose a Zoom-In Scale to Display: ", scale_list, index_scale)
         selectedExtra = st.selectbox("Add Additional Data to Display: ", extra_data_list, index_extra)
 
+
+
         # Input widgets for longitude and latitude
         st.write("**Enter a location:**")
         latitude = st.number_input("**Latitude:**", value=999.00, format="%.2f")
@@ -333,9 +395,30 @@ def main3():
             county_data = st.session_state.selected_data_list[index][0]
             centroid = st.session_state.selected_data_list[index][1]
             lines_data = st.session_state.selected_data_list[index][2]
-    
+            #points_data = st.session_state.selected_data_list[index][3]
+
+        # get extra data within the selected county
+        if selectedExtra == 'Substations' : 
+            points_data = extract_points_within_county(substations_geojson, county_data)
+            property_name = 'properties_Name:N'
+        elif selectedExtra == 'Power Plants' : 
+            points_data = extract_points_within_county(plants_geojson, county_data)
+            property_name = 'properties_PlantName:N'
+        elif selectedExtra == 'Retired Generators' : 
+            points_data = extract_points_within_county(retired_gen_geojson, county_data)
+            property_name = 'properties_Plant_Name:N'
+        else :
+            points_data = None
+            property_name = 'None'
+        
         # altair chart
-        st.altair_chart(create_altair_charts(basemap,selectedCounty,county_data,lines_data,centroid,selectedScale,coord_df), use_container_width=True)
+        alt_chart, data_df = create_altair_charts(basemap,selectedCounty,county_data,lines_data,points_data,property_name,
+                                             centroid,selectedScale,coord_df)
+        st.altair_chart(alt_chart, use_container_width=True)
+
+        if data_df is not None:
+            st.write("### Available data are listed below: ")
+            st.write(data_df)
     
 # Interactive Map
 ##def main3():
