@@ -8,7 +8,7 @@ from folium.plugins import BeautifyIcon
 import json
 import pandas as pd
 # the command below causes segmentation fault on local computer
-#from st_aggrid import AgGrid, GridOptionsBuilder
+from st_aggrid import AgGrid, GridOptionsBuilder
 
 import altair as alt
 from vega_datasets import data
