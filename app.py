@@ -79,7 +79,8 @@ def extract_lines_within_county(lines_geojson, county_geojson):
     within_lines = []
     for feature in lines_geojson['features'] :
         line_shape = shape(feature['geometry'])
-        if line_shape.within(county_shape) :
+        #if line_shape.within(county_shape) :
+        if line_shape.intersects(county_shape) :
             within_lines.append(feature)
 
     # create a new GeoJSON structure for within lines
