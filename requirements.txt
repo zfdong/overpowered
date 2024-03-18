@@ -5,3 +5,4 @@ streamlit-aggrid
 openpyxl
 xlrd
 vega_datasets
+shapely
