@@ -26,6 +26,7 @@ import geopandas as gpd
 
 from shapely.geometry import shape, MultiPolygon, MultiLineString
 
+import csv 
 
 @st.cache_data
 def load_basemap() :
@@ -127,6 +128,47 @@ def extract_points_within_county(points_geojson, county_geojson):
 def is_valid_coordinate(lat, lon):
     """Check if the provided latitude and longitude values are valid."""
     return -90 <= lat <= 90 and -180 <= lon <= 180
+
+def extract_retired_plants(geojson_data) :
+    # Filter features where "Retired_Plant" equals 1
+    filtered_features = [
+        feature for feature in geojson_data["features"] if feature["properties"]["Retired_Plant"] == 1
+    ]
+
+    # Create a new GeoJSON structure with the filtered features
+    filtered_geojson_data = {
+        "type": "FeatureCollection",
+        "crs": geojson_data["crs"],
+        "features": filtered_features,
+    }
+
+    return filtered_geojson_data
+
+def geojson_to_csv(geojson_data, csv_file) :
+    # get headers from geojson
+    headers_from_properties = list(geojson_data["features"][0]["properties"].keys())
+    # Add point coordinates to the headers
+    headers = ['latitude','longitude'] + headers_from_properties
+    
+    # Open a new CSV file
+    with open(csv_file, mode='w', newline='') as csv_file:
+        # Create a CSV writer object
+        csv_writer = csv.writer(csv_file)
+        
+        # Write the header row based on the properties you want to include
+        csv_writer.writerow(headers)
+        
+        # Loop through each feature in your GeoJSON data
+        for feature in geojson_data['features']:
+            # Extract the coordinates (assuming Point geometry for simplicity)
+            longitude, latitude = feature['geometry']['coordinates']
+            
+            # Extract the properties you're interested in
+            property_list = [feature['properties'][iprop] for iprop in headers_from_properties]
+            
+            # Write a row for this feature
+            csv_writer.writerow([latitude, longitude]+property_list)    
+    return 
 
 #@st.cache_data
 def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_geojson, property_name, in_center, in_scale, coord_df) :
@@ -345,7 +387,12 @@ def main3():
     # substations
     substations_geojson = load_geojson('data/CA_Substations_Final.geojson')
     # power plants
-    plants_geojson = load_geojson('data/California_Power_Plants.geojson')
+    plants_geojson_all = load_geojson('data/California_Power_Plants.geojson')
+    # only keep retired plants
+    plants_geojson = extract_retired_plants(plants_geojson_all)
+    # save retired plants data to csv 
+    geojson_to_csv(plants_geojson, 'retired_plants.csv')
+    
     # retired generators
     retired_gen_geojson = load_geojson('data/EIA_Retired_Generators_Y2022.geojson')
     
@@ -358,7 +405,8 @@ def main3():
     scale_list = list(range(5000,40000,2500))
     index_scale = scale_list.index(17500)
     # create list of extra dataset to add
-    extra_data_list = ['None','Substations','Power Plants','Retired Generators']
+    #extra_data_list = ['None','Substations','Power Plants','Retired Generators']
+    extra_data_list = ['None','Substations','Retired Power Plants']
     index_extra = 0
 
     with col1:
@@ -401,12 +449,12 @@ def main3():
         if selectedExtra == 'Substations' : 
             points_data = extract_points_within_county(substations_geojson, county_data)
             property_name = 'properties_Name:N'
-        elif selectedExtra == 'Power Plants' : 
+        elif selectedExtra == 'Retired Power Plants' : 
             points_data = extract_points_within_county(plants_geojson, county_data)
             property_name = 'properties_PlantName:N'
-        elif selectedExtra == 'Retired Generators' : 
-            points_data = extract_points_within_county(retired_gen_geojson, county_data)
-            property_name = 'properties_Plant_Name:N'
+##        elif selectedExtra == 'Retired Generators' : 
+##            points_data = extract_points_within_county(retired_gen_geojson, county_data)
+##            property_name = 'properties_Plant_Name:N'
         else :
             points_data = None
             property_name = 'None'
