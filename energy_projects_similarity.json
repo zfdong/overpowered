@@ -1,0 +1,106 @@
+[
+    {
+        "ProjectHead": "MONTEZUMA (HIGH WINDS III)",
+        "Cluster": [
+            {
+                "Project": "MONTEZUMA II",
+                "location": 0.88,
+                "on-line date/queue place": 0.99,
+                "fuel/type": 0.98,
+                "overall": 0.9500000000000001
+            },
+            {
+                "Project": "TULE WIND",
+                "location": 0.94,
+                "on-line date/queue place": 0.91,
+                "fuel/type": 0.99,
+                "overall": 0.9466666666666667
+            },
+            {
+                "Project": "SOLANO 4 WIND",
+                "location": 0.96,
+                "on-line date/queue place": 0.88,
+                "fuel/type": 0.98,
+                "overall": 0.94
+            }
+        ]
+    },
+    {
+        "ProjectHead": "TULE WIND",
+        "Cluster": [
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "location": 0.89,
+                "on-line date/queue place": 0.98,
+                "fuel/type": 0.95,
+                "overall": 0.9400000000000001
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "location": 0.9,
+                "on-line date/queue place": 0.85,
+                "fuel/type": 0.95,
+                "overall": 0.9
+            },
+            {
+                "Project": "STAGE COACH SOLAR",
+                "location": 0.88,
+                "on-line date/queue place": 0.95,
+                "fuel/type": 0.99,
+                "overall": 0.9400000000000001
+            }
+        ]
+    },
+    {
+        "ProjectHead": "FRESNO COGENERATION EXPANSION PROJECT",
+        "Cluster": [
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "location": 0.91,
+                "on-line date/queue place": 0.99,
+                "fuel/type": 0.95,
+                "overall": 0.9499999999999998
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "location": 0.84,
+                "on-line date/queue place": 1.0,
+                "fuel/type": 0.84,
+                "overall": 0.8933333333333332
+            },
+            {
+                "Project": "FOUNTAIN WIND",
+                "location": 0.94,
+                "on-line date/queue place": 0.97,
+                "fuel/type": 0.95,
+                "overall": 0.9533333333333333
+            }
+        ]
+    },
+    {
+        "ProjectHead": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+        "Cluster": [
+            {
+                "Project": "MULQUEENEY RANCH WIND",
+                "location": 0.82,
+                "on-line date/queue place": 0.84,
+                "fuel/type": 0.86,
+                "overall": 0.84
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "location": 0.83,
+                "on-line date/queue place": 0.91,
+                "fuel/type": 0.95,
+                "overall": 0.8966666666666666
+            },
+            {
+                "Project": "VENTOSO",
+                "location": 0.89,
+                "on-line date/queue place": 0.93,
+                "fuel/type": 0.88,
+                "overall": 0.9
+            }
+        ]
+    }
+]

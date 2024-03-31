@@ -28,6 +28,8 @@ from shapely.geometry import shape, MultiPolygon, MultiLineString
 
 import csv 
 
+from clusterPage import main2
+
 @st.cache_data
 def load_basemap() :
     basemap = alt.topo_feature(data.us_10m.url, 'states')
@@ -334,31 +336,7 @@ In short, our solution speeds up the Queue, provides flexibility, and reduces de
     3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
     4. **Zhifei Dong** *(zfdong@berkeley.edu)*
     """)
-# cluster model 
-def main2() :
-    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
-    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
-    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
-    visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
-    
-    options_builder = GridOptionsBuilder.from_dataframe(visible_df)
-    # options_builder.configure_column(‘col1’, editable=True)
-    options_builder.configure_selection('single')
-    options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
-    grid_options = options_builder.build()
 
-    st.write("## Clustering Model")
-    # st.caption('Select an application from the queue to suggest a cluster')
-    grid_return = AgGrid(visible_df, grid_options)
-    selected_rows = grid_return["selected_rows"]
-    try:
-        st.header(selected_rows[0]["Project Name"] + " Suggested Cluster")
-        cluster_df = createCluster(visible_df, n=5, selectedProjectName=  selected_rows[0]["Project Name"])
-        cluster_grid_return = AgGrid(cluster_df)
-    except:
-        st.write("Select a row to continue")   
-    
-    return
     
 def main3():
 
