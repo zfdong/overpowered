@@ -17,7 +17,8 @@ def load_json(path):
 
 @st.cache_data # This function will be cached
 def get_cluster(cluster_df, project_head):
-    return pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
+    new_df = pd.DataFrame.from_dict(clusters_df[clusters_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
+    return new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
 
 
 def main2():

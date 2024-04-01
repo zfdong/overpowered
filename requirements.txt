@@ -6,3 +6,4 @@ openpyxl
 xlrd
 vega_datasets
 shapely
+streamlit_extras
