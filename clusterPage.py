@@ -17,7 +17,7 @@ def load_json(path):
 
 @st.cache_data # This function will be cached
 def get_cluster(cluster_df, project_head):
-    new_df = pd.DataFrame.from_dict(clusters_df[clusters_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
+    new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
     return new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
 
 
@@ -54,6 +54,9 @@ def main2():
     grid_return = AgGrid(visible_df, grid_options)
     selected_rows = grid_return["selected_rows"]
     
+    if 'selected_rows' not in st.session_state:
+        st.session_state.selected_rows = None
+    
     if 'chosen_cluster_df' not in st.session_state:
         st.session_state.chosen_cluster_df = []
 
@@ -66,22 +69,26 @@ def main2():
             key="clear_button",
             css_styles= """
                 button {
-                    margin-left: auto; 
-                    margin-right: 0;
+                    color: red;
+                    float: right;
+                    border-color: red;
                 }            
             """
         ):
             clear_button = st.button('Clear')
     
     if go_button:
-        st.session_state.chosen_cluster_df = get_cluster(cluster_df, selected_rows[0]["Project Name"])
+        st.session_state.selected_rows = selected_rows
+        st.session_state.chosen_cluster_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"])
         
     if clear_button:
         st.session_state.chosen_cluster_df = []
+        st.session_state.selected_rows = None
     
-    try:
-        st.subheader(selected_rows[0]["Project Name"] + " Suggested Cluster")
-        cluster_grid_return = AgGrid(st.session_state.chosen_cluster_df)
-    except:
+    if st.session_state.selected_rows == None:
         st.write("Select a row and hit Go to continue")
+        
+    else:
+        st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
+        cluster_grid_return = AgGrid(st.session_state.chosen_cluster_df)
         
