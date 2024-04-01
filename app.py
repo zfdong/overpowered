@@ -265,14 +265,43 @@ def main():
     st.set_page_config(page_title="Overpowered", page_icon="", layout = "wide")
     
     st.title('Overpowered - Connecting Renewable Energy to the Grid Faster')
-    app_choice_2 = st.selectbox('Choose Page to Navigate To:', ['Home', 'Clustering', 'Power Grid Map'])
-    if app_choice_2 == 'Home':
-        main1()
-    elif app_choice_2 == 'Clustering':
-        main2()
-    elif app_choice_2 == 'Power Grid Map':
-        main3()
+    st.markdown("""
+        <style>
 
+            .stTabs [data-baseweb="tab-list"] {
+                font-size: 2em;
+                gap: 10px;
+            }
+
+            .stTabs [data-baseweb="tab"] {
+                height: 100px;
+                font-size: 2em;
+                white-space: pre-wrap;
+                background-color: #F0F2F6;
+                border-radius: 4px 4px 0px 0px;
+                gap: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .stTabs [aria-selected="true"] {
+                background-color: #FFFFFF;
+                font-size: 2em;
+            }
+
+        </style>""", unsafe_allow_html=True
+    )
+    
+    tab1, tab2, tab3 = st.tabs(['  Home  ', '  Clustering  ', '  Power Grid Map  '])
+
+    with tab1:
+       main1()
+
+    with tab2:
+       main2()
+
+    with tab3:
+       main3()
 
 # home page     
 def main1():
