@@ -53,12 +53,16 @@ def main2():
 
     grid_return = AgGrid(visible_df, grid_options)
     selected_rows = grid_return["selected_rows"]
+
+    # write out selected rows to check its format
+    #st.write(selected_rows)
     
-    if 'selected_rows' not in st.session_state:
-        st.session_state.selected_rows = None
-    
-    if 'chosen_cluster_df' not in st.session_state:
-        st.session_state.chosen_cluster_df = []
+    # define initial lists in app.py
+##    if 'selected_rows' not in st.session_state:
+##        st.session_state.selected_rows = None
+##    
+##    if 'chosen_cluster_df' not in st.session_state:
+##        st.session_state.chosen_cluster_df = []
 
     col1, col2 = st.columns([9, 1])
     

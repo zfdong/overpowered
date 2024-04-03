@@ -526,13 +526,29 @@ def main3():
             lines_data = extract_lines_within_county(transmission_lines_geojson, county_data)
 
             st.session_state.selected_data_list.append([county_data, centroid, lines_data])
+
+            #st.write(selectedCounty)
+            #st.write(st.session_state.selected_data_list)
             
         else :
             index = st.session_state.selected_county_list.index(selectedCounty)
-            county_data = st.session_state.selected_data_list[index][0]
-            centroid = st.session_state.selected_data_list[index][1]
-            lines_data = st.session_state.selected_data_list[index][2]
-            #points_data = st.session_state.selected_data_list[index][3]
+            #st.write(st.session_state.selected_county_list)
+            #st.write(st.session_state.selected_data_list)
+
+            # somehow, when runing main2(), the alameda was assigned to county list, but data list is still empty 
+            try :
+                county_data = st.session_state.selected_data_list[index][0]
+                centroid = st.session_state.selected_data_list[index][1]
+                lines_data = st.session_state.selected_data_list[index][2]
+            except :
+                # extract county data from all counties 
+                county_data = extract_geojson_by_county(selectedCounty, california_counties_geojson)
+                # get centroid coordinates
+                centroid = get_county_centroid(county_data)
+                # get transmission lines within the selected county
+                lines_data = extract_lines_within_county(transmission_lines_geojson, county_data)
+                # append items to list 
+                st.session_state.selected_data_list.append([county_data, centroid, lines_data])                
 
         # get extra data within the selected county
         if selectedExtra == 'Substations' : 
