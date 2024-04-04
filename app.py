@@ -158,6 +158,14 @@ def extract_retired_plants(geojson_data) :
 
     return filtered_geojson_data
 
+# convert shape file to geojson
+def save_shp_to_geojson(shp_file):
+    # convert to geojson
+    gdf = gpd.read_file(shp_file)
+    gdf.to_crs('EPSG:4326', inplace=True)
+    json_file = shp_file.replace('.shp','.geojson')
+    gdf.to_file(json_file, driver='GeoJSON')
+
 # save geojson to csv / no longer in use 
 def geojson_to_csv(geojson_data, csv_file) :
     # get headers from geojson
@@ -228,7 +236,7 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
     base = alt.layer(
         alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray'),
         alt.Chart(ca_counties).mark_geoshape(fill='yellow', stroke='gray'),
-        alt.Chart(ca_lines).mark_geoshape(filled=False, stroke='blue').encode(tooltip=alt.Tooltip('properties.Name:N',title=''))
+        alt.Chart(ca_lines).mark_geoshape(filled=False, stroke='blue').encode(tooltip=alt.Tooltip('properties.Disp_Name:N',title=''))
     ).properties(width=width, height=height)
 
     projections = {
@@ -519,6 +527,9 @@ def main3():
     # retired generators/ no longer use it
     #retired_gen_geojson = load_geojson('data/EIA_Retired_Generators_Y2022.geojson')
 
+    # save shape file to geojson
+    #save_shp_to_geojson('data/TransmissionLine_CES.shp')
+    
     # queue data with lat/lon
     queue_df = load_csv('data/new_caiso_queue.csv')
     # create a display name that combines project name and add-to substation
@@ -619,7 +630,7 @@ def main3():
         st.altair_chart(alt_chart, use_container_width=True)
 
         if data_df is not None:
-            st.write("### Available data are listed below: ")
+            st.write("### Available " + selectedExtra + " data are listed below: ")
             st.write(data_df)
     
 # Interactive Map
