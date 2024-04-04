@@ -53,6 +53,11 @@ def load_geojson(file_path):
         geojson_data = json.load(file)
     return geojson_data
 
+@st.cache_data
+def load_csv(path):
+    data = pd.read_csv(path)
+    return data
+
 ##@st.cache_data
 ##def load_transmission_lines(file_path):
 ##    # transmission lines geojson
@@ -153,6 +158,7 @@ def extract_retired_plants(geojson_data) :
 
     return filtered_geojson_data
 
+# save geojson to csv / no longer in use 
 def geojson_to_csv(geojson_data, csv_file) :
     # get headers from geojson
     headers_from_properties = list(geojson_data["features"][0]["properties"].keys())
@@ -177,10 +183,32 @@ def geojson_to_csv(geojson_data, csv_file) :
             
             # Write a row for this feature
             csv_writer.writerow([latitude, longitude]+property_list)    
-    return 
+    return
+
+# convert pd df to geojson
+def df_to_geojson(df, crs, lat_col='GIS Lat', lon_col='GIS Long') :
+    # Define the base structure of the GeoJSON
+    geojson = {
+        "type": "FeatureCollection",
+        "crs": crs,
+        "features": []
+    }
+    
+    # Iterate over DataFrame rows to populate the GeoJSON Features
+    for _, row in df.iterrows():
+        feature = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [row[lon_col], row[lat_col]]
+            },
+            "properties": row.drop([lon_col, lat_col]).to_dict()
+        }
+        geojson['features'].append(feature)    
+    return geojson 
 
 #@st.cache_data
-def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_geojson, property_name, in_center, in_scale, coord_df) :
+def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_geojson, property_list, in_center, in_scale, coord_df) :
     # prepare for altair display 
     ca_counties = alt.Data(values=county_geojson)
     ca_lines = alt.Data(values=lines_geojson, format=alt.DataFormat(property='features', type='json'))
@@ -191,6 +219,10 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
 
     width = 800
     height = 600
+
+    property_name = property_list[0]
+    shape = property_list[1]
+    color =  property_list[2]
 
     # Layering and configuring the components
     base = alt.layer(
@@ -214,7 +246,8 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
 
     alt_chart = geo_chart
 
-    # add extra points data only when data is selected and there are points within county boundary
+    ### add extra points data ### Substations, Retired Plants, Queue Data
+    #only when data is selected and there are points within county boundary
     data_tmp = None
     if points_geojson is not None and points_geojson['features']:
 
@@ -226,13 +259,14 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
         data_tmp['latitude'] = data_tmp['geometry_coordinates'].apply(lambda x: x[1])
 
         extra_points = alt.Chart(data_tmp).mark_point(
+            shape = shape,
             filled = True,
-            color='black',
+            color = color,
             size=100
         ).encode(
             longitude='longitude:Q',
             latitude='latitude:Q',
-            tooltip=property_name
+            tooltip=alt.Tooltip(property_name)
         )
 
         alt_chart = geo_chart + extra_points
@@ -331,7 +365,7 @@ def create_altair_charts_main2(basemap, county, county_geojson, lines_geojson, p
         points = alt.Chart(coord_df).mark_point(
             shape = 'diamond',
             filled = True,
-            color='red',
+            color='green',
             size=100
         ).encode(
             longitude='lon:Q',
@@ -480,10 +514,17 @@ def main3():
     # only keep retired plants
     plants_geojson = extract_retired_plants(plants_geojson_all)
     # save retired plants data to csv 
-    geojson_to_csv(plants_geojson, 'retired_plants.csv')
+    #geojson_to_csv(plants_geojson, 'retired_plants.csv')
     
-    # retired generators
-    retired_gen_geojson = load_geojson('data/EIA_Retired_Generators_Y2022.geojson')
+    # retired generators/ no longer use it
+    #retired_gen_geojson = load_geojson('data/EIA_Retired_Generators_Y2022.geojson')
+
+    # queue data with lat/lon
+    queue_df = load_csv('data/new_caiso_queue.csv')
+    # create a display name that combines project name and add-to substation
+    queue_df['Display Name'] = queue_df['Project Name'] + " : " + queue_df["Station or Transmission Line"]
+    # convert dataframe to geojson for standard processing
+    queue_geojson = df_to_geojson(queue_df, plants_geojson["crs"], lat_col='GIS Lat', lon_col='GIS Long')
     
     # split display
     col1, col2 = st.columns([1, 4])
@@ -491,11 +532,11 @@ def main3():
     county_list = [feature['properties']['CountyName'] for feature in california_counties_geojson['features']]
     index_county = 0
     # create a list of scales to display
-    scale_list = list(range(5000,40000,2500))
+    scale_list = list(range(2500,52500,2500))
     index_scale = scale_list.index(17500)
     # create list of extra dataset to add
     #extra_data_list = ['None','Substations','Power Plants','Retired Generators']
-    extra_data_list = ['None','Substations','Retired Power Plants']
+    extra_data_list = ['None','Substations','Retired Power Plants','Current Queue']
     index_extra = 0
 
     with col1:
@@ -553,19 +594,27 @@ def main3():
         # get extra data within the selected county
         if selectedExtra == 'Substations' : 
             points_data = extract_points_within_county(substations_geojson, county_data)
+            disp_shape = 'triangle'
+            disp_color = 'red'
             property_name = 'properties_Name:N'
         elif selectedExtra == 'Retired Power Plants' : 
             points_data = extract_points_within_county(plants_geojson, county_data)
+            disp_shape = 'cross'
+            disp_color = 'black'
             property_name = 'properties_PlantName:N'
-##        elif selectedExtra == 'Retired Generators' : 
-##            points_data = extract_points_within_county(retired_gen_geojson, county_data)
-##            property_name = 'properties_Plant_Name:N'
+        elif selectedExtra == 'Current Queue' : 
+            points_data = extract_points_within_county(queue_geojson, county_data)
+            disp_shape = 'diamond'
+            disp_color = 'green'
+            property_name = 'properties_Display Name:N'
         else :
             points_data = None
             property_name = 'None'
+            disp_shape = 'None'
+            disp_color = 'None'
         
         # altair chart
-        alt_chart, data_df = create_altair_charts(basemap,selectedCounty,county_data,lines_data,points_data,property_name,
+        alt_chart, data_df = create_altair_charts(basemap,selectedCounty,county_data,lines_data,points_data,[property_name,disp_shape,disp_color],
                                              centroid,selectedScale,coord_df)
         st.altair_chart(alt_chart, use_container_width=True)
 
