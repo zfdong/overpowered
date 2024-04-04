@@ -39,20 +39,23 @@ def main2():
     cluster_df = load_json("energy_projects_similarity.json")
         
     st.subheader("Clustering Model")
-    with st.expander("Set Parameters"):
-        col1, col2, col3, col4, col5 = st.columns(5)
-        with col1:
-            cluster_size = st.slider(label="Cluster Size", min_value= 2, max_value = 10)
-        with col2:
-            w1 = st.number_input(label="Weight 1", value = 0.25)
-        with col3:
-            w2 = st.number_input(label="Weight 2", value = 0.25)
-        with col4:
-            w3 = st.number_input(label="Weight 3", value = 0.25)
-        with col5:    
-            w4 = st.number_input(label="Weight 4", value = 0.25)
+    st.markdown(
+        """
+        Studying one applicant at a time poses lots of challenges. With this tool, you can determine which projects make sense to study _together_.  
+        We provide a structured scoring mechanism to determine the best groups, but recognize that sometimes, expert energy users would weigh parameters in different ways. Our preset weights offer a great starting point, but you can configure weights as you see fit!
+        """
+    )
+    c1, c2 = st.columns(2)
     
-    st.subheader('Select an application from the queue to suggest a cluster')
+    with c1:
+        with st.expander("Set Parameters"):
+            col1, col2 = st.columns(2)
+            with col1:
+                w1 = st.number_input(label="Weight 1", value = 0.25)
+                w2 = st.number_input(label="Weight 2", value = 0.25)
+            with col2:
+                w3 = st.number_input(label="Weight 3", value = 0.25)
+                w4 = st.number_input(label="Weight 4", value = 0.25)
 
     grid_return = AgGrid(visible_df, grid_options)
     selected_rows = grid_return["selected_rows"]
@@ -96,6 +99,10 @@ def main2():
         st.write("Select a row and hit Go to continue")
         
     else:
-        st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
-        cluster_grid_return = AgGrid(st.session_state.chosen_cluster_df)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
+            cluster_grid_return = AgGrid(st.session_state.chosen_cluster_df)
+        with col2:
+            st.markdown('''rainbow:[Map Placeholder]''')
         

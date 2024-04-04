@@ -1,0 +1,3602 @@
+[
+    {
+        "ProjectHead": "DAYLIGHT",
+        "Cluster": [
+            {
+                "Project": "GOLDEN FIELDS SOLAR",
+                "Location": 0.98,
+                "Process": 0.93,
+                "Infrastructure": 0.81,
+                "Overall": 0.91,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.85,
+                "Process": 0.87,
+                "Infrastructure": 0.91,
+                "Overall": 0.88,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "CROW CREEK SOLAR 1",
+                "Location": 0.88,
+                "Process": 0.8,
+                "Infrastructure": 1.0,
+                "Overall": 0.89,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.97,
+                "Process": 0.99,
+                "Infrastructure": 0.97,
+                "Overall": 0.98,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.86,
+                "Process": 0.88,
+                "Infrastructure": 0.89,
+                "Overall": 0.88,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.98,
+                "Process": 0.91,
+                "Infrastructure": 0.93,
+                "Overall": 0.94,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "RABBITBRUSH SOLAR",
+                "Location": 0.99,
+                "Process": 0.89,
+                "Infrastructure": 0.83,
+                "Overall": 0.9,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.91,
+                "Process": 0.86,
+                "Infrastructure": 0.89,
+                "Overall": 0.89,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.82,
+                "Process": 0.84,
+                "Infrastructure": 0.85,
+                "Overall": 0.84,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "QUARTZITE SOLAR 8",
+                "Location": 0.92,
+                "Process": 0.98,
+                "Infrastructure": 0.86,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.92,
+            "Total MegaWatts": 3154,
+            "Likelihood Score": 0.63
+        }
+    },
+    {
+        "ProjectHead": "FALLBROOK ENERGY STORAGE",
+        "Cluster": [
+            {
+                "Project": "MONTEZUMA II",
+                "Location": 0.92,
+                "Process": 0.91,
+                "Infrastructure": 0.95,
+                "Overall": 0.93,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.92,
+                "Process": 0.81,
+                "Infrastructure": 0.8,
+                "Overall": 0.84,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.88,
+                "Process": 0.91,
+                "Infrastructure": 0.82,
+                "Overall": 0.87,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "EXCELSIOR SOLAR",
+                "Location": 0.97,
+                "Process": 0.96,
+                "Infrastructure": 0.91,
+                "Overall": 0.95,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.97,
+                "Process": 0.92,
+                "Infrastructure": 0.91,
+                "Overall": 0.93,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.9,
+                "Process": 0.84,
+                "Infrastructure": 0.93,
+                "Overall": 0.89,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "LAKE ALPAUGH BATTERY STORAGE",
+                "Location": 0.83,
+                "Process": 0.99,
+                "Infrastructure": 0.96,
+                "Overall": 0.93,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "ANTELOPE SOLAR 2",
+                "Location": 0.99,
+                "Process": 0.98,
+                "Infrastructure": 0.98,
+                "Overall": 0.98,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "GASKELL WEST",
+                "Location": 0.84,
+                "Process": 0.82,
+                "Infrastructure": 0.83,
+                "Overall": 0.83,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "ALMASOL",
+                "Location": 0.94,
+                "Process": 0.88,
+                "Infrastructure": 0.93,
+                "Overall": 0.92,
+                "Project Score": 0.61
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.85,
+            "Total MegaWatts": 1119,
+            "Likelihood Score": 0.65
+        }
+    },
+    {
+        "ProjectHead": "RUGGED SOLAR FARM",
+        "Cluster": [
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.91,
+                "Process": 0.89,
+                "Infrastructure": 0.83,
+                "Overall": 0.88,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.99,
+                "Process": 0.82,
+                "Infrastructure": 0.96,
+                "Overall": 0.92,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.91,
+                "Process": 0.84,
+                "Infrastructure": 0.8,
+                "Overall": 0.85,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.93,
+                "Process": 0.89,
+                "Infrastructure": 0.89,
+                "Overall": 0.9,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "Location": 0.86,
+                "Process": 0.88,
+                "Infrastructure": 0.92,
+                "Overall": 0.89,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "ANTELOPE SOLAR 2",
+                "Location": 0.89,
+                "Process": 0.86,
+                "Infrastructure": 0.86,
+                "Overall": 0.87,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "NORTH CENTRAL VALLEY",
+                "Location": 0.85,
+                "Process": 0.83,
+                "Infrastructure": 0.82,
+                "Overall": 0.83,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "GOLDEN FIELDS SOLAR",
+                "Location": 0.86,
+                "Process": 0.94,
+                "Infrastructure": 0.88,
+                "Overall": 0.89,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "Location": 0.92,
+                "Process": 0.93,
+                "Infrastructure": 0.92,
+                "Overall": 0.92,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "PROXIMA SOLAR",
+                "Location": 0.97,
+                "Process": 0.84,
+                "Infrastructure": 0.92,
+                "Overall": 0.91,
+                "Project Score": 0.64
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.89,
+            "Total MegaWatts": 3813,
+            "Likelihood Score": 0.51
+        }
+    },
+    {
+        "ProjectHead": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+        "Cluster": [
+            {
+                "Project": "GATEWAY ENERGY STORAGE",
+                "Location": 0.95,
+                "Process": 0.96,
+                "Infrastructure": 1.0,
+                "Overall": 0.97,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.96,
+                "Process": 0.99,
+                "Infrastructure": 0.84,
+                "Overall": 0.93,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "ARATINA SOLAR CENTER 1",
+                "Location": 0.83,
+                "Process": 0.92,
+                "Infrastructure": 0.82,
+                "Overall": 0.86,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.87,
+                "Process": 0.86,
+                "Infrastructure": 0.91,
+                "Overall": 0.88,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "GASKELL WEST",
+                "Location": 0.96,
+                "Process": 0.89,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "CRIMSON",
+                "Location": 0.96,
+                "Process": 0.86,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.91,
+                "Process": 0.86,
+                "Infrastructure": 0.96,
+                "Overall": 0.91,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.88,
+                "Process": 0.86,
+                "Infrastructure": 0.95,
+                "Overall": 0.9,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "RABBITBRUSH SOLAR",
+                "Location": 0.82,
+                "Process": 0.84,
+                "Infrastructure": 0.82,
+                "Overall": 0.83,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.81,
+                "Process": 0.83,
+                "Infrastructure": 0.84,
+                "Overall": 0.83,
+                "Project Score": 0.6
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.9,
+            "Total MegaWatts": 4295,
+            "Likelihood Score": 0.64
+        }
+    },
+    {
+        "ProjectHead": "GOLDEN FIELDS SOLAR",
+        "Cluster": [
+            {
+                "Project": "ANTELOPE SOLAR 2",
+                "Location": 0.9,
+                "Process": 0.88,
+                "Infrastructure": 0.92,
+                "Overall": 0.9,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.87,
+                "Process": 0.81,
+                "Infrastructure": 0.84,
+                "Overall": 0.84,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "SANDSTORM WIND POWER",
+                "Location": 0.88,
+                "Process": 0.81,
+                "Infrastructure": 0.97,
+                "Overall": 0.89,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.9,
+                "Process": 1.0,
+                "Infrastructure": 0.85,
+                "Overall": 0.92,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.88,
+                "Process": 0.86,
+                "Infrastructure": 0.84,
+                "Overall": 0.86,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "GATEWAY ENERGY STORAGE",
+                "Location": 0.9,
+                "Process": 0.89,
+                "Infrastructure": 0.92,
+                "Overall": 0.9,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "ALMASOL",
+                "Location": 0.8,
+                "Process": 0.99,
+                "Infrastructure": 0.87,
+                "Overall": 0.89,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "STAGE COACH SOLAR",
+                "Location": 0.89,
+                "Process": 0.94,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.83,
+                "Process": 0.97,
+                "Infrastructure": 0.84,
+                "Overall": 0.88,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "MONTEZUMA II",
+                "Location": 0.85,
+                "Process": 0.92,
+                "Infrastructure": 0.94,
+                "Overall": 0.9,
+                "Project Score": 0.7
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.98,
+            "Total MegaWatts": 4058,
+            "Likelihood Score": 0.54
+        }
+    },
+    {
+        "ProjectHead": "ARLINGTON",
+        "Cluster": [
+            {
+                "Project": "ARATINA SOLAR CENTER 1",
+                "Location": 0.93,
+                "Process": 0.9,
+                "Infrastructure": 0.96,
+                "Overall": 0.93,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.94,
+                "Process": 0.95,
+                "Infrastructure": 0.81,
+                "Overall": 0.9,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.98,
+                "Process": 0.84,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.98,
+                "Process": 0.8,
+                "Infrastructure": 0.9,
+                "Overall": 0.89,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "BIG ROCK SOLAR FARM",
+                "Location": 0.96,
+                "Process": 0.99,
+                "Infrastructure": 0.92,
+                "Overall": 0.96,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.95,
+                "Process": 0.87,
+                "Infrastructure": 0.91,
+                "Overall": 0.91,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.91,
+                "Process": 0.99,
+                "Infrastructure": 0.88,
+                "Overall": 0.93,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "STAGE COACH SOLAR",
+                "Location": 0.95,
+                "Process": 0.9,
+                "Infrastructure": 0.9,
+                "Overall": 0.92,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 1.0,
+                "Process": 0.81,
+                "Infrastructure": 0.94,
+                "Overall": 0.92,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "COLUMBIA SOLAR ENERGY 2",
+                "Location": 0.83,
+                "Process": 0.89,
+                "Infrastructure": 0.84,
+                "Overall": 0.85,
+                "Project Score": 0.69
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.94,
+            "Total MegaWatts": 1514,
+            "Likelihood Score": 0.64
+        }
+    },
+    {
+        "ProjectHead": "STAGE COACH SOLAR",
+        "Cluster": [
+            {
+                "Project": "CHESTNUT WESTSIDE",
+                "Location": 0.91,
+                "Process": 0.84,
+                "Infrastructure": 0.85,
+                "Overall": 0.87,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.99,
+                "Process": 0.95,
+                "Infrastructure": 0.92,
+                "Overall": 0.95,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "FOUNTAIN WIND",
+                "Location": 0.8,
+                "Process": 0.96,
+                "Infrastructure": 0.88,
+                "Overall": 0.88,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "CROW CREEK SOLAR 1",
+                "Location": 0.9,
+                "Process": 0.92,
+                "Infrastructure": 0.83,
+                "Overall": 0.88,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.89,
+                "Process": 0.89,
+                "Infrastructure": 0.81,
+                "Overall": 0.86,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.93,
+                "Process": 0.82,
+                "Infrastructure": 0.85,
+                "Overall": 0.87,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "REDWOOD SOLAR FARM",
+                "Location": 0.93,
+                "Process": 0.88,
+                "Infrastructure": 0.84,
+                "Overall": 0.88,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "NORTH JOHNSON ENERGY CENTER",
+                "Location": 0.84,
+                "Process": 0.95,
+                "Infrastructure": 0.84,
+                "Overall": 0.88,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.96,
+                "Process": 0.81,
+                "Infrastructure": 0.89,
+                "Overall": 0.89,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.9,
+                "Process": 0.99,
+                "Infrastructure": 0.89,
+                "Overall": 0.93,
+                "Project Score": 0.54
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.99,
+            "Total MegaWatts": 3354,
+            "Likelihood Score": 0.55
+        }
+    },
+    {
+        "ProjectHead": "KETTLEMAN SOLAR PROJECT",
+        "Cluster": [
+            {
+                "Project": "SLOTH",
+                "Location": 0.87,
+                "Process": 0.92,
+                "Infrastructure": 0.87,
+                "Overall": 0.89,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 3",
+                "Location": 0.89,
+                "Process": 0.83,
+                "Infrastructure": 0.94,
+                "Overall": 0.89,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "LAKE ALPAUGH BATTERY STORAGE",
+                "Location": 0.95,
+                "Process": 0.85,
+                "Infrastructure": 0.99,
+                "Overall": 0.93,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "ANTELOPE SOLAR 2",
+                "Location": 0.94,
+                "Process": 0.82,
+                "Infrastructure": 0.92,
+                "Overall": 0.89,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.9,
+                "Process": 0.8,
+                "Infrastructure": 0.81,
+                "Overall": 0.84,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.85,
+                "Process": 0.86,
+                "Infrastructure": 0.93,
+                "Overall": 0.88,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.97,
+                "Process": 0.89,
+                "Infrastructure": 0.92,
+                "Overall": 0.93,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.9,
+                "Process": 0.93,
+                "Infrastructure": 0.85,
+                "Overall": 0.89,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.92,
+                "Process": 0.81,
+                "Infrastructure": 0.84,
+                "Overall": 0.86,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.86,
+                "Process": 0.91,
+                "Infrastructure": 0.99,
+                "Overall": 0.92,
+                "Project Score": 0.55
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.99,
+            "Total MegaWatts": 4115,
+            "Likelihood Score": 0.6
+        }
+    },
+    {
+        "ProjectHead": "KETTLEMAN SOLAR PROJECT",
+        "Cluster": [
+            {
+                "Project": "RABBITBRUSH SOLAR",
+                "Location": 0.91,
+                "Process": 0.85,
+                "Infrastructure": 0.95,
+                "Overall": 0.9,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.86,
+                "Process": 0.99,
+                "Infrastructure": 0.87,
+                "Overall": 0.91,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "TULE WIND",
+                "Location": 0.85,
+                "Process": 0.96,
+                "Infrastructure": 0.94,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.98,
+                "Process": 0.88,
+                "Infrastructure": 0.81,
+                "Overall": 0.89,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "LASSEN LODGE HYDROELECTRIC",
+                "Location": 0.95,
+                "Process": 0.98,
+                "Infrastructure": 0.96,
+                "Overall": 0.96,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.98,
+                "Process": 0.89,
+                "Infrastructure": 0.82,
+                "Overall": 0.9,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "EXCELSIOR SOLAR",
+                "Location": 0.81,
+                "Process": 0.89,
+                "Infrastructure": 0.88,
+                "Overall": 0.86,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.98,
+                "Process": 0.96,
+                "Infrastructure": 0.94,
+                "Overall": 0.96,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.96,
+                "Process": 0.98,
+                "Infrastructure": 0.88,
+                "Overall": 0.94,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 3",
+                "Location": 0.85,
+                "Process": 0.93,
+                "Infrastructure": 0.83,
+                "Overall": 0.87,
+                "Project Score": 0.58
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.82,
+            "Total MegaWatts": 1331,
+            "Likelihood Score": 0.67
+        }
+    },
+    {
+        "ProjectHead": "BOTTLE ROCK POWER",
+        "Cluster": [
+            {
+                "Project": "KETTLEMAN SOLAR PROJECT",
+                "Location": 0.98,
+                "Process": 0.91,
+                "Infrastructure": 0.97,
+                "Overall": 0.95,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.82,
+                "Process": 0.93,
+                "Infrastructure": 0.86,
+                "Overall": 0.87,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.81,
+                "Process": 0.85,
+                "Infrastructure": 0.92,
+                "Overall": 0.86,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "REDWOOD SOLAR FARM",
+                "Location": 0.86,
+                "Process": 0.94,
+                "Infrastructure": 0.99,
+                "Overall": 0.93,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.88,
+                "Process": 0.98,
+                "Infrastructure": 0.93,
+                "Overall": 0.93,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "WRIGHT SOLAR",
+                "Location": 0.98,
+                "Process": 0.8,
+                "Infrastructure": 0.83,
+                "Overall": 0.87,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.98,
+                "Process": 0.85,
+                "Infrastructure": 0.97,
+                "Overall": 0.93,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.85,
+                "Process": 0.84,
+                "Infrastructure": 0.99,
+                "Overall": 0.89,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.99,
+                "Process": 0.9,
+                "Infrastructure": 0.9,
+                "Overall": 0.93,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ARATINA SOLAR CENTER 1",
+                "Location": 0.89,
+                "Process": 0.85,
+                "Infrastructure": 0.86,
+                "Overall": 0.87,
+                "Project Score": 0.67
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.91,
+            "Total MegaWatts": 4427,
+            "Likelihood Score": 0.5
+        }
+    },
+    {
+        "ProjectHead": "QUARTZITE SOLAR 8",
+        "Cluster": [
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.86,
+                "Process": 0.85,
+                "Infrastructure": 0.88,
+                "Overall": 0.86,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.89,
+                "Process": 0.84,
+                "Infrastructure": 0.81,
+                "Overall": 0.85,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "ROSAMOND WEST SOLAR",
+                "Location": 1.0,
+                "Process": 0.86,
+                "Infrastructure": 0.82,
+                "Overall": 0.89,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.82,
+                "Process": 0.92,
+                "Infrastructure": 0.98,
+                "Overall": 0.91,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "MONTEZUMA II",
+                "Location": 0.88,
+                "Process": 0.82,
+                "Infrastructure": 0.82,
+                "Overall": 0.84,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "COLUMBIA SOLAR ENERGY 2",
+                "Location": 0.8,
+                "Process": 0.92,
+                "Infrastructure": 0.83,
+                "Overall": 0.85,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR",
+                "Location": 0.99,
+                "Process": 0.9,
+                "Infrastructure": 0.95,
+                "Overall": 0.95,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.91,
+                "Process": 0.81,
+                "Infrastructure": 0.98,
+                "Overall": 0.9,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.83,
+                "Process": 1.0,
+                "Infrastructure": 0.9,
+                "Overall": 0.91,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.97,
+                "Process": 1.0,
+                "Infrastructure": 0.98,
+                "Overall": 0.98,
+                "Project Score": 0.65
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.92,
+            "Total MegaWatts": 3175,
+            "Likelihood Score": 0.65
+        }
+    },
+    {
+        "ProjectHead": "LUNA VALLEY SOLAR",
+        "Cluster": [
+            {
+                "Project": "PLUOT",
+                "Location": 0.83,
+                "Process": 0.96,
+                "Infrastructure": 0.89,
+                "Overall": 0.89,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.98,
+                "Process": 0.95,
+                "Infrastructure": 0.98,
+                "Overall": 0.97,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.97,
+                "Process": 0.9,
+                "Infrastructure": 0.99,
+                "Overall": 0.95,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "FOUNTAIN WIND",
+                "Location": 0.9,
+                "Process": 0.99,
+                "Infrastructure": 0.88,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "GASKELL WEST",
+                "Location": 0.92,
+                "Process": 0.83,
+                "Infrastructure": 0.89,
+                "Overall": 0.88,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "LECONTE ENERGY STORAGE",
+                "Location": 0.98,
+                "Process": 0.84,
+                "Infrastructure": 0.83,
+                "Overall": 0.88,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.97,
+                "Process": 0.83,
+                "Infrastructure": 0.92,
+                "Overall": 0.91,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.96,
+                "Process": 0.86,
+                "Infrastructure": 0.89,
+                "Overall": 0.9,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.86,
+                "Process": 0.94,
+                "Infrastructure": 0.81,
+                "Overall": 0.87,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.99,
+                "Process": 0.97,
+                "Infrastructure": 0.87,
+                "Overall": 0.94,
+                "Project Score": 0.62
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.96,
+            "Total MegaWatts": 4738,
+            "Likelihood Score": 0.58
+        }
+    },
+    {
+        "ProjectHead": "CHESTNUT WESTSIDE",
+        "Cluster": [
+            {
+                "Project": "ULTRAPOWER CHINESE STATION BESS",
+                "Location": 0.94,
+                "Process": 0.99,
+                "Infrastructure": 0.83,
+                "Overall": 0.92,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 3",
+                "Location": 0.94,
+                "Process": 0.9,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "CROW CREEK SOLAR 1",
+                "Location": 0.98,
+                "Process": 0.95,
+                "Infrastructure": 0.83,
+                "Overall": 0.92,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "LASSEN LODGE HYDROELECTRIC",
+                "Location": 0.98,
+                "Process": 0.86,
+                "Infrastructure": 0.94,
+                "Overall": 0.93,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "CRIMSON",
+                "Location": 0.84,
+                "Process": 0.83,
+                "Infrastructure": 0.93,
+                "Overall": 0.87,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.96,
+                "Process": 0.91,
+                "Infrastructure": 0.96,
+                "Overall": 0.94,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "ESCONDIDO ENERGY CENTER 2",
+                "Location": 0.83,
+                "Process": 0.84,
+                "Infrastructure": 0.81,
+                "Overall": 0.83,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.85,
+                "Process": 0.97,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "GATEWAY ENERGY STORAGE",
+                "Location": 0.95,
+                "Process": 0.96,
+                "Infrastructure": 0.97,
+                "Overall": 0.96,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.84,
+                "Process": 0.89,
+                "Infrastructure": 0.87,
+                "Overall": 0.87,
+                "Project Score": 0.67
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.83,
+            "Total MegaWatts": 3214,
+            "Likelihood Score": 0.53
+        }
+    },
+    {
+        "ProjectHead": "VICTORY PASS SOLAR",
+        "Cluster": [
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.81,
+                "Process": 0.85,
+                "Infrastructure": 0.82,
+                "Overall": 0.83,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.92,
+                "Process": 0.99,
+                "Infrastructure": 0.85,
+                "Overall": 0.92,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "Location": 0.96,
+                "Process": 0.82,
+                "Infrastructure": 0.92,
+                "Overall": 0.9,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "Location": 0.83,
+                "Process": 0.81,
+                "Infrastructure": 0.97,
+                "Overall": 0.87,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.92,
+                "Process": 0.95,
+                "Infrastructure": 0.95,
+                "Overall": 0.94,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "NORTH JOHNSON ENERGY CENTER",
+                "Location": 0.83,
+                "Process": 0.97,
+                "Infrastructure": 0.87,
+                "Overall": 0.89,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "TULE WIND",
+                "Location": 0.84,
+                "Process": 0.91,
+                "Infrastructure": 0.98,
+                "Overall": 0.91,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "SANDSTORM WIND POWER",
+                "Location": 0.88,
+                "Process": 0.88,
+                "Infrastructure": 0.83,
+                "Overall": 0.86,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.85,
+                "Process": 0.85,
+                "Infrastructure": 0.94,
+                "Overall": 0.88,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "BIG ROCK SOLAR FARM",
+                "Location": 0.93,
+                "Process": 0.89,
+                "Infrastructure": 0.84,
+                "Overall": 0.89,
+                "Project Score": 0.52
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.88,
+            "Total MegaWatts": 1671,
+            "Likelihood Score": 0.59
+        }
+    },
+    {
+        "ProjectHead": "CHESTNUT WESTSIDE",
+        "Cluster": [
+            {
+                "Project": "ARATINA SOLAR CENTER 1",
+                "Location": 0.9,
+                "Process": 0.96,
+                "Infrastructure": 0.92,
+                "Overall": 0.93,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "QUARTZITE SOLAR 8",
+                "Location": 0.84,
+                "Process": 0.84,
+                "Infrastructure": 1.0,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "ALMASOL",
+                "Location": 0.87,
+                "Process": 0.93,
+                "Infrastructure": 0.9,
+                "Overall": 0.9,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.9,
+                "Process": 0.95,
+                "Infrastructure": 0.96,
+                "Overall": 0.94,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.97,
+                "Process": 0.96,
+                "Infrastructure": 0.89,
+                "Overall": 0.94,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.89,
+                "Process": 0.9,
+                "Infrastructure": 0.89,
+                "Overall": 0.89,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.93,
+                "Process": 0.87,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "AMERICAN KINGS SOLAR",
+                "Location": 0.84,
+                "Process": 0.96,
+                "Infrastructure": 0.91,
+                "Overall": 0.9,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.85,
+                "Process": 0.83,
+                "Infrastructure": 0.97,
+                "Overall": 0.88,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "Location": 0.83,
+                "Process": 0.86,
+                "Infrastructure": 0.85,
+                "Overall": 0.85,
+                "Project Score": 0.6
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.94,
+            "Total MegaWatts": 1552,
+            "Likelihood Score": 0.57
+        }
+    },
+    {
+        "ProjectHead": "KETTLEMAN SOLAR PROJECT",
+        "Cluster": [
+            {
+                "Project": "DESERT SUNLIGHT PV I",
+                "Location": 0.92,
+                "Process": 0.98,
+                "Infrastructure": 0.98,
+                "Overall": 0.96,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.97,
+                "Process": 0.99,
+                "Infrastructure": 0.99,
+                "Overall": 0.98,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "WESTLANDS ALMOND",
+                "Location": 0.89,
+                "Process": 0.98,
+                "Infrastructure": 0.96,
+                "Overall": 0.94,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "TULE WIND",
+                "Location": 0.86,
+                "Process": 0.9,
+                "Infrastructure": 0.93,
+                "Overall": 0.9,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "CHESTNUT WESTSIDE",
+                "Location": 0.96,
+                "Process": 0.88,
+                "Infrastructure": 0.83,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "PROXIMA SOLAR",
+                "Location": 0.81,
+                "Process": 0.83,
+                "Infrastructure": 0.81,
+                "Overall": 0.82,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "WESTLANDS ALMOND",
+                "Location": 0.99,
+                "Process": 0.87,
+                "Infrastructure": 0.83,
+                "Overall": 0.9,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.93,
+                "Process": 0.89,
+                "Infrastructure": 0.9,
+                "Overall": 0.91,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "GOLDEN FIELDS SOLAR",
+                "Location": 0.9,
+                "Process": 0.93,
+                "Infrastructure": 0.97,
+                "Overall": 0.93,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.98,
+                "Process": 0.89,
+                "Infrastructure": 0.84,
+                "Overall": 0.9,
+                "Project Score": 0.54
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.83,
+            "Total MegaWatts": 1808,
+            "Likelihood Score": 0.64
+        }
+    },
+    {
+        "ProjectHead": "POMEGRANATE",
+        "Cluster": [
+            {
+                "Project": "PROXIMA SOLAR",
+                "Location": 0.98,
+                "Process": 0.94,
+                "Infrastructure": 0.86,
+                "Overall": 0.93,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "ARATINA SOLAR CENTER 1",
+                "Location": 0.96,
+                "Process": 0.87,
+                "Infrastructure": 0.92,
+                "Overall": 0.92,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "KETTLEMAN SOLAR PROJECT",
+                "Location": 0.86,
+                "Process": 1.0,
+                "Infrastructure": 0.82,
+                "Overall": 0.89,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.84,
+                "Process": 0.96,
+                "Infrastructure": 0.9,
+                "Overall": 0.9,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.88,
+                "Process": 0.81,
+                "Infrastructure": 0.93,
+                "Overall": 0.87,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "STAGE COACH SOLAR",
+                "Location": 0.85,
+                "Process": 0.99,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "DESERT SUNLIGHT PV II",
+                "Location": 0.85,
+                "Process": 0.96,
+                "Infrastructure": 0.89,
+                "Overall": 0.9,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.84,
+                "Process": 0.87,
+                "Infrastructure": 0.94,
+                "Overall": 0.88,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.96,
+                "Process": 0.92,
+                "Infrastructure": 0.84,
+                "Overall": 0.91,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.93,
+                "Process": 0.85,
+                "Infrastructure": 0.98,
+                "Overall": 0.92,
+                "Project Score": 0.7
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.84,
+            "Total MegaWatts": 3257,
+            "Likelihood Score": 0.64
+        }
+    },
+    {
+        "ProjectHead": "LASSEN LODGE HYDROELECTRIC",
+        "Cluster": [
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.96,
+                "Process": 0.81,
+                "Infrastructure": 0.96,
+                "Overall": 0.91,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.84,
+                "Process": 0.96,
+                "Infrastructure": 0.99,
+                "Overall": 0.93,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.8,
+                "Process": 0.87,
+                "Infrastructure": 0.96,
+                "Overall": 0.88,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "LASSEN LODGE HYDROELECTRIC",
+                "Location": 0.98,
+                "Process": 0.89,
+                "Infrastructure": 0.94,
+                "Overall": 0.94,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.95,
+                "Process": 0.98,
+                "Infrastructure": 0.99,
+                "Overall": 0.97,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "MONTEZUMA II",
+                "Location": 0.85,
+                "Process": 0.91,
+                "Infrastructure": 0.92,
+                "Overall": 0.89,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "ULTRAPOWER CHINESE STATION BESS",
+                "Location": 0.86,
+                "Process": 0.96,
+                "Infrastructure": 0.91,
+                "Overall": 0.91,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "LAKE ALPAUGH BATTERY STORAGE",
+                "Location": 0.95,
+                "Process": 1.0,
+                "Infrastructure": 0.84,
+                "Overall": 0.93,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.91,
+                "Process": 0.87,
+                "Infrastructure": 0.9,
+                "Overall": 0.89,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.92,
+                "Process": 0.87,
+                "Infrastructure": 0.99,
+                "Overall": 0.93,
+                "Project Score": 0.58
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.85,
+            "Total MegaWatts": 4447,
+            "Likelihood Score": 0.67
+        }
+    },
+    {
+        "ProjectHead": "QUARTZITE SOLAR 8",
+        "Cluster": [
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.88,
+                "Process": 0.87,
+                "Infrastructure": 0.9,
+                "Overall": 0.88,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.92,
+                "Process": 0.96,
+                "Infrastructure": 0.96,
+                "Overall": 0.95,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.86,
+                "Process": 0.98,
+                "Infrastructure": 1.0,
+                "Overall": 0.95,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "CHESTNUT WESTSIDE",
+                "Location": 0.94,
+                "Process": 0.85,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.92,
+                "Process": 0.82,
+                "Infrastructure": 0.86,
+                "Overall": 0.87,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "LECONTE ENERGY STORAGE",
+                "Location": 0.86,
+                "Process": 0.91,
+                "Infrastructure": 0.91,
+                "Overall": 0.89,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "GASKELL WEST",
+                "Location": 0.89,
+                "Process": 0.93,
+                "Infrastructure": 0.9,
+                "Overall": 0.91,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.97,
+                "Process": 0.99,
+                "Infrastructure": 0.97,
+                "Overall": 0.98,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "CROW CREEK SOLAR 1",
+                "Location": 0.99,
+                "Process": 0.86,
+                "Infrastructure": 0.96,
+                "Overall": 0.94,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 1.0,
+                "Process": 0.82,
+                "Infrastructure": 0.97,
+                "Overall": 0.93,
+                "Project Score": 0.68
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.93,
+            "Total MegaWatts": 2761,
+            "Likelihood Score": 0.52
+        }
+    },
+    {
+        "ProjectHead": "WESTLANDS ALMOND",
+        "Cluster": [
+            {
+                "Project": "DESERT SUNLIGHT PV I",
+                "Location": 0.82,
+                "Process": 0.92,
+                "Infrastructure": 0.83,
+                "Overall": 0.86,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.99,
+                "Process": 0.99,
+                "Infrastructure": 0.98,
+                "Overall": 0.99,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.81,
+                "Process": 0.81,
+                "Infrastructure": 0.95,
+                "Overall": 0.86,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.89,
+                "Process": 0.83,
+                "Infrastructure": 0.94,
+                "Overall": 0.89,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.88,
+                "Process": 0.92,
+                "Infrastructure": 0.83,
+                "Overall": 0.88,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "MEDEIROS SOLAR",
+                "Location": 0.88,
+                "Process": 0.98,
+                "Infrastructure": 0.82,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.93,
+                "Process": 0.83,
+                "Infrastructure": 0.94,
+                "Overall": 0.9,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.95,
+                "Process": 0.81,
+                "Infrastructure": 0.9,
+                "Overall": 0.89,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "LASSEN LODGE HYDROELECTRIC",
+                "Location": 0.81,
+                "Process": 0.97,
+                "Infrastructure": 0.87,
+                "Overall": 0.88,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "Location": 0.96,
+                "Process": 0.94,
+                "Infrastructure": 0.99,
+                "Overall": 0.96,
+                "Project Score": 0.68
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.91,
+            "Total MegaWatts": 4900,
+            "Likelihood Score": 0.54
+        }
+    },
+    {
+        "ProjectHead": "POMEGRANATE",
+        "Cluster": [
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.95,
+                "Process": 0.96,
+                "Infrastructure": 0.97,
+                "Overall": 0.96,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "MEDEIROS SOLAR",
+                "Location": 0.81,
+                "Process": 0.99,
+                "Infrastructure": 0.87,
+                "Overall": 0.89,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.86,
+                "Process": 0.99,
+                "Infrastructure": 0.88,
+                "Overall": 0.91,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.95,
+                "Process": 0.84,
+                "Infrastructure": 0.98,
+                "Overall": 0.92,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.92,
+                "Process": 0.89,
+                "Infrastructure": 0.9,
+                "Overall": 0.9,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.94,
+                "Process": 0.96,
+                "Infrastructure": 0.92,
+                "Overall": 0.94,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "ESCONDIDO ENERGY CENTER 2",
+                "Location": 0.81,
+                "Process": 0.84,
+                "Infrastructure": 0.98,
+                "Overall": 0.88,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.9,
+                "Process": 0.92,
+                "Infrastructure": 0.83,
+                "Overall": 0.88,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.92,
+                "Process": 0.98,
+                "Infrastructure": 0.85,
+                "Overall": 0.92,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "QUARTZITE SOLAR 8",
+                "Location": 0.83,
+                "Process": 0.94,
+                "Infrastructure": 0.81,
+                "Overall": 0.86,
+                "Project Score": 0.58
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.81,
+            "Total MegaWatts": 2800,
+            "Likelihood Score": 0.68
+        }
+    },
+    {
+        "ProjectHead": "ESCONDIDO ENERGY CENTER 2",
+        "Cluster": [
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.85,
+                "Process": 0.84,
+                "Infrastructure": 0.97,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.95,
+                "Process": 0.94,
+                "Infrastructure": 0.86,
+                "Overall": 0.92,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.94,
+                "Process": 0.85,
+                "Infrastructure": 0.82,
+                "Overall": 0.87,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "SANDSTORM WIND POWER",
+                "Location": 1.0,
+                "Process": 1.0,
+                "Infrastructure": 0.91,
+                "Overall": 0.97,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "LAKE ALPAUGH BATTERY STORAGE",
+                "Location": 0.84,
+                "Process": 0.96,
+                "Infrastructure": 0.93,
+                "Overall": 0.91,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "ROSAMOND WEST SOLAR",
+                "Location": 0.88,
+                "Process": 0.99,
+                "Infrastructure": 0.87,
+                "Overall": 0.91,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.87,
+                "Process": 0.85,
+                "Infrastructure": 0.87,
+                "Overall": 0.86,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.91,
+                "Process": 0.91,
+                "Infrastructure": 0.95,
+                "Overall": 0.92,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.94,
+                "Process": 0.99,
+                "Infrastructure": 0.83,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "DESERT SUNLIGHT PV I",
+                "Location": 0.87,
+                "Process": 0.88,
+                "Infrastructure": 0.98,
+                "Overall": 0.91,
+                "Project Score": 0.69
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.85,
+            "Total MegaWatts": 4405,
+            "Likelihood Score": 0.62
+        }
+    },
+    {
+        "ProjectHead": "MEDEIROS SOLAR",
+        "Cluster": [
+            {
+                "Project": "CRIMSON",
+                "Location": 0.98,
+                "Process": 0.91,
+                "Infrastructure": 0.88,
+                "Overall": 0.92,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "AMERICAN KINGS SOLAR",
+                "Location": 0.94,
+                "Process": 0.85,
+                "Infrastructure": 0.89,
+                "Overall": 0.89,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "AMERICAN KINGS SOLAR",
+                "Location": 0.92,
+                "Process": 0.97,
+                "Infrastructure": 0.97,
+                "Overall": 0.95,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "DESERT SUNLIGHT PV I",
+                "Location": 0.84,
+                "Process": 0.94,
+                "Infrastructure": 0.81,
+                "Overall": 0.86,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "COLUMBIA SOLAR ENERGY 2",
+                "Location": 0.96,
+                "Process": 0.82,
+                "Infrastructure": 0.9,
+                "Overall": 0.89,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "SANDSTORM WIND POWER",
+                "Location": 0.87,
+                "Process": 0.85,
+                "Infrastructure": 0.82,
+                "Overall": 0.85,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.85,
+                "Process": 0.96,
+                "Infrastructure": 0.89,
+                "Overall": 0.9,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.97,
+                "Process": 0.84,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.91,
+                "Process": 0.9,
+                "Infrastructure": 0.91,
+                "Overall": 0.91,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "CHESTNUT WESTSIDE",
+                "Location": 0.84,
+                "Process": 0.88,
+                "Infrastructure": 0.97,
+                "Overall": 0.9,
+                "Project Score": 0.66
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.95,
+            "Total MegaWatts": 2076,
+            "Likelihood Score": 0.59
+        }
+    },
+    {
+        "ProjectHead": "CRIMSON",
+        "Cluster": [
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "Location": 0.92,
+                "Process": 0.98,
+                "Infrastructure": 0.92,
+                "Overall": 0.94,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.98,
+                "Process": 0.94,
+                "Infrastructure": 0.95,
+                "Overall": 0.96,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "GASKELL WEST",
+                "Location": 0.9,
+                "Process": 0.88,
+                "Infrastructure": 0.81,
+                "Overall": 0.86,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.98,
+                "Process": 0.84,
+                "Infrastructure": 0.91,
+                "Overall": 0.91,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "Location": 0.9,
+                "Process": 0.92,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "ESCONDIDO ENERGY CENTER 2",
+                "Location": 0.87,
+                "Process": 0.88,
+                "Infrastructure": 0.85,
+                "Overall": 0.87,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.94,
+                "Process": 0.95,
+                "Infrastructure": 0.81,
+                "Overall": 0.9,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "BIG ROCK SOLAR FARM",
+                "Location": 0.97,
+                "Process": 0.89,
+                "Infrastructure": 0.81,
+                "Overall": 0.89,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "MONTEZUMA II",
+                "Location": 0.81,
+                "Process": 0.98,
+                "Infrastructure": 0.96,
+                "Overall": 0.92,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.89,
+                "Process": 0.84,
+                "Infrastructure": 0.82,
+                "Overall": 0.85,
+                "Project Score": 0.65
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.8,
+            "Total MegaWatts": 3203,
+            "Likelihood Score": 0.6
+        }
+    },
+    {
+        "ProjectHead": "ULTRAPOWER CHINESE STATION BESS",
+        "Cluster": [
+            {
+                "Project": "DESERT SUNLIGHT PV II",
+                "Location": 0.95,
+                "Process": 0.99,
+                "Infrastructure": 0.99,
+                "Overall": 0.98,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "ALMASOL",
+                "Location": 0.88,
+                "Process": 0.85,
+                "Infrastructure": 0.87,
+                "Overall": 0.87,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "KETTLEMAN SOLAR PROJECT",
+                "Location": 0.81,
+                "Process": 0.97,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "MEDEIROS SOLAR",
+                "Location": 0.91,
+                "Process": 0.8,
+                "Infrastructure": 0.9,
+                "Overall": 0.87,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "MONTEZUMA II",
+                "Location": 0.88,
+                "Process": 0.86,
+                "Infrastructure": 0.87,
+                "Overall": 0.87,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "BIG ROCK SOLAR FARM",
+                "Location": 0.83,
+                "Process": 0.81,
+                "Infrastructure": 0.88,
+                "Overall": 0.84,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.96,
+                "Process": 0.86,
+                "Infrastructure": 0.94,
+                "Overall": 0.92,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "LECONTE ENERGY STORAGE",
+                "Location": 0.88,
+                "Process": 0.94,
+                "Infrastructure": 0.98,
+                "Overall": 0.93,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.87,
+                "Process": 1.0,
+                "Infrastructure": 0.92,
+                "Overall": 0.93,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.9,
+                "Process": 0.94,
+                "Infrastructure": 0.93,
+                "Overall": 0.92,
+                "Project Score": 0.56
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.98,
+            "Total MegaWatts": 1370,
+            "Likelihood Score": 0.54
+        }
+    },
+    {
+        "ProjectHead": "BEAR CANYON ENERGY STORAGE",
+        "Cluster": [
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.81,
+                "Process": 0.98,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.85,
+                "Process": 0.8,
+                "Infrastructure": 0.95,
+                "Overall": 0.87,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.89,
+                "Process": 0.81,
+                "Infrastructure": 0.94,
+                "Overall": 0.88,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "COLUMBIA SOLAR ENERGY 2",
+                "Location": 0.86,
+                "Process": 0.94,
+                "Infrastructure": 0.95,
+                "Overall": 0.92,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.85,
+                "Process": 0.86,
+                "Infrastructure": 0.99,
+                "Overall": 0.9,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.91,
+                "Process": 0.9,
+                "Infrastructure": 0.89,
+                "Overall": 0.9,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "NORTH JOHNSON ENERGY CENTER",
+                "Location": 0.83,
+                "Process": 0.9,
+                "Infrastructure": 0.96,
+                "Overall": 0.9,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "AMERICAN KINGS SOLAR",
+                "Location": 0.97,
+                "Process": 0.95,
+                "Infrastructure": 0.93,
+                "Overall": 0.95,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "LAKE ELSINORE ADVANCED PUMPED STORAGE PROJECT",
+                "Location": 0.97,
+                "Process": 0.94,
+                "Infrastructure": 0.94,
+                "Overall": 0.95,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "RABBITBRUSH SOLAR",
+                "Location": 0.81,
+                "Process": 0.98,
+                "Infrastructure": 0.88,
+                "Overall": 0.89,
+                "Project Score": 0.63
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.86,
+            "Total MegaWatts": 4023,
+            "Likelihood Score": 0.55
+        }
+    },
+    {
+        "ProjectHead": "NORTH CENTRAL VALLEY",
+        "Cluster": [
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.93,
+                "Process": 0.89,
+                "Infrastructure": 0.85,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "ANTELOPE SOLAR 2",
+                "Location": 0.96,
+                "Process": 0.96,
+                "Infrastructure": 0.87,
+                "Overall": 0.93,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "TULE WIND",
+                "Location": 0.86,
+                "Process": 0.9,
+                "Infrastructure": 0.97,
+                "Overall": 0.91,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.85,
+                "Process": 0.99,
+                "Infrastructure": 0.93,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR",
+                "Location": 0.93,
+                "Process": 0.93,
+                "Infrastructure": 0.87,
+                "Overall": 0.91,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "PROXIMA SOLAR",
+                "Location": 0.83,
+                "Process": 0.85,
+                "Infrastructure": 0.97,
+                "Overall": 0.88,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.88,
+                "Process": 1.0,
+                "Infrastructure": 0.82,
+                "Overall": 0.9,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.98,
+                "Process": 0.91,
+                "Infrastructure": 0.82,
+                "Overall": 0.9,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.86,
+                "Process": 0.92,
+                "Infrastructure": 0.99,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "STAGE COACH SOLAR",
+                "Location": 0.85,
+                "Process": 0.88,
+                "Infrastructure": 0.96,
+                "Overall": 0.9,
+                "Project Score": 0.52
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.91,
+            "Total MegaWatts": 3376,
+            "Likelihood Score": 0.58
+        }
+    },
+    {
+        "ProjectHead": "SIENNA SOLAR FARM",
+        "Cluster": [
+            {
+                "Project": "REDWOOD SOLAR FARM",
+                "Location": 0.95,
+                "Process": 0.99,
+                "Infrastructure": 0.9,
+                "Overall": 0.95,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "CRIMSON",
+                "Location": 0.95,
+                "Process": 0.9,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "WINDSTAR I ALTERNATE",
+                "Location": 0.91,
+                "Process": 0.84,
+                "Infrastructure": 0.91,
+                "Overall": 0.89,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "CRIMSON",
+                "Location": 0.88,
+                "Process": 0.98,
+                "Infrastructure": 0.95,
+                "Overall": 0.94,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ULTRAPOWER CHINESE STATION BESS",
+                "Location": 0.81,
+                "Process": 0.97,
+                "Infrastructure": 0.91,
+                "Overall": 0.9,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "WRIGHT SOLAR",
+                "Location": 0.96,
+                "Process": 0.84,
+                "Infrastructure": 0.89,
+                "Overall": 0.9,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 1.0,
+                "Process": 0.81,
+                "Infrastructure": 0.82,
+                "Overall": 0.88,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.88,
+                "Process": 0.97,
+                "Infrastructure": 1.0,
+                "Overall": 0.95,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.96,
+                "Process": 0.85,
+                "Infrastructure": 0.82,
+                "Overall": 0.88,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.83,
+                "Process": 0.82,
+                "Infrastructure": 0.9,
+                "Overall": 0.85,
+                "Project Score": 0.69
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.86,
+            "Total MegaWatts": 4063,
+            "Likelihood Score": 0.6
+        }
+    },
+    {
+        "ProjectHead": "PROXIMA SOLAR",
+        "Cluster": [
+            {
+                "Project": "KETTLEMAN SOLAR PROJECT",
+                "Location": 0.94,
+                "Process": 0.9,
+                "Infrastructure": 0.94,
+                "Overall": 0.93,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "FOUNTAIN WIND",
+                "Location": 1.0,
+                "Process": 0.98,
+                "Infrastructure": 0.99,
+                "Overall": 0.99,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "CHESTNUT WESTSIDE",
+                "Location": 0.89,
+                "Process": 0.93,
+                "Infrastructure": 0.92,
+                "Overall": 0.91,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "DESERT SUNLIGHT PV II",
+                "Location": 0.87,
+                "Process": 0.98,
+                "Infrastructure": 0.87,
+                "Overall": 0.91,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.83,
+                "Process": 0.96,
+                "Infrastructure": 0.85,
+                "Overall": 0.88,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "Location": 0.99,
+                "Process": 0.94,
+                "Infrastructure": 0.99,
+                "Overall": 0.97,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "REDWOOD SOLAR FARM",
+                "Location": 0.89,
+                "Process": 0.93,
+                "Infrastructure": 0.86,
+                "Overall": 0.89,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "BIG ROCK SOLAR FARM",
+                "Location": 0.8,
+                "Process": 0.96,
+                "Infrastructure": 0.93,
+                "Overall": 0.9,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "POMEGRANATE",
+                "Location": 0.99,
+                "Process": 0.94,
+                "Infrastructure": 0.8,
+                "Overall": 0.91,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "NORTH CENTRAL VALLEY",
+                "Location": 0.93,
+                "Process": 1.0,
+                "Infrastructure": 0.85,
+                "Overall": 0.93,
+                "Project Score": 0.51
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.88,
+            "Total MegaWatts": 2306,
+            "Likelihood Score": 0.64
+        }
+    },
+    {
+        "ProjectHead": "DESERT SUNLIGHT PV II",
+        "Cluster": [
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.86,
+                "Process": 0.8,
+                "Infrastructure": 1.0,
+                "Overall": 0.89,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.87,
+                "Process": 0.84,
+                "Infrastructure": 0.81,
+                "Overall": 0.84,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.88,
+                "Process": 0.92,
+                "Infrastructure": 0.8,
+                "Overall": 0.87,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "PROXIMA SOLAR",
+                "Location": 0.86,
+                "Process": 0.84,
+                "Infrastructure": 0.94,
+                "Overall": 0.88,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "CRIMSON",
+                "Location": 0.81,
+                "Process": 0.89,
+                "Infrastructure": 0.81,
+                "Overall": 0.84,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "MEDEIROS SOLAR",
+                "Location": 0.81,
+                "Process": 0.8,
+                "Infrastructure": 0.83,
+                "Overall": 0.81,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.96,
+                "Process": 0.97,
+                "Infrastructure": 0.88,
+                "Overall": 0.94,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.82,
+                "Process": 0.96,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.91,
+                "Process": 0.97,
+                "Infrastructure": 0.87,
+                "Overall": 0.92,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "VICTORY PASS SOLAR",
+                "Location": 0.81,
+                "Process": 0.82,
+                "Infrastructure": 0.99,
+                "Overall": 0.87,
+                "Project Score": 0.67
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.83,
+            "Total MegaWatts": 4055,
+            "Likelihood Score": 0.65
+        }
+    },
+    {
+        "ProjectHead": "ULTRAPOWER CHINESE STATION BESS",
+        "Cluster": [
+            {
+                "Project": "WILLOW SPRINGS SOLAR 4",
+                "Location": 0.95,
+                "Process": 0.88,
+                "Infrastructure": 0.87,
+                "Overall": 0.9,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "TULE WIND",
+                "Location": 0.92,
+                "Process": 0.82,
+                "Infrastructure": 0.95,
+                "Overall": 0.9,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.82,
+                "Process": 0.87,
+                "Infrastructure": 0.99,
+                "Overall": 0.89,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "SANDSTORM WIND POWER",
+                "Location": 0.88,
+                "Process": 0.95,
+                "Infrastructure": 0.98,
+                "Overall": 0.94,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.95,
+                "Process": 0.85,
+                "Infrastructure": 0.85,
+                "Overall": 0.88,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.98,
+                "Process": 0.97,
+                "Infrastructure": 0.87,
+                "Overall": 0.94,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.95,
+                "Process": 0.88,
+                "Infrastructure": 0.83,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.88,
+                "Process": 0.88,
+                "Infrastructure": 0.96,
+                "Overall": 0.91,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "WRIGHT SOLAR",
+                "Location": 1.0,
+                "Process": 0.84,
+                "Infrastructure": 0.97,
+                "Overall": 0.94,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "ALTAMONT MIDWAY LTD",
+                "Location": 0.89,
+                "Process": 0.96,
+                "Infrastructure": 0.84,
+                "Overall": 0.9,
+                "Project Score": 0.51
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.9,
+            "Total MegaWatts": 1383,
+            "Likelihood Score": 0.63
+        }
+    },
+    {
+        "ProjectHead": "DESERT SUNLIGHT PV II",
+        "Cluster": [
+            {
+                "Project": "COLUMBIA SOLAR ENERGY 2",
+                "Location": 0.94,
+                "Process": 0.92,
+                "Infrastructure": 0.82,
+                "Overall": 0.89,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.81,
+                "Process": 0.83,
+                "Infrastructure": 0.87,
+                "Overall": 0.84,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.89,
+                "Process": 0.94,
+                "Infrastructure": 0.88,
+                "Overall": 0.9,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "REDWOOD SOLAR FARM",
+                "Location": 0.9,
+                "Process": 0.8,
+                "Infrastructure": 0.99,
+                "Overall": 0.9,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "KETTLEMAN SOLAR PROJECT",
+                "Location": 0.9,
+                "Process": 0.84,
+                "Infrastructure": 1.0,
+                "Overall": 0.91,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "ESCONDIDO ENERGY CENTER 2",
+                "Location": 0.92,
+                "Process": 0.86,
+                "Infrastructure": 0.93,
+                "Overall": 0.9,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.8,
+                "Process": 0.81,
+                "Infrastructure": 0.88,
+                "Overall": 0.83,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "DESERT SUNLIGHT PV I",
+                "Location": 0.81,
+                "Process": 0.82,
+                "Infrastructure": 0.81,
+                "Overall": 0.81,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.89,
+                "Process": 0.85,
+                "Infrastructure": 0.83,
+                "Overall": 0.86,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "PROXIMA SOLAR",
+                "Location": 0.92,
+                "Process": 0.93,
+                "Infrastructure": 0.87,
+                "Overall": 0.91,
+                "Project Score": 0.69
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.9,
+            "Total MegaWatts": 4030,
+            "Likelihood Score": 0.67
+        }
+    },
+    {
+        "ProjectHead": "NORTH JOHNSON ENERGY CENTER",
+        "Cluster": [
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.83,
+                "Process": 0.82,
+                "Infrastructure": 0.94,
+                "Overall": 0.86,
+                "Project Score": 0.69
+            },
+            {
+                "Project": "WESTLANDS ALMOND",
+                "Location": 0.97,
+                "Process": 0.87,
+                "Infrastructure": 0.95,
+                "Overall": 0.93,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.86,
+                "Process": 0.83,
+                "Infrastructure": 0.97,
+                "Overall": 0.89,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "ROSAMOND SOUTH EAST",
+                "Location": 0.99,
+                "Process": 0.98,
+                "Infrastructure": 0.98,
+                "Overall": 0.98,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.92,
+                "Process": 0.82,
+                "Infrastructure": 0.87,
+                "Overall": 0.87,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "QUARTZITE SOLAR 8",
+                "Location": 0.82,
+                "Process": 0.94,
+                "Infrastructure": 0.91,
+                "Overall": 0.89,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "EXCELSIOR SOLAR",
+                "Location": 0.86,
+                "Process": 0.91,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "BIG SKY SOLAR",
+                "Location": 0.91,
+                "Process": 0.9,
+                "Infrastructure": 0.84,
+                "Overall": 0.88,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "CROW CREEK SOLAR 1",
+                "Location": 0.91,
+                "Process": 0.99,
+                "Infrastructure": 0.86,
+                "Overall": 0.92,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.89,
+                "Process": 0.95,
+                "Infrastructure": 0.88,
+                "Overall": 0.91,
+                "Project Score": 0.67
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.96,
+            "Total MegaWatts": 4079,
+            "Likelihood Score": 0.57
+        }
+    },
+    {
+        "ProjectHead": "FRESNO COGENERATION EXPANSION PROJECT",
+        "Cluster": [
+            {
+                "Project": "LUNA VALLEY SOLAR",
+                "Location": 0.84,
+                "Process": 0.83,
+                "Infrastructure": 0.88,
+                "Overall": 0.85,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "DESERT SUNLIGHT PV I",
+                "Location": 0.89,
+                "Process": 0.94,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "GASKELL WEST",
+                "Location": 0.82,
+                "Process": 0.8,
+                "Infrastructure": 0.84,
+                "Overall": 0.82,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "BOTTLE ROCK POWER",
+                "Location": 0.89,
+                "Process": 0.84,
+                "Infrastructure": 0.81,
+                "Overall": 0.85,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "LECONTE ENERGY STORAGE",
+                "Location": 0.94,
+                "Process": 0.86,
+                "Infrastructure": 0.99,
+                "Overall": 0.93,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "WESTLANDS ALMOND",
+                "Location": 0.95,
+                "Process": 0.95,
+                "Infrastructure": 0.92,
+                "Overall": 0.94,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.99,
+                "Process": 0.86,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "GOLDEN FIELDS SOLAR",
+                "Location": 0.96,
+                "Process": 0.93,
+                "Infrastructure": 0.91,
+                "Overall": 0.93,
+                "Project Score": 0.68
+            },
+            {
+                "Project": "ARATINA SOLAR CENTER 1",
+                "Location": 0.99,
+                "Process": 0.95,
+                "Infrastructure": 0.88,
+                "Overall": 0.94,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.97,
+                "Process": 0.84,
+                "Infrastructure": 0.88,
+                "Overall": 0.9,
+                "Project Score": 0.58
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.94,
+            "Total MegaWatts": 1390,
+            "Likelihood Score": 0.55
+        }
+    },
+    {
+        "ProjectHead": "PLUOT",
+        "Cluster": [
+            {
+                "Project": "KETTLEMAN SOLAR PROJECT",
+                "Location": 0.97,
+                "Process": 0.97,
+                "Infrastructure": 0.96,
+                "Overall": 0.97,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.86,
+                "Process": 0.97,
+                "Infrastructure": 0.86,
+                "Overall": 0.9,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.82,
+                "Process": 0.88,
+                "Infrastructure": 0.94,
+                "Overall": 0.88,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.99,
+                "Process": 0.94,
+                "Infrastructure": 0.85,
+                "Overall": 0.93,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "WRIGHT SOLAR",
+                "Location": 0.83,
+                "Process": 0.87,
+                "Infrastructure": 0.93,
+                "Overall": 0.88,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.96,
+                "Process": 0.83,
+                "Infrastructure": 0.85,
+                "Overall": 0.88,
+                "Project Score": 0.63
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.91,
+                "Process": 0.99,
+                "Infrastructure": 0.92,
+                "Overall": 0.94,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.98,
+                "Process": 0.97,
+                "Infrastructure": 0.86,
+                "Overall": 0.94,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.82,
+                "Process": 0.91,
+                "Infrastructure": 0.84,
+                "Overall": 0.86,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 1.0,
+                "Process": 0.97,
+                "Infrastructure": 0.84,
+                "Overall": 0.94,
+                "Project Score": 0.52
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.92,
+            "Total MegaWatts": 1369,
+            "Likelihood Score": 0.56
+        }
+    },
+    {
+        "ProjectHead": "AMERICAN KINGS SOLAR",
+        "Cluster": [
+            {
+                "Project": "APPARENT FIRST HYBRID",
+                "Location": 0.82,
+                "Process": 0.86,
+                "Infrastructure": 0.86,
+                "Overall": 0.85,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR 2",
+                "Location": 0.88,
+                "Process": 0.92,
+                "Infrastructure": 0.9,
+                "Overall": 0.9,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "Location": 0.98,
+                "Process": 0.85,
+                "Infrastructure": 0.94,
+                "Overall": 0.92,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "CROW CREEK SOLAR 1",
+                "Location": 0.9,
+                "Process": 0.96,
+                "Infrastructure": 0.91,
+                "Overall": 0.92,
+                "Project Score": 0.51
+            },
+            {
+                "Project": "SLOTH",
+                "Location": 0.87,
+                "Process": 0.88,
+                "Infrastructure": 0.95,
+                "Overall": 0.9,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "ARLINGTON",
+                "Location": 0.89,
+                "Process": 0.9,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "FOUNTAIN WIND",
+                "Location": 0.9,
+                "Process": 0.84,
+                "Infrastructure": 0.82,
+                "Overall": 0.85,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "DAYLIGHT",
+                "Location": 0.89,
+                "Process": 0.94,
+                "Infrastructure": 0.88,
+                "Overall": 0.9,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "LOS ESTEROS CRITICAL ENERGY FACILITY EXPANSION",
+                "Location": 0.92,
+                "Process": 0.96,
+                "Infrastructure": 0.94,
+                "Overall": 0.94,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "RABBITBRUSH SOLAR",
+                "Location": 0.95,
+                "Process": 0.82,
+                "Infrastructure": 0.99,
+                "Overall": 0.92,
+                "Project Score": 0.52
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.9,
+            "Total MegaWatts": 3834,
+            "Likelihood Score": 0.61
+        }
+    },
+    {
+        "ProjectHead": "LUNA VALLEY SOLAR",
+        "Cluster": [
+            {
+                "Project": "ESCONDIDO ENERGY CENTER 2",
+                "Location": 0.81,
+                "Process": 0.95,
+                "Infrastructure": 0.83,
+                "Overall": 0.86,
+                "Project Score": 0.62
+            },
+            {
+                "Project": "MEDEIROS SOLAR",
+                "Location": 0.89,
+                "Process": 0.86,
+                "Infrastructure": 0.95,
+                "Overall": 0.9,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.8,
+                "Process": 0.98,
+                "Infrastructure": 0.88,
+                "Overall": 0.89,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "CHULA VISTA ENERGY CENTER 2",
+                "Location": 0.94,
+                "Process": 0.97,
+                "Infrastructure": 0.97,
+                "Overall": 0.96,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "CRIMSON",
+                "Location": 0.82,
+                "Process": 0.97,
+                "Infrastructure": 0.83,
+                "Overall": 0.87,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.91,
+                "Process": 0.95,
+                "Infrastructure": 0.88,
+                "Overall": 0.91,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "MONTEZUMA (HIGH WINDS III)",
+                "Location": 0.98,
+                "Process": 0.85,
+                "Infrastructure": 0.89,
+                "Overall": 0.91,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "COLUMBIA SOLAR ENERGY 2",
+                "Location": 0.99,
+                "Process": 0.93,
+                "Infrastructure": 0.84,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.87,
+                "Process": 0.9,
+                "Infrastructure": 0.99,
+                "Overall": 0.92,
+                "Project Score": 0.61
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.82,
+                "Process": 0.86,
+                "Infrastructure": 0.82,
+                "Overall": 0.83,
+                "Project Score": 0.61
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.85,
+            "Total MegaWatts": 4349,
+            "Likelihood Score": 0.55
+        }
+    },
+    {
+        "ProjectHead": "DESERT SUNLIGHT PV I",
+        "Cluster": [
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.86,
+                "Process": 0.85,
+                "Infrastructure": 0.9,
+                "Overall": 0.87,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "ALTA VISTA SUNTOWER GENERATING STATION",
+                "Location": 0.9,
+                "Process": 0.86,
+                "Infrastructure": 1.0,
+                "Overall": 0.92,
+                "Project Score": 0.55
+            },
+            {
+                "Project": "RUGGED SOLAR FARM",
+                "Location": 0.9,
+                "Process": 0.87,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "SCARLET",
+                "Location": 0.8,
+                "Process": 0.99,
+                "Infrastructure": 0.86,
+                "Overall": 0.88,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.88,
+                "Process": 0.95,
+                "Infrastructure": 0.83,
+                "Overall": 0.89,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "EXCELSIOR SOLAR",
+                "Location": 0.98,
+                "Process": 0.94,
+                "Infrastructure": 0.84,
+                "Overall": 0.92,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.96,
+                "Process": 0.86,
+                "Infrastructure": 0.88,
+                "Overall": 0.9,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "FALLBROOK ENERGY STORAGE",
+                "Location": 0.96,
+                "Process": 0.9,
+                "Infrastructure": 0.94,
+                "Overall": 0.93,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "ULTRAPOWER CHINESE STATION BESS",
+                "Location": 0.87,
+                "Process": 0.92,
+                "Infrastructure": 0.81,
+                "Overall": 0.87,
+                "Project Score": 0.52
+            },
+            {
+                "Project": "NORTH CENTRAL VALLEY",
+                "Location": 0.83,
+                "Process": 0.88,
+                "Infrastructure": 0.81,
+                "Overall": 0.84,
+                "Project Score": 0.69
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.87,
+            "Total MegaWatts": 3039,
+            "Likelihood Score": 0.62
+        }
+    },
+    {
+        "ProjectHead": "DRACKER SOLAR",
+        "Cluster": [
+            {
+                "Project": "LAKE ALPAUGH BATTERY STORAGE",
+                "Location": 0.82,
+                "Process": 0.91,
+                "Infrastructure": 0.8,
+                "Overall": 0.84,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.97,
+                "Process": 0.92,
+                "Infrastructure": 0.99,
+                "Overall": 0.96,
+                "Project Score": 0.6
+            },
+            {
+                "Project": "SIENNA SOLAR FARM",
+                "Location": 0.87,
+                "Process": 0.84,
+                "Infrastructure": 0.84,
+                "Overall": 0.85,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 3",
+                "Location": 0.9,
+                "Process": 0.91,
+                "Infrastructure": 0.81,
+                "Overall": 0.87,
+                "Project Score": 0.7
+            },
+            {
+                "Project": "RABBITBRUSH SOLAR",
+                "Location": 0.84,
+                "Process": 0.85,
+                "Infrastructure": 0.99,
+                "Overall": 0.89,
+                "Project Score": 0.67
+            },
+            {
+                "Project": "BEAR CANYON ENERGY STORAGE",
+                "Location": 0.82,
+                "Process": 0.91,
+                "Infrastructure": 0.87,
+                "Overall": 0.87,
+                "Project Score": 0.64
+            },
+            {
+                "Project": "EXCELSIOR SOLAR",
+                "Location": 0.91,
+                "Process": 0.92,
+                "Infrastructure": 0.92,
+                "Overall": 0.92,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "NORTHERN ORCHARD SOLAR",
+                "Location": 0.94,
+                "Process": 0.81,
+                "Infrastructure": 0.98,
+                "Overall": 0.91,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "LECONTE ENERGY STORAGE",
+                "Location": 0.89,
+                "Process": 0.97,
+                "Infrastructure": 0.97,
+                "Overall": 0.94,
+                "Project Score": 0.58
+            },
+            {
+                "Project": "STAGE COACH SOLAR",
+                "Location": 0.92,
+                "Process": 0.91,
+                "Infrastructure": 0.97,
+                "Overall": 0.93,
+                "Project Score": 0.54
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.93,
+            "Total MegaWatts": 2668,
+            "Likelihood Score": 0.61
+        }
+    },
+    {
+        "ProjectHead": "COLUMBIA SOLAR ENERGY 2",
+        "Cluster": [
+            {
+                "Project": "FRESNO COGENERATION EXPANSION PROJECT",
+                "Location": 0.86,
+                "Process": 0.95,
+                "Infrastructure": 0.93,
+                "Overall": 0.91,
+                "Project Score": 0.54
+            },
+            {
+                "Project": "ANTELOPE SOLAR 2",
+                "Location": 0.89,
+                "Process": 0.88,
+                "Infrastructure": 0.81,
+                "Overall": 0.86,
+                "Project Score": 0.56
+            },
+            {
+                "Project": "WRIGHT SOLAR",
+                "Location": 0.88,
+                "Process": 0.89,
+                "Infrastructure": 0.99,
+                "Overall": 0.92,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "NORTH CENTRAL VALLEY",
+                "Location": 0.92,
+                "Process": 0.9,
+                "Infrastructure": 0.86,
+                "Overall": 0.89,
+                "Project Score": 0.59
+            },
+            {
+                "Project": "EXCELSIOR SOLAR",
+                "Location": 0.85,
+                "Process": 0.81,
+                "Infrastructure": 0.87,
+                "Overall": 0.84,
+                "Project Score": 0.65
+            },
+            {
+                "Project": "ALMASOL",
+                "Location": 0.95,
+                "Process": 0.88,
+                "Infrastructure": 0.98,
+                "Overall": 0.94,
+                "Project Score": 0.53
+            },
+            {
+                "Project": "DRACKER SOLAR",
+                "Location": 0.87,
+                "Process": 0.84,
+                "Infrastructure": 0.81,
+                "Overall": 0.84,
+                "Project Score": 0.57
+            },
+            {
+                "Project": "WILLOW SPRINGS SOLAR 3",
+                "Location": 0.89,
+                "Process": 0.99,
+                "Infrastructure": 0.95,
+                "Overall": 0.94,
+                "Project Score": 0.5
+            },
+            {
+                "Project": "PLUOT",
+                "Location": 0.95,
+                "Process": 0.98,
+                "Infrastructure": 0.81,
+                "Overall": 0.91,
+                "Project Score": 0.66
+            },
+            {
+                "Project": "ROSAMOND WEST SOLAR",
+                "Location": 0.83,
+                "Process": 0.88,
+                "Infrastructure": 0.85,
+                "Overall": 0.85,
+                "Project Score": 0.62
+            }
+        ],
+        "Summary": {
+            "Cluster Score": 0.86,
+            "Total MegaWatts": 3189,
+            "Likelihood Score": 0.56
+        }
+    }
+]
