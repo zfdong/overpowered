@@ -17,8 +17,15 @@ def load_json(path):
 
 @st.cache_data # This function will be cached
 def get_cluster(cluster_df, project_head):
-    new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
-    return new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
+    if project_head  in cluster_df["ProjectHead"].values:
+        new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
+        cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == "DAYLIGHT"]["Summary"].iloc[0])
+        associated_projects_df = new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
+        associated_projects_df = associated_projects_df[["Project", "Project Score", "Location", "Process", "Infrastructure", "Overall"]]
+    else:
+        cluster_data_df = pd.DataFrame({})
+        associated_projects_df = pd.DataFrame({})
+    return cluster_data_df, associated_projects_df
 
 
 def main2():
@@ -36,7 +43,7 @@ def main2():
     options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
     grid_options = options_builder.build()
     
-    cluster_df = load_json("energy_projects_similarity.json")
+    cluster_df = load_json("corrected_projects_clusters.json")
         
     st.subheader("Clustering Model")
     st.markdown(
@@ -62,13 +69,6 @@ def main2():
 
     # write out selected rows to check its format
     #st.write(selected_rows)
-    
-    # define initial lists in app.py
-##    if 'selected_rows' not in st.session_state:
-##        st.session_state.selected_rows = None
-##    
-##    if 'chosen_cluster_df' not in st.session_state:
-##        st.session_state.chosen_cluster_df = []
 
     col1, col2 = st.columns([9, 1])
     
@@ -89,10 +89,12 @@ def main2():
     
     if go_button:
         st.session_state.selected_rows = selected_rows
-        st.session_state.chosen_cluster_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"])
+        st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"])
+        
         
     if clear_button:
-        st.session_state.chosen_cluster_df = []
+        st.session_state.associated_projects_df = pd.DataFrame({})
+        st.session_state.cluster_summary_df = pd.DataFrame({})
         st.session_state.selected_rows = None
     
     if st.session_state.selected_rows == None:
@@ -102,7 +104,12 @@ def main2():
         col1, col2 = st.columns(2)
         with col1:
             st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
-            cluster_grid_return = AgGrid(st.session_state.chosen_cluster_df)
+            if st.session_state.associated_projects_df.empty:
+                st.markdown(''':red[No Cluster found]''', unsafe_allow_html=True)
+            else:
+                cluster_info_grid = AgGrid(st.session_state.cluster_summary_df)
+                cluster_grid_return = AgGrid(st.session_state.associated_projects_df)
         with col2:
-            st.markdown('''rainbow:[Map Placeholder]''')
+            st.markdown('''
+                :rainbow[Map Placeholder]''')
         

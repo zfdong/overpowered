@@ -10,8 +10,11 @@ if 'selected_data_list' not in st.session_state:
 if 'selected_rows' not in st.session_state:
     st.session_state.selected_rows = None
     
-if 'chosen_cluster_df' not in st.session_state:
-    st.session_state.chosen_cluster_df = []
+if 'cluster_summary_df' not in st.session_state:
+    st.session_state.cluster_summary_df = pd.DataFrame({})
+    
+if 'associated_projects_df' not in st.session_state:
+    st.session_state.associated_projects_df = pd.DataFrame({})
 
 from streamlit.components.v1 import html
 #import leafmap.foliumap as leafmap
@@ -393,13 +396,13 @@ def main():
         <style>
 
             .stTabs [data-baseweb="tab-list"] {
-                font-size: 10em !important;
+                font-size: 20px;
                 gap: 20px;
             }
 
             .stTabs [data-baseweb="tab"] {
                 height: 50px;
-                font-size: 10em !important;
+                font-size: 20px;
                 white-space: pre-wrap;
                 background-color: #F0F2F6;
                 border-radius: 10px 10px 0px 0px;
@@ -410,7 +413,7 @@ def main():
 
             .stTabs [aria-selected="true"] {
                 background-color: #FFFFFF;
-                font-size: 10em !important;
+                font-size: 40px;
             }
 
         </style>""", unsafe_allow_html=True
