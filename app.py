@@ -1,22 +1,7 @@
 import streamlit as st
-
-# Initialize the list in st.session_state if it doesn't exist
-if 'selected_county_list' not in st.session_state:
-    st.session_state.selected_county_list = []
-if 'selected_data_list' not in st.session_state:
-    st.session_state.selected_data_list = []
-
-# for Main2()
-if 'selected_rows' not in st.session_state:
-    st.session_state.selected_rows = None
-    
-if 'cluster_summary_df' not in st.session_state:
-    st.session_state.cluster_summary_df = pd.DataFrame({})
-    
-if 'associated_projects_df' not in st.session_state:
-    st.session_state.associated_projects_df = pd.DataFrame({})
-
 from streamlit.components.v1 import html
+from st_aggrid import AgGrid, GridOptionsBuilder
+from streamlit_extras.stylable_container import stylable_container 
 #import leafmap.foliumap as leafmap
 
 import folium
@@ -37,6 +22,24 @@ import geopandas as gpd
 from shapely.geometry import shape, MultiPolygon, MultiLineString
 
 import csv 
+
+# Initialize the list in st.session_state if it doesn't exist
+if 'selected_county_list' not in st.session_state:
+    st.session_state.selected_county_list = []
+if 'selected_data_list' not in st.session_state:
+    st.session_state.selected_data_list = []
+
+# for Main2()
+if 'selected_rows' not in st.session_state:
+    st.session_state.selected_rows = None
+    
+if 'cluster_summary_df' not in st.session_state:
+    st.session_state.cluster_summary_df = pd.DataFrame({})
+    
+if 'associated_projects_df' not in st.session_state:
+    st.session_state.associated_projects_df = pd.DataFrame({})
+
+
 
 from clusterPage import main2
 
