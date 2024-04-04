@@ -28,7 +28,7 @@ def main2():
     # only keep selected columns 
     column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
     visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
-    st.write(visible_df)
+    #st.write(visible_df)
     
     options_builder = GridOptionsBuilder.from_dataframe(visible_df)
     # options_builder.configure_column(‘col1’, editable=True)
@@ -54,7 +54,7 @@ def main2():
     
     st.subheader('Select an application from the queue to suggest a cluster')
 
-    #AgGrid(visible_df, grid_options)
+    AgGrid(visible_df, grid_options)
     selected_rows = AgGrid(visible_df, grid_options)["selected_rows"]
 
     # write out selected rows to check its format
