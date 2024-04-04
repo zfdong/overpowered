@@ -385,24 +385,24 @@ def main():
         <style>
 
             .stTabs [data-baseweb="tab-list"] {
-                font-size: 2em;
-                gap: 10px;
+                font-size: 10em !important;
+                gap: 20px;
             }
 
             .stTabs [data-baseweb="tab"] {
-                height: 100px;
-                font-size: 2em;
+                height: 50px;
+                font-size: 10em !important;
                 white-space: pre-wrap;
                 background-color: #F0F2F6;
-                border-radius: 4px 4px 0px 0px;
-                gap: 10px;
+                border-radius: 10px 10px 0px 0px;
+                gap: 30px;
                 padding-top: 10px;
                 padding-bottom: 10px;
             }
 
             .stTabs [aria-selected="true"] {
                 background-color: #FFFFFF;
-                font-size: 2em;
+                font-size: 10em !important;
             }
 
         </style>""", unsafe_allow_html=True
