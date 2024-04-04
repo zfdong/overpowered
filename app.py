@@ -495,7 +495,7 @@ def main3():
 
     2. Select a zoom-in scale to display the transmission lines in "blue" color.
 
-    3. Choose an extra data layer to display as "black dot". The available data layers are substations, power plants and retired generators.
+    3. Choose an extra data layer to display. The available data layers are substations ('red triangle'), retired power plants ('black cross') and queue data ('green diamond').
 
     4. This is optional. User can enter a location coordinate by latitude and longitude. The location will be added to plots as "red diamond"
     """)

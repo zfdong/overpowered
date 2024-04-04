@@ -55,7 +55,7 @@ def main2():
     st.subheader('Select an application from the queue to suggest a cluster')
 
     AgGrid(visible_df, grid_options)
-    selected_rows = AgGrid(visible_df, grid_options)["selected_rows"]
+    #selected_rows = AgGrid(visible_df, grid_options)["selected_rows"]
 
     # write out selected rows to check its format
     #st.write(selected_rows)
