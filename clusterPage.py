@@ -22,8 +22,10 @@ def get_cluster(cluster_df, project_head):
 
 
 def main2():
+    # load queue data and assign column name to the first column 
     full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
     full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
+    # only keep selected columns 
     column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
     visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
     
@@ -51,8 +53,8 @@ def main2():
     
     st.subheader('Select an application from the queue to suggest a cluster')
 
-    grid_return = AgGrid(visible_df, grid_options)
-    selected_rows = grid_return["selected_rows"]
+    #AgGrid(visible_df, grid_options)
+    selected_rows = AgGrid(visible_df, grid_options)["selected_rows"]
 
     # write out selected rows to check its format
     #st.write(selected_rows)
