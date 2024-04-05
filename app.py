@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit.components.v1 import html
-from st_aggrid import AgGrid, GridOptionsBuilder
+from st_aggrid import AgGrid, GridOptionsBuilder, ColumnsAutoSizeMode
 from streamlit_extras.stylable_container import stylable_container 
 #import leafmap.foliumap as leafmap
 
