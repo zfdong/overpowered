@@ -29,7 +29,6 @@ def get_cluster(cluster_df, project_head):
 
 
 def main2():
-    st.write(st.__version__)
     # load queue data and assign column name to the first column 
     full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
     full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
@@ -118,11 +117,13 @@ def main2():
             if st.session_state.associated_projects_df.empty:
                 st.markdown(''':red[No Cluster found]''', unsafe_allow_html=True)
             else:
-                st.write(st.__version__)
-                
+                row = st.columns(len(list(st.session_state.cluster_summary_df)))
+                for ix, col in enumerate(row):
+                    tile = col.container(border=True)
                     
-                    
-                cluster_info_grid = AgGrid(st.session_state.cluster_summary_df)
+                    tile.markdown('**' + str(st.session_state.cluster_summary_df.iat[0, ix]) + '**')
+                    tile.write(list(st.session_state.cluster_summary_df)[ix])
+
                 cluster_grid_return = AgGrid(st.session_state.associated_projects_df, columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
         with col2:
             st.markdown('''
