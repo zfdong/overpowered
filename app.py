@@ -251,71 +251,83 @@ def find_nearest_line(queue_df, lines_geojson, all_county_geojson) :
     queue_df['Cap_MW'] = 0
     queue_df['Load_Pct'] = 0
     queue_df['Remain_MW'] = 0
+
+    # get unique county list
+    county_list = list(queue_df[county_col].unique())
+    #county_list.remove('tecate baja california mexico')
     
-    # iterate each row in data frame
-    for index, row in queue_df.iterrows():
-        # get the county of this row, make sure the string is consistent with CA county names 
-        county = row[county_col].title()
+    st.write('total number of counties: '+ str(len(county_list)))
+    st.write(county_list)
+    
+    # iterate for each county
+    for icounty in county_list :
+        # make sure the string is consistent with CA county names
+        county = icounty.title()
+        st.write(county)
         # select county boundary 
         county_data = extract_geojson_by_county(county, all_county_geojson)
         # select transmission lines within county boundary
         lines_data = extract_lines_within_county(lines_geojson, county_data)
         
-        # get lat and lon of the row
-        q_lat = row[lat_col]
-        q_lon = row[lon_col]
-        # find the shortest distance from queue point to the line point 
-        dist0 = 1e12
-        line_name0 = 'None'
-        cap_mw0 = 0
-        load_pct0 = 0
-        remain_mw0 = 0
-        
-        # go through each transmission line
-        for feature in lines_data['features']:
-            # Extract the coordinates, line capacity, load, and remaining 
-            coord_list = feature['geometry']['coordinates']
-            cap_mw = feature['properties']['Cap_MW']
-            load_pct = feature['properties']['Load_Pct']
-            remain_mw = feature['properties']['Remain_MW']
-            line_name =  feature['properties']['Name']
+        # iterate each row in data frame
+        for index, row in queue_df.iterrows():
+            # only update rows for icounty 
+            if row[county_col] == icounty :
+                # get lat and lon of the row
+                q_lat = row[lat_col]
+                q_lon = row[lon_col]
+                # find the shortest distance from queue point to the line point 
+                dist0 = 1e12
+                line_name0 = 'None'
+                cap_mw0 = 0
+                load_pct0 = 0
+                remain_mw0 = 0
+                
+                # go through each transmission line
+                for feature in lines_data['features']:
+                    # Extract the coordinates, line capacity, load, and remaining 
+                    coord_list = feature['geometry']['coordinates']
+                    cap_mw = feature['properties']['Cap_MW']
+                    load_pct = feature['properties']['Load_Pct']
+                    remain_mw = feature['properties']['Remain_MW']
+                    line_name =  feature['properties']['Name']
 
-            #st.write(feature['properties']['GlobalID'])
-            
-            for icoord in coord_list :
-                item = icoord[0]
-                # icoord[0] could also be list for multilinestring feature
-                if isinstance(item, list):
-                    for item in icoord :
-                        ilon = item[0]
-                        ilat = item[1]
-                        
-                        dist = haversine(q_lat, q_lon, ilat, ilon)
-                        if dist < dist0 :
-                            dist0 = dist
-                            cap_mw0 = cap_mw
-                            load_pct0 = load_pct
-                            remain_mw0 = remain_mw
-                            line_name0 = line_name                        
-                else :
-                    ilon = icoord[0]
-                    ilat = icoord[1]
+                    #st.write(feature['properties']['GlobalID'])
                     
-                    dist = haversine(q_lat, q_lon, ilat, ilon)
-                    #st.write(dist)
-                    if dist < dist0 :
-                        dist0 = dist
-                        cap_mw0 = cap_mw
-                        load_pct0 = load_pct
-                        remain_mw0 = remain_mw
-                        line_name0 = line_name
-            
-        # assigne the values from nearest line point
-        queue_df.at[index,'Line_Name'] = line_name0
-        queue_df.at[index,'Min_Dist'] = dist0
-        queue_df.at[index,'Cap_MW'] = cap_mw0
-        queue_df.at[index,'Load_Pct'] = load_pct0
-        queue_df.at[index,'Remain_MW'] = remain_mw0
+                    for icoord in coord_list :
+                        item = icoord[0]
+                        # icoord[0] could also be list for multilinestring feature
+                        if isinstance(item, list):
+                            for item in icoord :
+                                ilon = item[0]
+                                ilat = item[1]
+                                
+                                dist = haversine(q_lat, q_lon, ilat, ilon)
+                                if dist < dist0 :
+                                    dist0 = dist
+                                    cap_mw0 = cap_mw
+                                    load_pct0 = load_pct
+                                    remain_mw0 = remain_mw
+                                    line_name0 = line_name                        
+                        else :
+                            ilon = icoord[0]
+                            ilat = icoord[1]
+                            
+                            dist = haversine(q_lat, q_lon, ilat, ilon)
+                            #st.write(dist)
+                            if dist < dist0 :
+                                dist0 = dist
+                                cap_mw0 = cap_mw
+                                load_pct0 = load_pct
+                                remain_mw0 = remain_mw
+                                line_name0 = line_name
+                    
+                # assigne the values from nearest line point
+                queue_df.at[index,'Line_Name'] = line_name0
+                queue_df.at[index,'Min_Dist'] = dist0
+                queue_df.at[index,'Cap_MW'] = cap_mw0
+                queue_df.at[index,'Load_Pct'] = load_pct0
+                queue_df.at[index,'Remain_MW'] = remain_mw0
 
     
     return queue_df
@@ -636,11 +648,11 @@ def main3():
     #save_shp_to_geojson('data/TransmissionLine_CES.shp')
     
     # queue data with lat/lon
-    queue_df = load_csv('data/new_caiso_queue.csv')
+    queue_df = load_csv('data/new_caiso_queue_MW.csv')
     # create a display name that combines project name and add-to substation
     queue_df['Display Name'] = queue_df['Project Name'] + " : " + queue_df["Station or Transmission Line"]
     # find the nearest transmission line and assign the capacity
-    #queue_df2 =  find_nearest_line(queue_df.head(1), transmission_lines_geojson, california_counties_geojson)
+    #queue_df2 =  find_nearest_line(queue_df, transmission_lines_geojson, california_counties_geojson)
     # save dataframe to csv
     #queue_df2.to_csv('data/new_caiso_queue_MW.csv', index=False)
     
