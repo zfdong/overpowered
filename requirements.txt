@@ -1,7 +1,7 @@
 streamlit
 geopandas
 leafmap
-streamlit-aggrid==0.3.3
+streamlit-aggrid
 openpyxl
 xlrd
 vega_datasets
