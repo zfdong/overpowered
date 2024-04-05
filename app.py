@@ -221,6 +221,105 @@ def df_to_geojson(df, crs, lat_col='GIS Lat', lon_col='GIS Long') :
         geojson['features'].append(feature)    
     return geojson 
 
+import math
+def haversine(lat1, lon1, lat2, lon2):
+    # Radius of the Earth in kilometers
+    R = 6371.0
+    # Convert latitude and longitude from degrees to radians
+    lat1_rad = math.radians(lat1)
+    lon1_rad = math.radians(lon1)
+    lat2_rad = math.radians(lat2)
+    lon2_rad = math.radians(lon2)
+    # Difference in coordinates
+    dlat = lat2_rad - lat1_rad
+    dlon = lon2_rad - lon1_rad
+    # Haversine formula
+    a = math.sin(dlat / 2)**2 + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(dlon / 2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    distance = R * c
+
+    return distance
+
+# find the nearest transmission line
+def find_nearest_line(queue_df, lines_geojson, all_county_geojson) :
+    lon_col = 'GIS Long'
+    lat_col = 'GIS Lat'
+    county_col = 'County'
+    # create new columns in dataframe
+    queue_df['Line_Name'] = 'None'
+    queue_df['Min_Dist'] = 0
+    queue_df['Cap_MW'] = 0
+    queue_df['Load_Pct'] = 0
+    queue_df['Remain_MW'] = 0
+    
+    # iterate each row in data frame
+    for index, row in queue_df.iterrows():
+        # get the county of this row, make sure the string is consistent with CA county names 
+        county = row[county_col].title()
+        # select county boundary 
+        county_data = extract_geojson_by_county(county, all_county_geojson)
+        # select transmission lines within county boundary
+        lines_data = extract_lines_within_county(lines_geojson, county_data)
+        
+        # get lat and lon of the row
+        q_lat = row[lat_col]
+        q_lon = row[lon_col]
+        # find the shortest distance from queue point to the line point 
+        dist0 = 1e12
+        line_name0 = 'None'
+        cap_mw0 = 0
+        load_pct0 = 0
+        remain_mw0 = 0
+        
+        # go through each transmission line
+        for feature in lines_data['features']:
+            # Extract the coordinates, line capacity, load, and remaining 
+            coord_list = feature['geometry']['coordinates']
+            cap_mw = feature['properties']['Cap_MW']
+            load_pct = feature['properties']['Load_Pct']
+            remain_mw = feature['properties']['Remain_MW']
+            line_name =  feature['properties']['Name']
+
+            #st.write(feature['properties']['GlobalID'])
+            
+            for icoord in coord_list :
+                item = icoord[0]
+                # icoord[0] could also be list for multilinestring feature
+                if isinstance(item, list):
+                    for item in icoord :
+                        ilon = item[0]
+                        ilat = item[1]
+                        
+                        dist = haversine(q_lat, q_lon, ilat, ilon)
+                        if dist < dist0 :
+                            dist0 = dist
+                            cap_mw0 = cap_mw
+                            load_pct0 = load_pct
+                            remain_mw0 = remain_mw
+                            line_name0 = line_name                        
+                else :
+                    ilon = icoord[0]
+                    ilat = icoord[1]
+                    
+                    dist = haversine(q_lat, q_lon, ilat, ilon)
+                    #st.write(dist)
+                    if dist < dist0 :
+                        dist0 = dist
+                        cap_mw0 = cap_mw
+                        load_pct0 = load_pct
+                        remain_mw0 = remain_mw
+                        line_name0 = line_name
+            
+        # assigne the values from nearest line point
+        queue_df.at[index,'Line_Name'] = line_name0
+        queue_df.at[index,'Min_Dist'] = dist0
+        queue_df.at[index,'Cap_MW'] = cap_mw0
+        queue_df.at[index,'Load_Pct'] = load_pct0
+        queue_df.at[index,'Remain_MW'] = remain_mw0
+
+    
+    return queue_df
+
 #@st.cache_data
 def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_geojson, property_list, in_center, in_scale, coord_df) :
     # prepare for altair display 
@@ -540,6 +639,11 @@ def main3():
     queue_df = load_csv('data/new_caiso_queue.csv')
     # create a display name that combines project name and add-to substation
     queue_df['Display Name'] = queue_df['Project Name'] + " : " + queue_df["Station or Transmission Line"]
+    # find the nearest transmission line and assign the capacity
+    #queue_df2 =  find_nearest_line(queue_df.head(1), transmission_lines_geojson, california_counties_geojson)
+    # save dataframe to csv
+    #queue_df2.to_csv('data/new_caiso_queue_MW.csv', index=False)
+    
     # convert dataframe to geojson for standard processing
     queue_geojson = df_to_geojson(queue_df, plants_geojson["crs"], lat_col='GIS Lat', lon_col='GIS Long')
     
