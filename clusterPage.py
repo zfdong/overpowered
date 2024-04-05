@@ -31,9 +31,7 @@ def get_cluster(cluster_df, project_head):
 
 def main2():
     # load queue data and assign column name to the first column 
-    d = {'col1': [1, 2], 'col2': [3, 4]}
-    df = pd.DataFrame(data=d)
-    AgGrid(df)
+    
     full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
     full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
     # only keep selected columns 
