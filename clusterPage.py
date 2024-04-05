@@ -2,7 +2,7 @@ import streamlit as st
 import json
 import pandas as pd
 # the command below causes segmentation fault on local computer
-from st_aggrid import AgGrid, GridOptionsBuilder
+from st_aggrid import AgGrid, GridOptionsBuilder, ColumnsAutoSizeMode
 from streamlit_extras.stylable_container import stylable_container 
 
 @st.cache_data  # This function will be cached
@@ -29,6 +29,7 @@ def get_cluster(cluster_df, project_head):
 
 
 def main2():
+    st.write(st.__version__)
     # load queue data and assign column name to the first column 
     full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
     full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
@@ -73,7 +74,17 @@ def main2():
     col1, col2 = st.columns([9, 1])
     
     with col1:
-        go_button = st.button('Go')
+        with stylable_container(
+            key="go_button",
+            css_styles= """
+                button {
+                    background-color: green;
+                    color: white;
+                    border-color: green;
+                }            
+            """
+        ):
+            go_button = st.button('Go')
     with col2:
         with stylable_container(
             key="clear_button",
@@ -107,8 +118,12 @@ def main2():
             if st.session_state.associated_projects_df.empty:
                 st.markdown(''':red[No Cluster found]''', unsafe_allow_html=True)
             else:
+                st.write(st.__version__)
+                
+                    
+                    
                 cluster_info_grid = AgGrid(st.session_state.cluster_summary_df)
-                cluster_grid_return = AgGrid(st.session_state.associated_projects_df)
+                cluster_grid_return = AgGrid(st.session_state.associated_projects_df, columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
         with col2:
             st.markdown('''
                 :rainbow[Map Placeholder]''')
