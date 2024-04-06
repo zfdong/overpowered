@@ -651,6 +651,7 @@ def main3():
     queue_df = load_csv('data/new_caiso_queue_MW.csv')
     # create a display name that combines project name and add-to substation
     queue_df['Display Name'] = queue_df['Project Name'] + " : " + queue_df["Station or Transmission Line"]
+
     # find the nearest transmission line and assign the capacity
     #queue_df2 =  find_nearest_line(queue_df, transmission_lines_geojson, california_counties_geojson)
     # save dataframe to csv
@@ -755,116 +756,6 @@ def main3():
             st.write("### Available " + selectedExtra + " data are listed below: ")
             st.write(data_df)
     
-# Interactive Map
-##def main3():
-##    st.sidebar.title("Operate Here")
-##    st.write("## CAISO Power Grid Map")
-##
-##    # split display
-##    col1, col2 = st.columns([4, 1])
-##    options = list(leafmap.basemaps.keys())
-##    index = options.index("SATELLITE")
-##
-##    with col2:
-##
-##        basemap = st.selectbox("Select a basemap:", options, index)
-##
-##    with col1:
-##
-##        m = leafmap.Map(center=(36.7783, -119.4179), zoom_start=6)
-##        m.add_basemap(basemap)
-##
-##        # add CA counties
-##        json_file = 'data/California_County_Boundaries.geojson'
-##        m.add_geojson(json_file, layer_name='CA Counties',
-##                      style = {"color" : "yellow",
-##                              "weight" : 2,
-##                               })        
-##
-##        # add CA transmission lines
-##        json_file = 'data/TransmissionLine_CEC.geojson'
-####        # change CRS and save 
-####        gdf = gpd.read_file(json_file)
-####        gdf.to_crs('EPSG:4326', inplace=True)
-####        gdf.to_file(json_file, driver='GeoJSON')
-##        
-##        m.add_geojson(json_file, layer_name='CA Transmission Lines',
-##                      style = {"color" : "blue",
-##                              "weight" : 3,
-##                               })   
-##
-####        # add CA power plants 
-####        json_file = 'data/California_Power_Plants.geojson'
-####
-######        with open(json_file, 'r') as f:
-######            geojson_data = json.load(f)
-######
-######        # get coordinates from geojson
-######        lats = []
-######        lons = []
-######        for feature in geojson_data["features"]:
-######            coordinates = feature["geometry"]["coordinates"]
-######            lats.append(coordinates[0])
-######            lons.append(coordinates[1])
-######        
-######        # Create star-shaped markers
-######        for lat, lon in zip(lats, lons):
-######            star_icon = BeautifyIcon(icon='star',
-######                                     inner_icon_style='color:red;font-size:10px;',  # Customize star color and size
-######                                     background_color='transparent',
-######                                     border_color='transparent')
-######            folium.Marker([lat, lon], icon=star_icon).add_to(m)
-####
-####        style_dict ={
-####                    # "stroke": True,
-####                    "color": "#3388ff",
-####                    "weight": 2,
-####                    "opacity": 1,
-####                    # "fill": True,
-####                    # "fillColor": "#ffffff",
-####                    "fillOpacity": 0,
-####                    # "dashArray": "9"
-####                    # "clickable": True,
-####                }
-####        m.add_geojson(json_file, style = style_dict, layer_name='CA Power Plants')
-####
-####        # add CA substations 
-######        shp_file = 'data/CA_Substations_Final.shp'
-######        # convert to geojson
-######        gdf = gpd.read_file(shp_file)
-######        gdf.to_crs('EPSG:4326', inplace=True)
-######        json_file = shp_file.replace('.shp','.geojson')
-######        gdf.to_file(json_file, driver='GeoJSON')
-####        
-####        json_file = 'data/CA_Substations_Final.geojson'
-####        m.add_geojson(json_file, layer_name='CA Substations')
-####
-####        # add EIA retired generators
-######        shp_file = 'data/EIA_Retired_Generators_Y2022.shp'
-######        # convert to geojson
-######        gdf = gpd.read_file(shp_file)
-######        gdf.to_crs('EPSG:4326', inplace=True)
-######        json_file = shp_file.replace('.shp','.geojson')
-######        gdf.to_file(json_file, driver='GeoJSON')
-####        
-####        json_file = 'data/EIA_Retired_Generators_Y2022.geojson'
-####        m.add_geojson(json_file, layer_name='EIA Retired Generators')        
-##        
-##        m.to_streamlit(height=700)
-##
-##
-####    # Create a map object centered at a specific location
-####    m = folium.Map(location=[36.7783, -119.4179], zoom_start=6)
-####
-####    # Add the GeoJSON to the map
-####    #json_file = 'TransmissionLine_CEC.geojson'
-####    #json_file = 'us-states.json'
-####    json_file = 'data/California_County_Boundaries.geojson'
-####    folium.GeoJson(json_file, name='CAISO Transmission Line').add_to(m)
-####
-####    st_folium(m,width=1500, height=800)
-####    
-####    #folium_static(m)
 
 if __name__ == "__main__":
     main()
