@@ -84,7 +84,7 @@ def main2():
         selected_rows = grid_return["selected_rows"]
 
         # write out selected rows to check its format
-        # st.write(not selected_rows)
+        #st.write(selected_rows)
 
         with stylable_container(
             key="go_button",
