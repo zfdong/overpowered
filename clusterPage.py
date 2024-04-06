@@ -28,10 +28,10 @@ def get_cluster(cluster_df, project_head):
         associated_projects_df = pd.DataFrame({})
     return cluster_data_df, associated_projects_df
 
-def set_selection_cb(selected_rows, cluster_df):
-    if selected_rows:
+def set_selection_cb(selected_rows_in, cluster_df):
+    if selected_rows_in:
         with st.spinner(text="In progress..."):
-            st.session_state.selected_rows = selected_rows
+            st.session_state.selected_rows = selected_rows_in
             st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"])
      
 
@@ -139,3 +139,4 @@ def main2():
             """
         ):
             clear_button = st.button('Clear', on_click=reset_selection_cb)
+  
