@@ -171,7 +171,7 @@ def main2():
 ##    cluster_df = cluster_df.drop(columns=['Project Name'])
 ##    st.write(cluster_df)
     
-    if st.session_state.selected_rows == None:
+    if st.session_state.selected_rows is None or st.session_state.selected_rows.empty :
          
         st.subheader("Clustering Model")
         st.markdown(
