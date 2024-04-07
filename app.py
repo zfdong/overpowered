@@ -427,79 +427,7 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
     return alt_chart, data_tmp
 
 #@st.cache_data
-def create_altair_charts_main2(basemap, county, county_geojson, lines_geojson, points_geojson, property_name, in_center, in_scale, coord_df) :
-    # prepare for altair display 
-    ca_counties = alt.Data(values=county_geojson)
-    ca_lines = alt.Data(values=lines_geojson, format=alt.DataFormat(property='features', type='json'))
-    
-    # define map center and zoom scale 
-    center = in_center
-    scale = in_scale
 
-    width = 800
-    height = 600
-
-    # Layering and configuring the components
-    base = alt.layer(
-        alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray'),
-        alt.Chart(ca_counties).mark_geoshape(fill='yellow', stroke='gray'),
-        alt.Chart(ca_lines).mark_geoshape(filled=False, stroke='blue').encode(tooltip=alt.Tooltip('properties.Name:N',title=''))
-    ).properties(width=width, height=height)
-
-    projections = {
-        "Mercator": {
-            "type": "mercator",
-            "center": center,
-            "rotate": [0,0,0],
-            "translate": [width/2, height/2],
-            "scale": scale,
-            "precision": 0.1
-        },
-    }
-    
-    geo_chart = base.properties(projection=projections['Mercator'])
-
-    alt_chart = geo_chart
-
-    # add extra points data only when data is selected and there are points within county boundary
-    data_tmp = None
-    if points_geojson is not None and points_geojson['features']:
-
-        #st.write(points_geojson)
-        
-        # convert geojson to pd df
-        data_tmp = pd.json_normalize(points_geojson['features'], sep="_")
-        data_tmp['longitude'] = data_tmp['geometry_coordinates'].apply(lambda x: x[0])
-        data_tmp['latitude'] = data_tmp['geometry_coordinates'].apply(lambda x: x[1])
-
-        extra_points = alt.Chart(data_tmp).mark_point(
-            filled = True,
-            color='black',
-            size=100
-        ).encode(
-            longitude='longitude:Q',
-            latitude='latitude:Q',
-            tooltip=property_name
-        )
-
-        alt_chart = geo_chart + extra_points
-    
-    # add user input point
-    if is_valid_coordinate(coord_df['lat'][0], coord_df['lon'][0]):
-        # Create points for the input coordinates
-        points = alt.Chart(coord_df).mark_point(
-            shape = 'diamond',
-            filled = True,
-            color='green',
-            size=100
-        ).encode(
-            longitude='lon:Q',
-            latitude='lat:Q'
-        )
-        
-        alt_chart = alt_chart + points
-    
-    return alt_chart, data_tmp
 
 def main():
     # make page wide 
@@ -534,6 +462,12 @@ def main():
     )
     
     tab1, tab2, tab3 = st.tabs(['  Home  ', '  Clustering  ', '  Power Grid Map  '])
+
+##    ## Load Data
+##    # US states map
+##    basemap = load_basemap()
+##    # CA counties map 
+##    california_counties_geojson = load_geojson('data/California_County_Boundaries.geojson')
 
     with tab1:
        main1()
@@ -625,7 +559,7 @@ def main3():
     4. This is optional. User can enter a location coordinate by latitude and longitude. The location will be added to plots as "red diamond"
     """)
     
-    ## Load Data
+    ## Load Data from Main()
     # US states map
     basemap = load_basemap()
     # CA counties map 
