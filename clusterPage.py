@@ -228,8 +228,6 @@ def main2():
                 go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
                     
     else:
-        st.subheader("Review Results")
-        
         
         # when it is a list of dict 
         if isinstance(st.session_state.selected_rows,list) :
@@ -285,7 +283,7 @@ def main2():
             """
         ):
             clear_button = st.button('Clear', on_click=reset_selection_cb)
-            
+        st.subheader("Variable Definitions")    
         st.markdown(
             """
             Here we can see the high-level details of the cluster recommendation.
