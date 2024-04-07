@@ -210,7 +210,7 @@ def main2():
                 }            
             """
         ):
-            st.write(selected_rows)
+            st.write(type(selected_rows))
             go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
 
                     
