@@ -67,7 +67,7 @@ def set_selection_cb(selected_rows_in, cluster_df, vis_df):
             with st.spinner(text="In progress..."):
                 st.session_state.selected_rows = selected_rows_in
                 #st.write(st.session_state.selected_rows.columns)
-                st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"], vis_df)
+                st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"].iloc[0], vis_df)
             
 
 def reset_selection_cb():
