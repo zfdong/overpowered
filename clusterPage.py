@@ -66,7 +66,7 @@ def set_selection_cb(selected_rows_in, cluster_df, vis_df):
         if not selected_rows_in.empty:
             with st.spinner(text="In progress..."):
                 st.session_state.selected_rows = selected_rows_in
-                st.write(type(st.session_state.selected_rows))
+                st.write(st.session_state.selected_rows)
                 st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
             
 
