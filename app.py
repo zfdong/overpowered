@@ -48,10 +48,10 @@ def load_basemap() :
     basemap = alt.topo_feature(data.us_10m.url, 'states')
     return basemap 
 
-@st.cache_data
-def load_excel(path, sheetname):
-    data = pd.read_excel(path, sheetname)
-    return data
+##@st.cache_data
+##def load_excel(path, sheetname):
+##    data = pd.read_excel(path, sheetname)
+##    return data
 
 @st.cache_data
 def load_geojson(file_path):
