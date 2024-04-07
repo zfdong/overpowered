@@ -506,18 +506,56 @@ Let’s get to a greener grid, faster.
     All team members are currently pursuing their Master of Information and Data science at UC Berkeley. 
     """)
 
-    st.markdown("""
-    1. **Adam Kreitzman** *(adam_kreitzman@berkeley.edu)*
-    2. **Hailee Schuele** *(hschuele@berkeley.edu)*
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        a1, a2, a3 = st.columns([1,3,1])
+        with a2:
+            st.image("adam.jpg", width=200)
+            st.markdown("""
+            **Adam Kreitzman**  
+            *(adam_kreitzman@berkeley.edu)*
+            """)
+        
+    with c2:
+        h1, h2, h3 = st.columns([1,3,1])
+        with h2:
+            st.image("hailee.jpg", width=200)
+            st.markdown("""
+            **Hailee Schuele**  
+            *(hschuele@berkeley.edu)*
+            """)
+        
+    with c3:
+        
+        p1, p2, p3 = st.columns([1,3,1])
+        with p2:
+            st.image("paul.jpg", width=200)
+            st.markdown("""
+            **Paul Cooper**  
+            *(paul.cooper@berkeley.edu)*
+            """)
+    with c4:
     
-    Hailee Schuele has a background in political science and public health with an environmental focus. She spent 6 years working in healthcare and pharmaceuticals as an analyst. Now she’s interested in using data science tools in support of clean energy.
-
-    3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
-    4. **Zhifei Dong** *(zfdong@berkeley.edu)*
-
-    Zhifei Dong holds a PhD degree in coastal engineering and has 10-year experience in numerical modeling of coastal hydrodyamics (such as storm surge, waves and sediment transport), coastal resilience, restoration and adaptation, decision-support and analysis toolbox development with ArcGIS/Python programming, and LiDAR data processing. He is currently working as a geospatial data scientist.
+        z1, z2, z3 = st.columns([1,3,1])
+        with z2:
+            st.image("zhifei.jpg", width=200)
+            st.markdown("""
+            **Zhifei Dong**   
+            *(zfdong@berkeley.edu)*
+            """)
     
-    """)
+    # st.markdown("""
+    # 1. **Adam Kreitzman** *(adam_kreitzman@berkeley.edu)*
+    # 2. **Hailee Schuele** *(hschuele@berkeley.edu)*
+    
+    # Hailee Schuele has a background in political science and public health with an environmental focus. She spent 6 years working in healthcare and pharmaceuticals as an analyst. Now she’s interested in using data science tools in support of clean energy.
+
+    # 3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
+    # 4. **Zhifei Dong** *(zfdong@berkeley.edu)*
+
+    # Zhifei Dong holds a PhD degree in coastal engineering and has 10-year experience in numerical modeling of coastal hydrodyamics (such as storm surge, waves and sediment transport), coastal resilience, restoration and adaptation, decision-support and analysis toolbox development with ArcGIS/Python programming, and LiDAR data processing. He is currently working as a geospatial data scientist.
+    
+    # """)
 
     
 def main3():
