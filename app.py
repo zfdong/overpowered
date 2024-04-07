@@ -461,7 +461,7 @@ def main():
         </style>""", unsafe_allow_html=True
     )
     
-    tab1, tab2, tab3 = st.tabs(['  Home  ', '  Clustering  ', '  Power Grid Map  '])
+    tab1, tab2, tab3, tab4 = st.tabs(['  Home  ', '  Clustering  ', '  Power Grid Map  ', ' Details '])
 
 ##    ## Load Data
 ##    # US states map
@@ -470,13 +470,16 @@ def main():
 ##    california_counties_geojson = load_geojson('data/California_County_Boundaries.geojson')
 
     with tab1:
-       main1()
+        main1()
 
     with tab2:
-       main2()
+        main2()
 
     with tab3:
-       main3()
+        main3()
+        
+    with tab4:
+        main4()
 
 # home page     
 def main1():
@@ -484,45 +487,17 @@ def main1():
 
     st.write(
     """
-The Power Grid is big, and complicated. So it’s no surprise that adding new power generators to the grid is, too.
+Welcome to Overpowered! We’re a recommendation tool for power grid operators looking to streamline the Interconnection Queue approval process. 
 
-It is also a legacy system – built in a time of lower demand and centralized, fossil-fuel guzzling, behemoth power generators. It’s 2024, and power generators have gone green, decentralized, and multiplied, but the process for connecting generators to the grid hasn’t changed. As a result, there is a queue to join the grid more than 10,000 applications long with wait times averaging 4 years.
+The power grid is big and complicated, so it’s no surprise that the process of adding new power generators to the grid is too. In order to connect a generator to the grid, developers have to submit an application to the grid operator’s Interconnection Queue. The Queue is notoriously slow and often ends with developers dropping out (see “Details - The Current Queue Process” for a more in-depth explanation).
 
-As we move to a better, greener grid, we need a better application process. Investigating multiple applicants at a time can speed up processing, share up-front infrastructure costs, and reduce failed applications.
+As we move towards a better, greener grid, we need an improved application process. That’s where Overpowered’s interactive tool comes in. By recommending groups of applicants to be studied together and providing visibility into the results, we can speed up processing, encourage sharing infrastructure costs, and reduce failed applications. 
 
-Our team is building a product that will help energy regulators streamline this process by stitching together varied data sources and applying cutting edge data science techniques to identify and suggest applicants to be considered as a group.  
+Let’s get to a greener grid, faster.
 
     """
     )
 
-    st.write("## Current Queue Process")
-
-    st.write(
-        """
-        There are a number of grid operators (a.k.a. ISOs/RTOs) that manage the power grid in different geographic regions of the U.S. For example, CAISO manages the grid in California. The Interconnection Queue is the process through which developers apply to add their resources to the power grid. If a developer wants to build a wind turbine, they have to get through the Queue in order to be able to sell their generated power in the grid marketplace. 
-
-To enter the Queue, an applicant has to provide a number of materials, including a deposit, proof of land control in the area they want to build, proof of their ability to pay for the project, and the blueprints for their project design. Given the length of the Queue and manpower it takes to assess projects, grid operators take the application process seriously - they do not want to waste time on developers who are ill-prepared.
-
-Once in the Queue, the ISO performs a series of studies to ensure the addition of the project will not disturb grid reliability and will be compatible with other projects coming online, to name a few. At the end of the study process, the ISO may return to the developer with required application updates and a price tag for the infrastructure that needs to be built to accommodate their project. Infrastructure can include line items such as additional transmission lines or energy storage. At this point, the applicant can either choose to move forward with their project (by making the updates and/or agreeing to build the infrastructure), or they can drop out. Dropout frequently results from the infrastructure costs placed on individuals. 
-
-Moving through the Queue can take years and a large part of the bottleneck are the feasibility and system impact studies conducted by the ISO. In addition to the individual impact of a given project, the ISO has to consider how said project will interact with future infrastructure and other projects waiting in the Queue. You can imagine the added difficulty if the applicant drops out. ISOs are dealing with a complex system that’s also a moving target.
-
-Until recently, ISOs worked through the Queue on a first in first out basis to adhere to legislation requiring each project to be given equal consideration. This worked well and good enough in the time of a few big, centralized, fossil-fuel generators. However, as the focus has shifted to renewable energy, the number of decentralized renewable generator applications has blown up. Still everyone had to wait in a single-file line and, as mentioned, the going was slow. 
-
-Recent FERC legislation now requires ISOs to assess groups of applicants in “cluster analyses”. Depending on the ISO, there’s a short time period every year within which applicants can apply to be assessed as part of the cluster. The ISO studies the whole group, provides feedback, and then conducts a secondary study post-initial applicant dropout. 
-
-Cluster analyses are certainly an improvement, but it’s not without its flaws. For starters, there’s a lot of pressure on developers to get their application just right within the short timeframe. If they miss the window, better luck next year. Also, while Queue times are speeding up, conducting a system-wide analysis for a large number of projects in a given cluster still takes a decent amount of time.
-
-That’s where Overpowered comes in. By identifying smaller groups of applicants, we put more power in the hands of both ISOs and developers. ISO impact studies can be conducted more quickly if they’re able to strategically approve smaller, related groups. Small batch processing also allows for more developer flexibility since they won’t be beholden to a small application window. Finally, developers will be less likely to drop out if the cost of building new infrastructure can be shared across a group instead of born individually. Reduced dropout is good for developers who want to build, ISOs who won’t have to deal with a moving target, and the grid as a whole.
-
-In short, our solution speeds up the Queue, provides flexibility, and reduces developer dropout. With these improvements to the Interconnection Queue, we take another step towards a green power grid.
-
-        """
-    )
-    
-    st.write("## Data Sources")
-    
-    st.markdown(""" """)
 
     st.write("## Meet The Team")
 
@@ -539,6 +514,9 @@ In short, our solution speeds up the Queue, provides flexibility, and reduces de
 
     3. **Paul Cooper** *(paul.cooper@berkeley.edu)*
     4. **Zhifei Dong** *(zfdong@berkeley.edu)*
+
+    Zhifei Dong holds a PhD degree in coastal engineering and has 10-year experience in numerical modeling of coastal hydrodyamics (such as storm surge, waves and sediment transport), coastal resilience, restoration and adaptation, decision-support and analysis toolbox development with ArcGIS/Python programming, and LiDAR data processing. He is currently working as a geospatial data scientist.
+    
     """)
 
     
@@ -690,6 +668,67 @@ def main3():
             st.write("### Available " + selectedExtra + " data are listed below: ")
             st.write(data_df)
     
+def main4() :
+    st.write("## Current Queue Process")
 
+    st.write(
+        """
+        There are a number of grid operators (a.k.a. ISOs/RTOs) that manage the power grid in different geographic regions of the U.S. For example, CAISO manages the grid in California. The Interconnection Queue is the process through which developers apply to add their resources to the power grid. If a developer wants to build a wind turbine, they have to get through the Queue in order to be able to sell their generated power in the grid marketplace. 
+
+To enter the Queue, an applicant has to provide a number of materials, including a deposit, proof of land control in the area they want to build, proof of their ability to pay for the project, and the blueprints for their project design. Given the length of the Queue and manpower it takes to assess projects, grid operators take the application process seriously - they do not want to waste time on developers who are ill-prepared.
+
+Once in the Queue, the ISO performs a series of studies to ensure the addition of the project will not disturb grid reliability and will be compatible with other projects coming online, to name a few. At the end of the study process, the ISO may return to the developer with required application updates and a price tag for the infrastructure that needs to be built to accommodate their project. Infrastructure can include line items such as additional transmission lines or energy storage. At this point, the applicant can either choose to move forward with their project (by making the updates and/or agreeing to build the infrastructure), or they can drop out. Dropout frequently results from the infrastructure costs placed on individuals. 
+
+Moving through the Queue can take years and a large part of the bottleneck are the feasibility and system impact studies conducted by the ISO. In addition to the individual impact of a given project, the ISO has to consider how said project will interact with future infrastructure and other projects waiting in the Queue. You can imagine the added difficulty if the applicant drops out. ISOs are dealing with a complex system that’s also a moving target.
+
+Until recently, ISOs worked through the Queue on a first in first out basis to adhere to legislation requiring each project to be given equal consideration. This worked well and good enough in the time of a few big, centralized, fossil-fuel generators. However, as the focus has shifted to renewable energy, the number of decentralized renewable generator applications has blown up. Still everyone had to wait in a single-file line and, as mentioned, the going was slow. 
+
+Recent FERC legislation now requires ISOs to assess groups of applicants in “cluster analyses”. Depending on the ISO, there’s a short time period every year within which applicants can apply to be assessed as part of the cluster. The ISO studies the whole group, provides feedback, and then conducts a secondary study post-initial applicant dropout. 
+
+Cluster analyses are certainly an improvement, but it’s not without its flaws. For starters, there’s a lot of pressure on developers to get their application just right within the short timeframe. If they miss the window, better luck next year. Also, while Queue times are speeding up, conducting a system-wide analysis for a large number of projects in a given cluster still takes a decent amount of time.
+
+That’s where Overpowered comes in. By identifying smaller groups of applicants, we put more power in the hands of both ISOs and developers. ISO impact studies can be conducted more quickly if they’re able to strategically approve smaller, related groups. Small batch processing also allows for more developer flexibility since they won’t be beholden to a small application window. Finally, developers will be less likely to drop out if the cost of building new infrastructure can be shared across a group instead of born individually. Reduced dropout is good for developers who want to build, ISOs who won’t have to deal with a moving target, and the grid as a whole.
+
+In short, our solution speeds up the Queue, provides flexibility, and reduces developer dropout. With these improvements to the Interconnection Queue, we take another step towards a green power grid.
+
+        """
+    )
+
+    st.write("## Overpowered's Scoring Mechanism ")
+
+    st.markdown("""
+    Clusters are determined by calculating cosine similarity between a number of project features and user-specified weights. These features include:
+    - Geospatial proximity
+    - Line position in the Queue
+    - Utility company
+    - Generator type
+    - Permit status
+    - Current on-line date
+
+    Projects are upweighted if they:
+    - Contain energy storage
+    - Are geographically close to planned infrastructure projects
+    - Are geographically close to retired plants, which can be used for energy storage
+
+    """)
+    
+    st.write("## Data Sources")
+    
+    st.markdown("""
+    - CAISO’s Interconnection Queue - (ISO Generator Interconnection Queue) https://www.caiso.com/planning/Pages/GeneratorInterconnection/Default.aspx
+    - CAISO’s 10 Year Transmission Plan - https://drive.google.com/file/d/1ddRU7lbQkXdpaz0cn20hKhq5JhdpWHAw/view
+    - California Substation GIS - From the California Energy Commission available upon request 
+    - California Transmission Line GIS - https://gis.data.ca.gov/datasets/260b4513acdb4a3a8e4d64e69fc84fee/explore
+    - California Power Plants GIS - https://gis.data.ca.gov/datasets/4a702cd67be24ae7ab8173423a768e1b_0/explore
+    - County Population Centroids - https://www.census.gov/geographies/reference-files/time-series/geo/centers-population.html
+
+    """)
+    
+    st.write("## Data Sources")
+    st.markdown("""
+    If you’re interested in learning more about the problems with the Interconnection Queue, give this podcast a listen (https://www.volts.wtf/p/whats-the-deal-with-interconnection).
+    
+
+    """)
 if __name__ == "__main__":
     main()

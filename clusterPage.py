@@ -99,7 +99,7 @@ def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
     center = in_center
     scale = in_scale
 
-    width = 800
+    width = 600
     height = 600
 
     # Layering and configuring the components
@@ -176,13 +176,21 @@ def main2():
 ##    st.write(cluster_df)
     
     if check_list_or_df_empty(st.session_state.selected_rows) :
-         
-        st.subheader("Clustering Model")
+
+        st.subheader("Let’s get to clustering!")
+
         st.markdown(
             """
-            Studying one applicant at a time poses lots of challenges. With this tool, you can determine which projects make sense to study _together_.  
-            We provide a structured scoring mechanism to determine the best groups, but recognize that sometimes, expert energy users would weigh parameters in different ways. Our preset weights offer a great starting point, but you can configure weights as you see fit!
+            Studying a single applicantion at a time makes for a slow going. Overpowered’s clustering tool helps you determine which projects make sense to study together. This tool focuses on the California grid operator (CAISO) Interconnection Queue.
+
             """
+        )         
+        st.subheader("Set Custom Weights")
+        st.markdown(
+            """
+            Overpowered provides a structured scoring mechanism to determine the best groups of applicants to study together. Our default weights were determined using machine learning on historical CAISO data. These algorithms gave us insight into which features are most important for successful Queue applications.
+            That said, we recognize that expert energy users may opt to weigh parameters in different ways. Our preset weights offer a great starting point, but feel free to configure them as you see fit!
+             """
         )
         c1, c2 = st.columns(2)
         
@@ -196,6 +204,13 @@ def main2():
                 with col2:
                     w3 = st.number_input(label="Infrastructure", value = 0.25)
                     w4 = st.number_input(label="Project Score", value = 0.25)
+
+        st.subheader("Pick a Project")
+        st.markdown(
+            """
+            Now that you’ve set your weights, click a base project in the CAISO Queue below to generate cluster recommendations.
+             """
+        )
 
         grid_return = AgGrid(visible_df, grid_options)
         selected_rows = grid_return["selected_rows"]
@@ -222,6 +237,24 @@ def main2():
                 go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
                     
     else:
+        st.subheader("Review Results")
+        st.markdown(
+            """
+            Here we can see the high-level details of the cluster recommendation.
+        - **Cluster Score**: This tells you the strength of the cluster as a whole. It’s the average strength score between the base project you selected above and all the other projects in the recommended cluster.
+        - **Total MegaWatts**: This metric gives us insight into the amount of infrastructure (transmission lines and/or storage) that would need to be built to accommodate this cluster.
+            -(Sum of MWs supplied to the grid for all projects in the cluster) - (Sum of available transmission capacity at each project’s proposed interconnect point)
+        - **Likelihood Score**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
+
+        The table below allows us to dig into the details of each project in the cluster. Similarity scores are calculated for different categories between the base project and all other projects. The most similar projects are included in the cluster. A higher number indicates a better similarity score. (See “Details - Overpowered’s Scoring Mechanism” for more information.)
+        - **Project Score**: 
+        - **Location**: This measures the geospatial proximity between two projects.
+        - **Process**: This summarizes the readiness of each project. It includes operational variables, such as the project’s position in the Queue, the date it's expected to go online, and its permit status. We want to discourage “line skipping” by grouping projects that are closer together in the Queue. We also want to encourage ease of construction and real-life operations by having projects in the same geography go online at similar times.
+        - **Infrastructure**: This captures the similarity of the project build types. For example, two solar projects can be studied under the same set of assumptions, which is more efficient than two projects of different types.
+        - **Overall**: The overall similarity score between the base project and the given project.
+            """
+        )
+        
         # when it is a list of dict 
         if isinstance(st.session_state.selected_rows,list) :
             st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
@@ -254,8 +287,8 @@ def main2():
 
                 cluster_grid_return = AgGrid(st.session_state.associated_projects_df, columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
             with col2:
-                st.markdown('''
-                    :rainbow[Map Placeholder]''')
+                #st.markdown('''
+                #    :rainbow[Map Placeholder]''')
                 scale_list = list(range(1000,5000,500))
                 index_scale = scale_list.index(2000)
                 selectedScale = st.selectbox("Choose a Zoom-In Scale to Display: ", scale_list, index_scale, key='scale2')
