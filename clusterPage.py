@@ -16,7 +16,7 @@ def load_basemap() :
     basemap = alt.topo_feature(data.us_10m.url, 'states')
     return basemap 
 
-@st.cache_data
+#@st.cache_data
 def load_geojson(file_path):
     with open(file_path, 'r') as file:
         geojson_data = json.load(file)
@@ -27,7 +27,7 @@ def load_csv(path):
     data = pd.read_csv(path)
     return data
 
-@st.cache_data  # This function will be cached
+#@st.cache_data  # This function will be cached
 def load_excel(path, sheetname):
     data = pd.read_excel(path, sheetname)
     return data
@@ -65,7 +65,7 @@ def set_selection_cb(selected_rows_in, cluster_df, vis_df):
         # for pandas dataframe 
         if not selected_rows_in.empty:
             with st.spinner(text="In progress..."):
-                st.session_state.selected_rows = selected_rows_in
+                st.session_state.selected_rows = selected_rows_in.reset_index(drop=True)
                 st.write(st.session_state.selected_rows)
                 st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
             
@@ -74,24 +74,6 @@ def reset_selection_cb():
     st.session_state.selected_rows = None
     st.session_state.cluster_summary_df = pd.DataFrame({})
     st.session_state.associated_projects_df = pd.DataFrame({})
-
-@st.cache_data
-def get_county_centroid(in_county):
-    # Using Shapely to create a geometry from the GeoJSON geometry
-    geom = shape(in_county['features'][0]['geometry'])
-    # If the geometry is a MultiPolygon, calculate the centroid of the largest polygon by area
-    if isinstance(geom, MultiPolygon):
-        # Corrected handling of MultiPolygon
-        largest_area = 0
-        largest_polygon = None
-        for polygon in geom.geoms:
-            if polygon.area > largest_area:
-                largest_area = polygon.area
-                largest_polygon = polygon
-        centroid = largest_polygon.centroid if largest_polygon else None
-    else:
-        centroid = geom.centroid
-    return centroid.x, centroid.y
 
 def get_points_centroid(in_df) :
     
