@@ -222,7 +222,13 @@ def main2():
                 go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
                     
     else:
-        st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
+        # when it is a list of dict 
+        if isinstance(st.session_state.selected_rows,list) :
+            st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
+        # when it is a pandas data frame 
+        else :
+            st.subheader(st.session_state.selected_rows["Project Name"].iloc[0] + " Suggested Cluster")
+            
         if st.session_state.associated_projects_df.empty:
             st.markdown(''':red[No Cluster found]''', unsafe_allow_html=True)
         else:
