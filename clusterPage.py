@@ -54,12 +54,20 @@ def get_cluster(cluster_df, project_head, vis_df):
     return cluster_data_df, associated_projects_df
 
 def set_selection_cb(selected_rows_in, cluster_df, vis_df):
-    if not selected_rows_in.empty:
-        st.write(selected_rows_in)
-        with st.spinner(text="In progress..."):
-            st.session_state.selected_rows = selected_rows_in
-            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
-     
+    # in local python, selected_rows_in is a list, however on streamlit, it is pd df 
+    if isinstance(selected_rows_in, list) :
+        # for list 
+        if selected_rows_in:
+            with st.spinner(text="In progress..."):
+                st.session_state.selected_rows = selected_rows_in
+                st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
+    else :
+        # for pandas dataframe 
+        if not selected_rows_in.empty:
+            with st.spinner(text="In progress..."):
+                st.session_state.selected_rows = selected_rows_in
+                st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
+            
 
 def reset_selection_cb():
     st.session_state.selected_rows = None
@@ -87,6 +95,18 @@ def get_county_centroid(in_county):
 def get_points_centroid(in_df) :
     
     return in_df['Gis Long'].mean(), in_df['Gis Lat'].mean()
+
+def check_list_or_df_empty(in_var) :
+    # check if list is empty, value is none or pandas df is empty
+    # for list 
+    if isinstance(in_var, list) :
+        return not in_var
+    # for None value 
+    elif  in_var is None :
+        return in_var is None 
+    # for pandas data frame 
+    else :
+        return in_var.empty
 
 def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
     # prepare for altair display 
@@ -172,7 +192,7 @@ def main2():
 ##    cluster_df = cluster_df.drop(columns=['Project Name'])
 ##    st.write(cluster_df)
     
-    if st.session_state.selected_rows is None or st.session_state.selected_rows.empty :
+    if check_list_or_df_empty(st.session_state.selected_rows) :
          
         st.subheader("Clustering Model")
         st.markdown(
@@ -211,8 +231,12 @@ def main2():
             """
         ):
             #st.write(type(selected_rows))
-            go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= selected_rows.empty)
-
+            if not isinstance(selected_rows, list) :
+                # for pandas data frame type
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= selected_rows.empty)
+            else :
+                # for list type 
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
                     
     else:
         st.subheader(st.session_state.selected_rows[0]["Project Name"] + " Suggested Cluster")
