@@ -42,12 +42,12 @@ def get_cluster(cluster_df, project_head, vis_df):
     if project_head  in cluster_df["ProjectHead"].values:
         new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
         # add lat/lon to displayed table
-        new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long']], left_on='Project',  right_on='Project Name', how='left')
+        new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long', 'Type-1']], left_on='Project',  right_on='Project Name', how='left')
         new_df = new_df.drop(columns=['Project Name'])
         #st.write(new_df)
-        cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == "DAYLIGHT"]["Summary"].iloc[0])
+        cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == project_head]["Summary"].iloc[0])
         associated_projects_df = new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
-        associated_projects_df = associated_projects_df[["Project", "Project Score", "Location", "Process", "Infrastructure", "Overall","Gis Lat", "Gis Long"]]
+        associated_projects_df = associated_projects_df[["Project", "Project Score", "Location", "Process", "Infrastructure", "Overall","Gis Lat", "Gis Long", 'Type-1']]
     else:
         cluster_data_df = pd.DataFrame({})
         associated_projects_df = pd.DataFrame({})
@@ -58,16 +58,13 @@ def set_selection_cb(selected_rows_in, cluster_df, vis_df):
     if isinstance(selected_rows_in, list) :
         # for list 
         if selected_rows_in:
-            with st.spinner(text="In progress..."):
-                st.session_state.selected_rows = selected_rows_in
-                st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
+            st.session_state.selected_rows = selected_rows_in
+            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
     else :
         # for pandas dataframe 
         if not selected_rows_in.empty:
-            with st.spinner(text="In progress..."):
-                st.session_state.selected_rows = selected_rows_in
-                #st.write(st.session_state.selected_rows.columns)
-                st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"].iloc[0], vis_df)
+            st.session_state.selected_rows = selected_rows_in
+            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"].iloc[0], vis_df)
             
 
 def reset_selection_cb():
@@ -104,7 +101,7 @@ def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
 
     # Layering and configuring the components
     base = alt.layer(
-        alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray')#.encode(tooltip='Project:N')
+        alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray').encode(tooltip=alt.value(None))
         #alt.Chart(ca_counties).mark_geoshape(fill='yellow', stroke='gray')
     ).properties(width=width, height=height)
 
@@ -129,12 +126,12 @@ def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
         extra_points = alt.Chart(data_tmp).mark_point(
             shape = 'diamond',
             filled = True,
-            color='green',
             size=100
         ).encode(
             longitude='Gis Long:Q',
             latitude='Gis Lat:Q',
-            tooltip='Project:N'
+            tooltip='Project:N',
+            color=alt.Color('Type-1:N'),
         )
 
         alt_chart = geo_chart + extra_points
@@ -163,25 +160,19 @@ def main2():
     visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
     
     options_builder = GridOptionsBuilder.from_dataframe(visible_df)
-    # options_builder.configure_column(‘col1’, editable=True)
     options_builder.configure_selection('single')
     options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
     grid_options = options_builder.build()
     
     cluster_df = load_json("corrected_projects_clusters.json")
 
-##    # add lat/lon to cluster_df
-##    cluster_df = pd.merge(cluster_df, visible_df[['Project Name', 'GIS Lat', 'GIS Long']], left_on='ProjectHead',  right_on='Project Name', how='left')
-##    cluster_df = cluster_df.drop(columns=['Project Name'])
-##    st.write(cluster_df)
-    
+  
     if check_list_or_df_empty(st.session_state.selected_rows) :
-
         st.subheader("Let’s get to clustering!")
 
         st.markdown(
             """
-            Studying a single applicantion at a time makes for a slow going. Overpowered’s clustering tool helps you determine which projects make sense to study together. This tool focuses on the California grid operator (CAISO) Interconnection Queue.
+            Studying a single application at a time makes for a slow going. Overpowered’s clustering tool helps you determine which projects make sense to study together. This tool focuses on the California grid operator (CAISO) Interconnection Queue.
 
             """
         )         
@@ -238,22 +229,7 @@ def main2():
                     
     else:
         st.subheader("Review Results")
-        st.markdown(
-            """
-            Here we can see the high-level details of the cluster recommendation.
-        - **Cluster Score**: This tells you the strength of the cluster as a whole. It’s the average strength score between the base project you selected above and all the other projects in the recommended cluster.
-        - **Total MegaWatts**: This metric gives us insight into the amount of infrastructure (transmission lines and/or storage) that would need to be built to accommodate this cluster.
-            -(Sum of MWs supplied to the grid for all projects in the cluster) - (Sum of available transmission capacity at each project’s proposed interconnect point)
-        - **Likelihood Score**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
-
-        The table below allows us to dig into the details of each project in the cluster. Similarity scores are calculated for different categories between the base project and all other projects. The most similar projects are included in the cluster. A higher number indicates a better similarity score. (See “Details - Overpowered’s Scoring Mechanism” for more information.)
-        - **Project Score**: 
-        - **Location**: This measures the geospatial proximity between two projects.
-        - **Process**: This summarizes the readiness of each project. It includes operational variables, such as the project’s position in the Queue, the date it's expected to go online, and its permit status. We want to discourage “line skipping” by grouping projects that are closer together in the Queue. We also want to encourage ease of construction and real-life operations by having projects in the same geography go online at similar times.
-        - **Infrastructure**: This captures the similarity of the project build types. For example, two solar projects can be studied under the same set of assumptions, which is more efficient than two projects of different types.
-        - **Overall**: The overall similarity score between the base project and the given project.
-            """
-        )
+        
         
         # when it is a list of dict 
         if isinstance(st.session_state.selected_rows,list) :
@@ -285,7 +261,7 @@ def main2():
                             st.subheader(str(st.session_state.cluster_summary_df.iat[0, ix]))
                             st.write(list(st.session_state.cluster_summary_df)[ix])
 
-                cluster_grid_return = AgGrid(st.session_state.associated_projects_df, columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
+                cluster_grid_return = AgGrid(st.session_state.associated_projects_df.iloc[:,[0,1,2,3,4,5]], columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
             with col2:
                 #st.markdown('''
                 #    :rainbow[Map Placeholder]''')
@@ -296,7 +272,8 @@ def main2():
                 centroid = get_points_centroid(st.session_state.associated_projects_df)
                 # display cluster in the map 
                 alt_chart = create_altair_charts_main2(basemap,st.session_state.associated_projects_df,centroid, selectedScale)
-                st.altair_chart(alt_chart, use_container_width=True)
+                with st.container(border=True):
+                    st.altair_chart(alt_chart, use_container_width=True)
         
         with stylable_container(
             key="clear_button",
@@ -308,4 +285,21 @@ def main2():
             """
         ):
             clear_button = st.button('Clear', on_click=reset_selection_cb)
+            
+        st.markdown(
+            """
+            Here we can see the high-level details of the cluster recommendation.
+        - **Cluster Score**: This tells you the strength of the cluster as a whole. It’s the average similarity score between the base project you selected above and all the other projects in the recommended cluster.
+        - **Total MegaWatts**: This metric gives us insight into the amount of infrastructure (transmission lines and/or storage) that would need to be built to accommodate this cluster.
+            - (Sum of MWs supplied to the grid for all projects in the cluster) - (Sum of available transmission capacity at each project’s proposed interconnect point)
+        - **Likelihood Score**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
+
+        The table above allows us to dig into the details of each project in the cluster. Similarity scores are calculated for different categories between the base project and all other projects. The most similar projects are included in the cluster. A higher number indicates a better similarity score. (See “Details - Overpowered’s Scoring Mechanism” for more information.)
+        - **Project Score**: 
+        - **Location**: This measures the geospatial proximity between two projects.
+        - **Process**: This summarizes the readiness of each project. It includes operational variables, such as the project’s position in the Queue, the date it's expected to go online, and its permit status. We want to discourage “line skipping” by grouping projects that are closer together in the Queue. We also want to encourage ease of construction and real-life operations by having projects in the same geography go online at similar times.
+        - **Infrastructure**: This captures the similarity of the project build types. For example, two solar projects can be studied under the same set of assumptions, which is more efficient than two projects of different types.
+        - **Overall**: The overall similarity score between the base project and the given project.
+            """
+        )
   

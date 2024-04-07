@@ -721,10 +721,11 @@ In short, our solution speeds up the Queue, provides flexibility, and reduces de
     - California Transmission Line GIS - https://gis.data.ca.gov/datasets/260b4513acdb4a3a8e4d64e69fc84fee/explore
     - California Power Plants GIS - https://gis.data.ca.gov/datasets/4a702cd67be24ae7ab8173423a768e1b_0/explore
     - County Population Centroids - https://www.census.gov/geographies/reference-files/time-series/geo/centers-population.html
+    - Powerflow simulation software used by ISOs
 
     """)
     
-    st.write("## Data Sources")
+    st.write("## Resources")
     st.markdown("""
     If you’re interested in learning more about the problems with the Interconnection Queue, give this podcast a listen (https://www.volts.wtf/p/whats-the-deal-with-interconnection).
     
