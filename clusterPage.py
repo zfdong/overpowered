@@ -54,6 +54,7 @@ def get_cluster(cluster_df, project_head, vis_df):
     return cluster_data_df, associated_projects_df
 
 def set_selection_cb(selected_rows_in, cluster_df, vis_df):
+    #st.write(selected_rows_in)
     if selected_rows_in:
         with st.spinner(text="In progress..."):
             st.session_state.selected_rows = selected_rows_in
@@ -209,6 +210,7 @@ def main2():
                 }            
             """
         ):
+            st.write(selected_rows)
             go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
 
                     
