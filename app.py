@@ -402,7 +402,7 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
         points = alt.Chart(coord_df).mark_point(
             shape = 'diamond',
             filled = True,
-            color='red',
+            color='#07f2ea',
             size=100
         ).encode(
             longitude='lon:Q',
@@ -472,14 +472,16 @@ def main():
     with tab1:
         main1()
 
+    with tab4:
+        main4()
+
     with tab2:
         main2()
 
     with tab3:
         main3()
         
-    with tab4:
-        main4()
+
 
 # home page     
 def main1():
@@ -560,19 +562,43 @@ Let’s get to a greener grid, faster.
     
 def main3():
 
-    st.write("## How to Use the Querying Map")
+    st.write("## Interactive Map")
+    st.markdown("""
+    Each application in the queue data indicates the county where the project is to be built. The application also briefly describes the station or transmission line it plans to connect to. Therefore, the interactive map allows the user to explore the available datasets (transmission lines, substations, retired power plants, and future infracture projects) by California counties. 
 
-    st.markdown("""Currently, the querying map only supports CAISO database. 
+    Here are some examples of using the interactive map:
+    - **Scenario 1**: The application indicates the transmission line it plans to connect to. The user can load the current queue and quickly find the shortest distance to the nearby transmission line. Additionally, the user can compare the proposed power with the remaining line capacity to determine if the transmission line has enough capacity for the application.   
+    - **Scenario 2**: The application includes a power storage unit. The user can load the current queue and the retired power plants to check the availability of the nearby plants as ideal storage units.
+    - **Scenario 3**: The project location of the application is far away from the existing infrastrucure. The user can load the current queue and the future infrastructure to determine if an infrastructure project is to be built near the site.   
+
+    Currently, the querying map only supports California database. 
+
     """)
 
+    st.write("### Available Datasets")
     st.markdown("""
-    1. To start with, choose a California county to zoom into. The county boundary is filled with "yellow" color.
+    - **US state boundaries**: base map filled in gray color
+    - **California county boundaries**: base map filled in yellow color
+    - **California transmission lines**: base map lines in blue color. The transmission lines are labeled by their names and simulated remaining capacity. Hover over a transmission line to view.
+    - **Additional datasets**
+        - **California substations**: add-on points in "red triangle". The substations are labeled by their names. Hover over a substation to view. 
+        - **Retired power plants**: add-on points in "black cross". The retired power plants are labeled by their names and dates of retirement. Hover over a plant to view.  
+        - **Current queue**: add-on points in "green diamond". The queue applications are labeled by their names and station/transmission line to connect to. Hover over an application to view. 
+        - **Future infrastructure**: add-on points in "purple circle". The future infrastructure projects are labeled by their names. Hover over an infrastructure project to view. 
+    - **User-specified location**: add-on point in "cyan diamond". The user-specified point allows users to hand-pick a project location and explore the nearby resources.  
+    """)
+    
+    st.write("### How to Use")
+    st.markdown("""
+    1. To start with, choose a California county to view. The selected county is filled with "yellow" color.
 
-    2. Select a zoom-in scale to display the transmission lines in "blue" color.
+    2. Select a zoom-in scale to adjust the view as needed. 
 
-    3. Choose an extra data layer to display. The available data layers are substations ('red triangle'), retired power plants ('black cross') and queue data ('green diamond').
+    3. Choose an additional data layer to display. The available data layers are substations ('red triangle'), retired power plants ('black cross'), queue data ('green diamond') and future infrastructure ('purple circle').
 
-    4. This is optional. User can enter a location coordinate by latitude and longitude. The location will be added to plots as "red diamond"
+    4. Download the table of selected data layer as needed. 
+
+    5. This step is optional. User can enter a coordinate by latitude and longitude. The location will be displayed as "cyan diamond" on the map. 
     """)
     
     ## Load Data from Main()
@@ -609,6 +635,12 @@ def main3():
     
     # convert dataframe to geojson for standard processing
     queue_geojson = df_to_geojson(queue_df, plants_geojson["crs"], lat_col='GIS Lat', lon_col='GIS Long')
+
+    
+    # load future infrastructure dataset
+    infra_df = load_csv('data/caiso_future_transmission.csv')
+    # convert dataframe to geojson for standard processing
+    infra_geojson = df_to_geojson(infra_df, plants_geojson["crs"], lat_col='GIS Lat', lon_col='GIS Long')    
     
     # split display
     col1, col2 = st.columns([1, 4])
@@ -620,7 +652,7 @@ def main3():
     index_scale = scale_list.index(17500)
     # create list of extra dataset to add
     #extra_data_list = ['None','Substations','Power Plants','Retired Generators']
-    extra_data_list = ['None','Substations','Retired Power Plants','Current Queue']
+    extra_data_list = ['None','Substations','Retired Power Plants','Current Queue','Future Infrastructure']
     index_extra = 0
 
     with col1:
@@ -633,8 +665,8 @@ def main3():
 
         # Input widgets for longitude and latitude
         st.write("**Enter a location:**")
-        latitude = st.number_input("**Latitude:**", value=999.00, format="%.2f")
-        longitude = st.number_input("**Longitude:**", value=999.00, format="%.2f")
+        latitude = st.number_input("**Latitude:**", value=37.60, format="%.2f")
+        longitude = st.number_input("**Longitude:**", value=-121.90, format="%.2f")
         # Create a DataFrame with the input coordinates
         coord_df = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
 
@@ -691,6 +723,11 @@ def main3():
             disp_shape = 'diamond'
             disp_color = 'green'
             property_name = 'properties_Display Name:N'
+        elif selectedExtra == 'Future Infrastructure' : 
+            points_data = extract_points_within_county(infra_geojson, county_data)
+            disp_shape = 'circle'
+            disp_color = '#ee07f2'
+            property_name = 'properties_CAISO Transmission:N'        
         else :
             points_data = None
             property_name = 'None'
