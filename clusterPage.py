@@ -36,9 +36,14 @@ def load_excel(path, sheetname):
 def load_json(path):
     return pd.read_json(path)
     
-
+def safe_round(val, precision = 4):
+    try:
+        return round(val, precision)
+    except:
+        return val
+      
 @st.cache_data # This function will be cached
-def get_cluster(cluster_df, project_head, vis_df):
+def get_cluster(cluster_df, project_head, vis_df, weight_list):
     if project_head  in cluster_df["ProjectHead"].values:
         new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
         # add lat/lon to displayed table
@@ -47,36 +52,43 @@ def get_cluster(cluster_df, project_head, vis_df):
         #st.write(new_df)
         # only select the first three columns in the summary, ignore the geolocations 
         cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == project_head]["Summary"].iloc[0]).iloc[:,[0,1,2]]
-        # round the cluster strength, net transmission capacity, likelyhood of approval
-        cluster_data_df['Cluster Strength'] = cluster_data_df['Cluster Strength'].round(4)
-        cluster_data_df['Net Transmission Capacity'] = cluster_data_df['Net Transmission Capacity'].round(1)
-        cluster_data_df['Likelihood of Approval'] = cluster_data_df['Likelihood of Approval'].round(4)
+        cluster_data_df.fillna(value=0, inplace=True)
         
         associated_projects_df = new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
         associated_projects_df = associated_projects_df[["Project", "Likelihood Of Approval", "Location", "Process", "Infrastructure", "Overall","Gis Lat", "Gis Long", 'Type-1']]
+        associated_projects_df.fillna(value=0, inplace=True)
+        # Scale values
+        scaled_weights = [x/sum(weight_list) for x in weight_list]
+        associated_projects_df['Overall'] = associated_projects_df[["Likelihood Of Approval", "Location", "Process", "Infrastructure"]].mul(scaled_weights, axis=1).sum(axis=1)
+        cluster_data_df["Cluster Strength"] = associated_projects_df['Overall'].mean()
+        
         # round Likelyhood of Approval, location, process, overall
         associated_projects_df['Likelihood Of Approval'] = associated_projects_df['Likelihood Of Approval'].round(4)
         associated_projects_df['Location'] = associated_projects_df['Location'].round(4)
         associated_projects_df['Process'] = associated_projects_df['Process'].round(4)
         associated_projects_df['Overall'] = associated_projects_df['Overall'].round(4)
+        # round the cluster strength, net transmission capacity, likelyhood of approval
+        cluster_data_df['Cluster Strength'] = safe_round(cluster_data_df['Cluster Strength'])
+        cluster_data_df['Net Transmission Capacity'] = safe_round(cluster_data_df['Net Transmission Capacity'], 1)
+        cluster_data_df['Likelihood of Approval'] = safe_round(cluster_data_df['Likelihood of Approval'])
         
     else:
         cluster_data_df = pd.DataFrame({})
         associated_projects_df = pd.DataFrame({})
     return cluster_data_df, associated_projects_df
 
-def set_selection_cb(selected_rows_in, cluster_df, vis_df):
+def set_selection_cb(selected_rows_in, cluster_df, vis_df, weight_list = [0.25,0.25,0.25,0.25]):
     # in local python, selected_rows_in is a list, however on streamlit, it is pd df 
     if isinstance(selected_rows_in, list) :
         # for list 
         if selected_rows_in:
             st.session_state.selected_rows = selected_rows_in
-            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df)
+            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df, weight_list)
     else :
         # for pandas dataframe 
         if not selected_rows_in.empty:
             st.session_state.selected_rows = selected_rows_in
-            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"].iloc[0], vis_df)
+            st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"].iloc[0], vis_df, weight_list)
             
 
 def reset_selection_cb():
@@ -234,10 +246,10 @@ def main2():
             #st.write(type(selected_rows))
             if not isinstance(selected_rows, list) :
                 # for pandas data frame type
-                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= selected_rows.empty)
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= selected_rows.empty)
             else :
                 # for list type 
-                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df), disabled= not selected_rows)
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= not selected_rows)
                     
     else:
         
