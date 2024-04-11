@@ -45,9 +45,21 @@ def get_cluster(cluster_df, project_head, vis_df):
         new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long', 'Type-1']], left_on='Project',  right_on='Project Name', how='left')
         new_df = new_df.drop(columns=['Project Name'])
         #st.write(new_df)
-        cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == project_head]["Summary"].iloc[0])
+        # only select the first three columns in the summary, ignore the geolocations 
+        cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == project_head]["Summary"].iloc[0]).iloc[:,[0,1,2]]
+        # round the cluster strength, net transmission capacity, likelyhood of approval
+        cluster_data_df['Cluster Strength'] = cluster_data_df['Cluster Strength'].round(4)
+        cluster_data_df['Net Transmission Capacity'] = cluster_data_df['Net Transmission Capacity'].round(1)
+        cluster_data_df['Likelihood of Approval'] = cluster_data_df['Likelihood of Approval'].round(4)
+        
         associated_projects_df = new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
-        associated_projects_df = associated_projects_df[["Project", "Project Score", "Location", "Process", "Infrastructure", "Overall","Gis Lat", "Gis Long", 'Type-1']]
+        associated_projects_df = associated_projects_df[["Project", "Likelihood Of Approval", "Location", "Process", "Infrastructure", "Overall","Gis Lat", "Gis Long", 'Type-1']]
+        # round Likelyhood of Approval, location, process, overall
+        associated_projects_df['Likelihood Of Approval'] = associated_projects_df['Likelihood Of Approval'].round(4)
+        associated_projects_df['Location'] = associated_projects_df['Location'].round(4)
+        associated_projects_df['Process'] = associated_projects_df['Process'].round(4)
+        associated_projects_df['Overall'] = associated_projects_df['Overall'].round(4)
+        
     else:
         cluster_data_df = pd.DataFrame({})
         associated_projects_df = pd.DataFrame({})
@@ -96,7 +108,7 @@ def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
     center = in_center
     scale = in_scale
 
-    width = 600
+    width = 300
     height = 600
 
     # Layering and configuring the components
@@ -164,7 +176,7 @@ def main2():
     options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
     grid_options = options_builder.build()
     
-    cluster_df = load_json("corrected_projects_clusters.json")
+    cluster_df = load_json("almost_final_clusters.json")
 
   
     if check_list_or_df_empty(st.session_state.selected_rows) :
