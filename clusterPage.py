@@ -317,7 +317,7 @@ def main2():
                             st.subheader(str(st.session_state.cluster_summary_df.iat[0, ix]))
                             st.write(list(st.session_state.cluster_summary_df)[ix])
 
-                cluster_grid_return = AgGrid(st.session_state.associated_projects_df, columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
+                cluster_grid_return = AgGrid(st.session_state.associated_projects_df.iloc[:,0:6], columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
             with col2:
                 #st.markdown('''
                 #    :rainbow[Map Placeholder]''')
@@ -348,10 +348,10 @@ def main2():
         - **Cluster Score**: This tells you the strength of the cluster as a whole. It’s the average similarity score between the base project you selected above and all the other projects in the recommended cluster.
         - **Total MegaWatts**: This metric gives us insight into the amount of infrastructure (transmission lines and/or storage) that would need to be built to accommodate this cluster.
             - (Sum of MWs supplied to the grid for all projects in the cluster) - (Sum of available transmission capacity at each project’s proposed interconnect point)
-        - **Likelihood Score**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
+        - **Likelihood of Approval**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
 
         The table above allows us to dig into the details of each project in the cluster. Similarity scores are calculated for different categories between the base project and all other projects. The most similar projects are included in the cluster. A higher number indicates a better similarity score. (See “Details - Overpowered’s Scoring Mechanism” for more information.)
-        - **Project Score**: This is the likelihood that a given project would succeed independent of the rest of the cluster, based on past project applications.
+        - **Likelihood of Approval**: This is the likelihood that a given project would succeed independent of the rest of the cluster, based on past project applications.
         - **Location**: This measures the geospatial proximity between two projects.
         - **Process**: This summarizes the readiness of each project. It includes operational variables, such as the project’s position in the Queue, the date it's expected to go online, and its permit status. We want to discourage “line skipping” by grouping projects that are closer together in the Queue. We also want to encourage ease of construction and real-life operations by having projects in the same geography go online at similar times.
         - **Infrastructure**: This captures the similarity of the project build types. For example, two solar projects can be studied under the same set of assumptions, which is more efficient than two projects of different types.
