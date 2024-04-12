@@ -47,23 +47,22 @@ def get_cluster(cluster_df, project_head, vis_df, weight_list):
     if project_head  in cluster_df["ProjectHead"].values:
         new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
         # add lat/lon to displayed table
-        new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long', 'Type-1']], left_on='Project',  right_on='Project Name', how='left')
+        new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long', 'Type-1', 'Net MWs to Grid']], left_on='Project',  right_on='Project Name', how='left')
         new_df = new_df.drop(columns=['Project Name'])
         #st.write(new_df)
         # only select the first three columns in the summary, ignore the geolocations 
         cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == project_head]["Summary"].iloc[0]).iloc[:,[0,1,2]]
         cluster_data_df.fillna(value=0, inplace=True)
         
-        associated_projects_df = new_df.rename(columns=dict(zip(new_df.columns, [c.title() for c in new_df.columns])))
-        associated_projects_df = associated_projects_df[["Project", "Likelihood Of Approval", "Location", "Process", "Infrastructure", "Overall","Gis Lat", "Gis Long", 'Type-1']]
+        associated_projects_df = new_df[["Project",'Net MWs to Grid', "Likelihood of Approval", "Location", "Process", "Infrastructure", "Overall","GIS Lat", "GIS Long", 'Type-1']]
         associated_projects_df.fillna(value=0, inplace=True)
         # Scale values
         scaled_weights = [x/sum(weight_list) for x in weight_list]
-        associated_projects_df['Overall'] = associated_projects_df[["Likelihood Of Approval", "Location", "Process", "Infrastructure"]].mul(scaled_weights, axis=1).sum(axis=1)
+        associated_projects_df['Overall'] = associated_projects_df[["Likelihood of Approval", "Location", "Process", "Infrastructure"]].mul(scaled_weights, axis=1).sum(axis=1)
         cluster_data_df["Cluster Strength"] = associated_projects_df['Overall'].mean()
         
         # round Likelyhood of Approval, location, process, overall
-        associated_projects_df['Likelihood Of Approval'] = associated_projects_df['Likelihood Of Approval'].round(4)
+        associated_projects_df['Likelihood of Approval'] = associated_projects_df['Likelihood of Approval'].round(4)
         associated_projects_df['Location'] = associated_projects_df['Location'].round(4)
         associated_projects_df['Process'] = associated_projects_df['Process'].round(4)
         associated_projects_df['Overall'] = associated_projects_df['Overall'].round(4)
@@ -98,7 +97,7 @@ def reset_selection_cb():
 
 def get_points_centroid(in_df) :
     
-    return in_df['Gis Long'].mean(), in_df['Gis Lat'].mean()
+    return in_df['GIS Long'].mean(), in_df['GIS Lat'].mean()
 
 def check_list_or_df_empty(in_var) :
     # check if list is empty, value is none or pandas df is empty
@@ -112,7 +111,7 @@ def check_list_or_df_empty(in_var) :
     else :
         return in_var.empty
 
-def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
+def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale, project_head) :
     # prepare for altair display 
     #ca_counties = alt.Data(values=county_geojson)
 
@@ -145,22 +144,29 @@ def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale) :
     alt_chart = geo_chart
 
     # add extra points data only when data is selected and there are points within county boundary
+    # combine project head with cluster
+    map_points_df = data_tmp
+    map_points_df['is_project_head'] = 0
+    project_head = project_head.rename(columns=dict(zip(project_head.columns, [c.title() for c in project_head.columns])))
+    project_head['is_project_head'] = 1
+    project_head.rename(columns={"Project Name": "Project", "Gis Long": "GIS Long", "Gis Lat": "GIS Lat"}, inplace=True)
+    map_points_df = pd.concat([map_points_df[['Project', 'GIS Long', 'GIS Lat', 'Type-1', 'is_project_head']], project_head[['Project', 'GIS Long', 'GIS Lat', 'Type-1', 'is_project_head']]])
     
-    if data_tmp is not None:
-        extra_points = alt.Chart(data_tmp).mark_point(
-            shape = 'diamond',
+    
+    if map_points_df is not None:
+        extra_points = alt.Chart(map_points_df).mark_point(
             filled = True,
-            size=100
+            opacity = 0.5
         ).encode(
-            longitude='Gis Long:Q',
-            latitude='Gis Lat:Q',
+            longitude='GIS Long:Q',
+            latitude='GIS Lat:Q',
             tooltip='Project:N',
-            color=alt.Color('Type-1:N'),
+            size = alt.Size('is_project_head:N').scale(domain=[0, 1], range=[100, 400]),
+            shape = alt.Shape('is_project_head:N', legend=None).scale(domain=[0, 1], range=['circle', 'cross']),
+            color= alt.Color('Type-1:N').scale(domain=['Photovoltaic', 'Wind Turbine', 'Storage', 'Steam Turbine', 'Hydro', 'Gas Turbine', 'Solar Thermal', 'Combined Cycle'], range=['gold', '#0FD00B', '#252523', 'red', 'blue', '#D52EEE', '#0884C6', 'green'])
         )
 
         alt_chart = geo_chart + extra_points
-    
-
     
     return alt_chart
 
@@ -188,9 +194,8 @@ def main2():
     options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
     grid_options = options_builder.build()
     
-    cluster_df = load_json("almost_final_clusters.json")
-
-  
+    cluster_df = load_json("almost_final_clusters.json")  
+    
     if check_list_or_df_empty(st.session_state.selected_rows) :
         st.subheader("Let’s get to clustering!")
 
@@ -214,11 +219,11 @@ def main2():
                 st.write('***Assign relative weights***')
                 col1, col2 = st.columns(2)
                 with col1:
-                    w1 = st.number_input(label="Location", value = 0.25)
-                    w2 = st.number_input(label="Process", value = 0.25)
+                    w1 = st.number_input(label="Location", value = 1)
+                    w2 = st.number_input(label="Process", value = 1)
                 with col2:
-                    w3 = st.number_input(label="Infrastructure", value = 0.25)
-                    w4 = st.number_input(label="Project Score", value = 0.25)
+                    w3 = st.number_input(label="Infrastructure", value = 1)
+                    w4 = st.number_input(label="Project Score", value = 1)
 
         st.subheader("Pick a Project")
         st.markdown(
@@ -263,9 +268,38 @@ def main2():
         if st.session_state.associated_projects_df.empty:
             st.markdown(''':red[No Cluster found]''', unsafe_allow_html=True)
         else:
-            col1, col2 = st.columns(2)
-            with col1:
+            
                 
+            col1, col2 = st.columns([3, 2])
+        
+            with col1:
+                with st.expander("Set Parameters"):
+                    st.write('***Assign relative weights***')
+                    c1, c2 = st.columns(2)
+                    with c1:
+                        w1 = st.number_input(label="Location", value = 1)
+                        w2 = st.number_input(label="Process", value = 1)
+                        
+                    with c2:
+                        w3 = st.number_input(label="Infrastructure", value = 1)
+                        w4 = st.number_input(label="Project Score", value = 1)
+                    with stylable_container(
+                        key="go_button",
+                        css_styles= """
+                            button {
+                                background-color: green;
+                                color: white;
+                                border-color: green;
+                            }            
+                        """
+                    ):
+                        
+                        if not isinstance(st.session_state.selected_rows, list) :
+                            # for pandas data frame type
+                            rerun_button = st.button('Rerun', on_click=set_selection_cb(st.session_state.selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= st.session_state.selected_rows.empty)
+                        else :
+                            # for list type 
+                            rerun_button = st.button('Rerun', on_click=set_selection_cb(st.session_state.selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= not st.session_state.selected_rows)
                 row = st.columns(len(list(st.session_state.cluster_summary_df)))
                 for ix, col in enumerate(row):
                     with col:
@@ -283,7 +317,7 @@ def main2():
                             st.subheader(str(st.session_state.cluster_summary_df.iat[0, ix]))
                             st.write(list(st.session_state.cluster_summary_df)[ix])
 
-                cluster_grid_return = AgGrid(st.session_state.associated_projects_df.iloc[:,[0,1,2,3,4,5]], columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
+                cluster_grid_return = AgGrid(st.session_state.associated_projects_df, columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
             with col2:
                 #st.markdown('''
                 #    :rainbow[Map Placeholder]''')
@@ -293,7 +327,7 @@ def main2():
                 # get centroid coordinates
                 centroid = get_points_centroid(st.session_state.associated_projects_df)
                 # display cluster in the map 
-                alt_chart = create_altair_charts_main2(basemap,st.session_state.associated_projects_df,centroid, selectedScale)
+                alt_chart = create_altair_charts_main2(basemap,st.session_state.associated_projects_df,centroid, selectedScale, pd.DataFrame(st.session_state.selected_rows))
                 with st.container(border=True):
                     st.altair_chart(alt_chart, use_container_width=True)
         
@@ -317,7 +351,7 @@ def main2():
         - **Likelihood Score**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
 
         The table above allows us to dig into the details of each project in the cluster. Similarity scores are calculated for different categories between the base project and all other projects. The most similar projects are included in the cluster. A higher number indicates a better similarity score. (See “Details - Overpowered’s Scoring Mechanism” for more information.)
-        - **Project Score**: 
+        - **Project Score**: This is the likelihood that a given project would succeed independent of the rest of the cluster, based on past project applications.
         - **Location**: This measures the geospatial proximity between two projects.
         - **Process**: This summarizes the readiness of each project. It includes operational variables, such as the project’s position in the Queue, the date it's expected to go online, and its permit status. We want to discourage “line skipping” by grouping projects that are closer together in the Queue. We also want to encourage ease of construction and real-life operations by having projects in the same geography go online at similar times.
         - **Infrastructure**: This captures the similarity of the project build types. For example, two solar projects can be studied under the same set of assumptions, which is more efficient than two projects of different types.
