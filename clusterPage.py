@@ -247,12 +247,16 @@ def main2():
             """
         ):
             #st.write(type(selected_rows))
-            if not isinstance(selected_rows, list) :
-                # for pandas data frame type
-                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= selected_rows.empty)
-            else :
+            if isinstance(selected_rows, list):
                 # for list type 
                 go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= not selected_rows)
+            
+            elif isinstance(selected_rows, pd.DataFrame):
+                # for pandas data frame type
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= selected_rows.empty)
+            else:
+                go_button = st.button('Go', disabled= True)
+                
                     
     else:
         
