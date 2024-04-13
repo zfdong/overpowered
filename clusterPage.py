@@ -83,12 +83,15 @@ def set_selection_cb(selected_rows_in, cluster_df, vis_df, weight_list = [0.25,0
         if selected_rows_in:
             st.session_state.selected_rows = selected_rows_in
             st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows[0]["Project Name"], vis_df, weight_list)
-    else :
+    elif isinstance(selected_rows_in, pd.DataFrame) :
         # for pandas dataframe 
         if not selected_rows_in.empty:
             st.session_state.selected_rows = selected_rows_in
             st.session_state.cluster_summary_df, st.session_state.associated_projects_df = get_cluster(cluster_df, st.session_state.selected_rows["Project Name"].iloc[0], vis_df, weight_list)
-            
+    else:
+        st.session_state.selected_rows = None
+        st.session_state.cluster_summary_df = pd.DataFrame({})
+        st.session_state.associated_projects_df = pd.DataFrame({})
 
 def reset_selection_cb():
     st.session_state.selected_rows = None
@@ -178,12 +181,6 @@ def main2():
     # CA counties map 
     #california_counties_geojson = load_geojson('data/California_County_Boundaries.geojson')
     
-##    # load queue data and assign column name to the first column 
-##    full_queue_df = load_excel('data/Caiso Queue Data.xlsx', 'Grid GenerationQueue')
-##    full_queue_df.rename(columns={full_queue_df.columns[0]: 'Project Name'}, inplace=True)
-##    # only keep selected columns 
-##    column_ixs_to_keep = [0, 1, 2, 6, 7, 9, 15, 19, 23, 25, 27, 29, 31, 32, 33, 34, 35]
-
     # need to load csv with lat/lon cooridnates 
     full_queue_df = load_csv('data/new_caiso_queue_MW.csv')
     column_ixs_to_keep = [0, 1, 2, 5, 6, 8, 14, 18, 22, 24, 26, 28, 30, 31, 32, 33, 34, 37, 38]
@@ -359,5 +356,4 @@ def main2():
         - **Overall**: The overall similarity score between the base project and the given project.
             """
         )
-    st.write(isinstance(selected_rows, list))
   
