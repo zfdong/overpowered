@@ -196,6 +196,7 @@ def main2():
     
     cluster_df = load_json("almost_final_clusters.json")  
     
+    
     if check_list_or_df_empty(st.session_state.selected_rows) :
         st.subheader("Let’s get to clustering!")
 
@@ -358,4 +359,5 @@ def main2():
         - **Overall**: The overall similarity score between the base project and the given project.
             """
         )
+    st.write(isinstance(selected_rows, list))
   
