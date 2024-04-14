@@ -64,7 +64,7 @@ def get_cluster(cluster_df, project_head, vis_df, weight_list, threshold = 0.6):
         associated_projects_df = associated_projects_df[associated_projects_df['Overall'] > threshold].sort_values(by=['Overall', 'Likelihood of Approval'], ascending=False)
         
         cluster_data_df["Cluster Strength"] = associated_projects_df['Overall'].mean()
-        
+        cluster_data_df["Likelihood of Approval"] = associated_projects_df['Likelihood of Approval'].mean()
         # round Likelyhood of Approval, location, process, overall
         associated_projects_df['Likelihood of Approval'] = associated_projects_df['Likelihood of Approval'].round(4)
         associated_projects_df['Location'] = associated_projects_df['Location'].round(4)
