@@ -197,6 +197,7 @@ def main2():
     
     cluster_df = load_json("final_clusters_still_nan.json")  
     
+    st.write(type(st.session_state.selected_rows))
     
     if check_list_or_df_empty(st.session_state.selected_rows) :
         st.subheader("Let’s get to clustering!")
