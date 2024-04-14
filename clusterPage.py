@@ -47,15 +47,15 @@ def get_cluster(cluster_df, project_head, vis_df, weight_list, threshold = 0.6):
     if project_head  in cluster_df["ProjectHead"].values:
         new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
         # add lat/lon to displayed table
-        new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long', 'Type-1', 'Net MWs to Grid']], left_on='Project',  right_on='Project Name', how='left')
+        new_df = pd.merge(new_df, vis_df[['Project Name', 'GIS Lat', 'GIS Long', 'Type-1', 'Net MWs to Grid', 'Remain_MW']], left_on='Project',  right_on='Project Name', how='left')
         new_df = new_df.drop(columns=['Project Name'])
         #st.write(new_df)
         # only select the first three columns in the summary, ignore the geolocations 
         cluster_data_df = pd.json_normalize(cluster_df[cluster_df["ProjectHead"] == project_head]["Summary"].iloc[0]).iloc[:,[0,1,2]]
         cluster_data_df.fillna(value=0, inplace=True)
         
-        associated_projects_df = new_df[["Project",'Net MWs to Grid', "Likelihood of Approval", "Location", "Process", "Infrastructure", "Overall","GIS Lat", "GIS Long", 'Type-1']]
-        associated_projects_df.fillna(value=0, inplace=True)
+        associated_projects_df = new_df[["Project",'Net MWs to Grid', "Likelihood of Approval", "Location", "Process", "Infrastructure", "Overall","GIS Lat", "GIS Long", 'Type-1', 'Remain_MW']]
+        associated_projects_df.fillna(value=associated_projects_df['Likelihood of Approval'].mean(), inplace=True)
         # Scale values
         scaled_weights = [x/sum(weight_list) for x in weight_list]
         associated_projects_df['Overall'] = associated_projects_df[["Likelihood of Approval", "Location", "Process", "Infrastructure"]].mul(scaled_weights, axis=1).sum(axis=1)
@@ -65,6 +65,8 @@ def get_cluster(cluster_df, project_head, vis_df, weight_list, threshold = 0.6):
         
         cluster_data_df["Cluster Strength"] = associated_projects_df['Overall'].mean()
         cluster_data_df["Likelihood of Approval"] = associated_projects_df['Likelihood of Approval'].mean()
+        cluster_data_df['Net Transmission Capacity'] = associated_projects_df['Net MWs to Grid'].sum() - associated_projects_df['Remain_MW'].sum()
+        
         # round Likelyhood of Approval, location, process, overall
         associated_projects_df['Likelihood of Approval'] = associated_projects_df['Likelihood of Approval'].round(4)
         associated_projects_df['Location'] = associated_projects_df['Location'].round(4)
@@ -187,7 +189,7 @@ def main2():
     
     # need to load csv with lat/lon cooridnates 
     full_queue_df = load_csv('data/new_caiso_queue_MW.csv')
-    column_ixs_to_keep = [0, 1, 2, 5, 6, 8, 14, 18, 22, 24, 26, 28, 30, 31, 32, 33, 34, 37, 38]
+    column_ixs_to_keep = [0, 1, 2, 5, 6, 8, 14, 18, 22, 24, 26, 28, 30, 31, 32, 33, 34, 37, 38, 50]
     visible_df = full_queue_df.iloc[:, column_ixs_to_keep]
     
     options_builder = GridOptionsBuilder.from_dataframe(visible_df)
@@ -225,7 +227,7 @@ def main2():
                     w2 = st.number_input(label="Process", value = st.session_state.w2)
                 with col2:
                     w3 = st.number_input(label="Infrastructure", value = st.session_state.w3)
-                    w4 = st.number_input(label="Project Score", value = st.session_state.w4)
+                    w4 = st.number_input(label="Likelihood of Approval", value = st.session_state.w4)
 
         st.subheader("Pick a Project")
         st.markdown(
@@ -298,7 +300,7 @@ def main2():
                         
                     with c2:
                         w3 = st.number_input(label="Infrastructure", value = st.session_state.w3)
-                        w4 = st.number_input(label="Project Score", value = st.session_state.w4)
+                        w4 = st.number_input(label="Likelihood of Approval", value = st.session_state.w4)
                     with stylable_container(
                         key="rerun_button_ct",
                         css_styles= """
