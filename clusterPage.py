@@ -346,7 +346,11 @@ def main2():
                 # get centroid coordinates
                 centroid = get_points_centroid(st.session_state.associated_projects_df)
                 # display cluster in the map 
-                alt_chart = create_altair_charts_main2(basemap,st.session_state.associated_projects_df,centroid, selectedScale, pd.DataFrame(st.session_state.selected_rows))
+                if isinstance(st.session_state.selected_rows,list) :
+                    alt_chart = create_altair_charts_main2(basemap,st.session_state.associated_projects_df,centroid, selectedScale, pd.DataFrame(st.session_state.selected_rows))
+                else:
+                    alt_chart = create_altair_charts_main2(basemap,st.session_state.associated_projects_df,centroid, selectedScale, st.session_state.selected_rows)
+                
                 with st.container(border=True):
                     st.altair_chart(alt_chart, use_container_width=True)
         
