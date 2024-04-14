@@ -168,9 +168,9 @@ def create_altair_charts_main2(basemap, data_tmp, in_center, in_scale, project_h
             longitude='GIS Long:Q',
             latitude='GIS Lat:Q',
             tooltip='Project:N',
-            size = alt.Size('is_project_head:N').scale(domain=[0, 1], range=[100, 400]),
-            shape = alt.Shape('is_project_head:N', legend=None).scale(domain=[0, 1], range=['circle', 'cross']),
-            color= alt.Color('Type-1:N').scale(domain=['Photovoltaic', 'Wind Turbine', 'Storage', 'Steam Turbine', 'Hydro', 'Gas Turbine', 'Solar Thermal', 'Combined Cycle'], range=['gold', '#0FD00B', '#252523', 'red', 'blue', '#D52EEE', '#0884C6', 'green'])
+            size = alt.Size('is_project_head:N', scale=alt.Scale(domain=[0, 1], range=[100, 400])),
+            shape = alt.Shape('is_project_head:N', legend=None, scale=alt.Scale(domain=[0, 1], range=['circle', 'cross'])),
+            color= alt.Color('Type-1:N', scale = alt.Scale(domain=['Photovoltaic', 'Wind Turbine', 'Storage', 'Steam Turbine', 'Hydro', 'Gas Turbine', 'Solar Thermal', 'Combined Cycle'], range=['gold', '#0FD00B', '#252523', 'red', 'blue', '#D52EEE', '#0884C6', 'green']))
         )
 
         alt_chart = geo_chart + extra_points
@@ -197,7 +197,7 @@ def main2():
     
     cluster_df = load_json("final_clusters_still_nan.json")  
     
-    st.write(alt.__version__)
+    # st.write(alt.__version__)
     if check_list_or_df_empty(st.session_state.selected_rows) :
         st.subheader("Let’s get to clustering!")
 
