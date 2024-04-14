@@ -339,7 +339,7 @@ def main2():
             with col2:
                 #st.markdown('''
                 #    :rainbow[Map Placeholder]''')
-                scale_list = list(range(1000,5000,500))
+                scale_list = list(range(1000,25000,1000))
                 index_scale = scale_list.index(2000)
                 selectedScale = st.selectbox("Choose a Zoom-In Scale to Display: ", scale_list, index_scale, key='scale2')
                 # get centroid coordinates
