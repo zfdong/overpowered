@@ -38,6 +38,12 @@ if 'cluster_summary_df' not in st.session_state:
     
 if 'associated_projects_df' not in st.session_state:
     st.session_state.associated_projects_df = pd.DataFrame({})
+    
+if 'w1' not in st.session_state:
+    st.session_state.w1 = 1
+    st.session_state.w2 = 1
+    st.session_state.w3 = 1
+    st.session_state.w4 = 1
 
 
 

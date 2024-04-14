@@ -43,7 +43,7 @@ def safe_round(val, precision = 4):
         return val
       
 @st.cache_data # This function will be cached
-def get_cluster(cluster_df, project_head, vis_df, weight_list):
+def get_cluster(cluster_df, project_head, vis_df, weight_list, threshold = 0.6):
     if project_head  in cluster_df["ProjectHead"].values:
         new_df = pd.DataFrame.from_dict(cluster_df[cluster_df["ProjectHead"] == project_head]["Cluster"].iloc[0])
         # add lat/lon to displayed table
@@ -59,6 +59,10 @@ def get_cluster(cluster_df, project_head, vis_df, weight_list):
         # Scale values
         scaled_weights = [x/sum(weight_list) for x in weight_list]
         associated_projects_df['Overall'] = associated_projects_df[["Likelihood of Approval", "Location", "Process", "Infrastructure"]].mul(scaled_weights, axis=1).sum(axis=1)
+        
+        # Filter above threshold
+        associated_projects_df = associated_projects_df[associated_projects_df['Overall'] > threshold].sort_values(by=['Overall', 'Likelihood of Approval'], ascending=False)
+        
         cluster_data_df["Cluster Strength"] = associated_projects_df['Overall'].mean()
         
         # round Likelyhood of Approval, location, process, overall
@@ -191,7 +195,7 @@ def main2():
     options_builder.configure_pagination(paginationPageSize=10, paginationAutoPageSize=False)
     grid_options = options_builder.build()
     
-    cluster_df = load_json("almost_final_clusters.json")  
+    cluster_df = load_json("final_clusters_still_nan.json")  
     
     
     if check_list_or_df_empty(st.session_state.selected_rows) :
@@ -217,11 +221,11 @@ def main2():
                 st.write('***Assign relative weights***')
                 col1, col2 = st.columns(2)
                 with col1:
-                    w1 = st.number_input(label="Location", value = 1)
-                    w2 = st.number_input(label="Process", value = 1)
+                    w1 = st.number_input(label="Location", value = st.session_state.w1)
+                    w2 = st.number_input(label="Process", value = st.session_state.w2)
                 with col2:
-                    w3 = st.number_input(label="Infrastructure", value = 1)
-                    w4 = st.number_input(label="Project Score", value = 1)
+                    w3 = st.number_input(label="Infrastructure", value = st.session_state.w3)
+                    w4 = st.number_input(label="Project Score", value = st.session_state.w4)
 
         st.subheader("Pick a Project")
         st.markdown(
@@ -249,11 +253,21 @@ def main2():
             #st.write(type(selected_rows))
             if isinstance(selected_rows, list):
                 # for list type 
-                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= not selected_rows)
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [st.session_state.w4, st.session_state.w1, st.session_state.w2, st.session_state.w3]), disabled= not selected_rows)
+                if go_button:
+                    st.session_state.w1 = w1
+                    st.session_state.w2 = w2
+                    st.session_state.w3 = w3
+                    st.session_state.w4 = w4
             
             elif isinstance(selected_rows, pd.DataFrame):
                 # for pandas data frame type
-                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= selected_rows.empty)
+                go_button = st.button('Go', on_click=set_selection_cb(selected_rows, cluster_df, visible_df, [st.session_state.w4, st.session_state.w1, st.session_state.w2, st.session_state.w3]), disabled= selected_rows.empty)
+                if go_button:
+                    st.session_state.w1 = w1
+                    st.session_state.w2 = w2
+                    st.session_state.w3 = w3
+                    st.session_state.w4 = w4
             else:
                 go_button = st.button('Go', disabled= True)
                 
@@ -279,14 +293,14 @@ def main2():
                     st.write('***Assign relative weights***')
                     c1, c2 = st.columns(2)
                     with c1:
-                        w1 = st.number_input(label="Location", value = 1)
-                        w2 = st.number_input(label="Process", value = 1)
+                        w1 = st.number_input(label="Location", value = st.session_state.w1)
+                        w2 = st.number_input(label="Process", value = st.session_state.w2)
                         
                     with c2:
-                        w3 = st.number_input(label="Infrastructure", value = 1)
-                        w4 = st.number_input(label="Project Score", value = 1)
+                        w3 = st.number_input(label="Infrastructure", value = st.session_state.w3)
+                        w4 = st.number_input(label="Project Score", value = st.session_state.w4)
                     with stylable_container(
-                        key="go_button",
+                        key="rerun_button_ct",
                         css_styles= """
                             button {
                                 background-color: green;
@@ -296,12 +310,14 @@ def main2():
                         """
                     ):
                         
-                        if not isinstance(st.session_state.selected_rows, list) :
-                            # for pandas data frame type
-                            rerun_button = st.button('Rerun', on_click=set_selection_cb(st.session_state.selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= st.session_state.selected_rows.empty)
-                        else :
-                            # for list type 
-                            rerun_button = st.button('Rerun', on_click=set_selection_cb(st.session_state.selected_rows, cluster_df, visible_df, [w4, w1, w2, w3]), disabled= not st.session_state.selected_rows)
+                        st.button(label= "Rerun", key="rerun_btn")
+                        if st.session_state.get("rerun_btn"):
+                            st.session_state.w1 = w1
+                            st.session_state.w2 = w2
+                            st.session_state.w3 = w3
+                            st.session_state.w4 = w4
+                            set_selection_cb(st.session_state.selected_rows, cluster_df, visible_df, [st.session_state.w4, st.session_state.w1, st.session_state.w2, st.session_state.w3])
+                        
                 row = st.columns(len(list(st.session_state.cluster_summary_df)))
                 for ix, col in enumerate(row):
                     with col:
@@ -319,7 +335,7 @@ def main2():
                             st.subheader(str(st.session_state.cluster_summary_df.iat[0, ix]))
                             st.write(list(st.session_state.cluster_summary_df)[ix])
 
-                cluster_grid_return = AgGrid(st.session_state.associated_projects_df.iloc[:,0:6], columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
+                cluster_grid_return = AgGrid(st.session_state.associated_projects_df.iloc[:,0:7], columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW)
             with col2:
                 #st.markdown('''
                 #    :rainbow[Map Placeholder]''')
