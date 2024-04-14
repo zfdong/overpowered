@@ -357,8 +357,8 @@ def create_altair_charts(basemap, county, county_geojson, lines_geojson, points_
 
     # Layering and configuring the components
     base = alt.layer(
-        alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray'),
-        alt.Chart(ca_counties).mark_geoshape(fill='yellow', stroke='gray'),
+        alt.Chart(basemap).mark_geoshape(fill='lightgray', stroke='gray').encode(tooltip=alt.value(None)),
+        alt.Chart(ca_counties).mark_geoshape(fill='yellow', stroke='gray').encode(tooltip=alt.value(None)),
         alt.Chart(ca_lines).mark_geoshape(filled=False, stroke='blue').encode(tooltip=alt.Tooltip('properties.Disp_Name:N',title=''))
     ).properties(width=width, height=height)
 
