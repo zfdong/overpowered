@@ -212,8 +212,7 @@ def main2():
         st.subheader("Set Custom Weights")
         st.markdown(
             """
-            Overpowered provides a structured scoring mechanism to determine the best groups of applicants to study together. Our default weights were determined using machine learning on historical CAISO data. These algorithms gave us insight into which features are most important for successful Queue applications.
-            That said, we recognize that expert energy users may opt to weigh parameters in different ways. Our preset weights offer a great starting point, but feel free to configure them as you see fit!
+            Overpowered provides a structured scoring mechanism to determine the best groups of applicants to study together. We also recognize that expert energy users have insights into how Queue applications are successful in their unique operating regions. Feel free to start with the default equal split, or configure the weighting parameters as you see fit!
              """
         )
         c1, c2 = st.columns(2)
@@ -369,8 +368,8 @@ def main2():
         st.markdown(
             """
             Here we can see the high-level details of the cluster recommendation.
-        - **Cluster Score**: This tells you the strength of the cluster as a whole. It’s the average similarity score between the base project you selected above and all the other projects in the recommended cluster.
-        - **Total MegaWatts**: This metric gives us insight into the amount of infrastructure (transmission lines and/or storage) that would need to be built to accommodate this cluster.
+        - **Cluster Strength**: This tells you the strength of the cluster as a whole. It’s the average similarity score between the base project you selected above and all the other projects in the recommended cluster.
+        - **Net Transmission Capacity**: This metric gives us insight into the amount of infrastructure (transmission lines and/or storage) that would need to be built to accommodate this cluster.
             - (Sum of MWs supplied to the grid for all projects in the cluster) - (Sum of available transmission capacity at each project’s proposed interconnect point)
         - **Likelihood of Approval**: The likelihood of approval is calculated for each project using features learned from historical data. This likelihood score takes the average approval of all projects in the recommended cluster.
 
